@@ -1,2 +1,5 @@
-# dotfiles
-Personal .dotfiles and quick-setup files
+# qsetup
+Personal .dotfiles and quick-setup scripts for every fresh install.
+
+## References
+- https://github.com/MarioCatuogno/Clean-macOS
