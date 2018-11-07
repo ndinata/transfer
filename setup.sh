@@ -17,8 +17,8 @@ brew upgrade --all
 
 # Set up dotfiles
 echo "Adding .bash_profile and .bashrc to $HOME..."
-cp .bash_profile ~ && source ~/.bash_profile
-cp .bashrc ~ && source ~/.bashrc
+cp .bash_profile $HOME && source $HOME/.bash_profile
+cp .bashrc $HOME && source $HOME/.bashrc
 
 # Set up git
 bash git-setup.sh
@@ -26,4 +26,4 @@ bash git-setup.sh
 # Set up installations
 bash install-setup.sh
 
-echo "qsetup completed! Remember to restart just to be safe."
+echo "qsetup completed! Remember to restart for some changes to take into effect."
