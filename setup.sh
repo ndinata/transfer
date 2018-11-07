@@ -15,6 +15,11 @@ echo "Updating Homebrew..."
 brew update
 brew upgrade --all
 
+# Set up dotfiles
+echo "Adding .bash_profile and .bashrc to $HOME..."
+cp .bash_profile ~ && source ~/.bash_profile
+cp .bashrc ~ && source ~/.bashrc
+
 # Set up git
 bash git-setup.sh
 
