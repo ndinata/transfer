@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-echo "------------------------"
+printf "\n------------------------\n"
 echo "Commence git-setup."
 
-echo "Type in your first and last name: "
+printf "Type in your first and last name: "
 read full_name
 
-echo "Type in your Github email address: "
+printf "Type in your Github email address: "
 read email
 
 git config --global user.name $full_name
 git config --global user.email $email
 git config --global credential.helper osxkeychain
 
+echo ".gitconfig has now been added in $HOME."
 echo "git-setup is done!"
-echo "------------------------"
+printf "------------------------\n"
