@@ -1,0 +1,13 @@
+{
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "editor.rulers": [
+        80
+    ],
+    "extensions.ignoreRecommendations": false,
+    "files.insertFinalNewline": true,
+    "breadcrumbs.enabled": true
+}
