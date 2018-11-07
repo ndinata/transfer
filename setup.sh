@@ -15,9 +15,10 @@ echo "Updating Homebrew..."
 brew update
 brew upgrade --all
 
-# Install Mac App Store CLI
-echo "Installing MAS..."
-brew install mas
-
 # Set up git
 bash git-setup.sh
+
+# Set up installations
+bash install-setup.sh
+
+
