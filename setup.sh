@@ -26,4 +26,4 @@ bash git-setup.sh
 # Set up installations
 bash install-setup.sh
 
-
+echo "qsetup completed! Remember to restart just to be safe."
