@@ -95,4 +95,3 @@ brew install python
 brew update && brew upgrade && brew cleanup && brew doctor
 
 echo "install-setup is done!"
-printf "------------------------\n"

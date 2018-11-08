@@ -17,7 +17,7 @@ echo "Setting osxkeychain as credential helper..."
 git config --global credential.helper osxkeychain
 
 echo "Setting the default commit message editor to TextEdit..."
-git config --global core.editor open -W -n
+git config --global core.editor "open -W -n"
 
 echo "Setting prune to true when fetching..."
 git config --global fetch.prune true
@@ -29,4 +29,3 @@ brew install git-lfs
 git lfs install
 
 echo "git-setup is done!"
-printf "------------------------\n"
