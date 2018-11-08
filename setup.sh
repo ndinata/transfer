@@ -2,6 +2,7 @@
 
 echo "Commence qsetup."
 
+# Fix sub-pixel AA
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
 # Install Xcode command-line tools
