@@ -86,14 +86,6 @@ mas install 682658836
 # Install binary commands
 ####################################
 
-echo "Installing binary commands..."
-brew install bash
-brew install bash-completion2
-if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
-    echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
-    chsh -s /usr/local/bin/bash;
-fi;
-
 brew install nano
 brew install wget
 brew install python
