@@ -79,8 +79,8 @@ echo "Installing Garageband..."
 mas install 682658836
 
 # Install Xcode
-# echo "Installing Xcode..."
-# mas install 497799835
+echo "Installing Xcode..."
+mas install 497799835
 
 ####################################
 # Install binary commands
