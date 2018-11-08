@@ -23,5 +23,10 @@ echo "Setting prune to true when fetching..."
 git config --global fetch.prune true
 
 echo ".gitconfig has now been added in $HOME."
+
+echo "Installing and configuring git-lfs..."
+brew install git-lfs
+git lfs install
+
 echo "git-setup is done!"
 printf "------------------------\n"

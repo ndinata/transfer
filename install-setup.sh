@@ -15,6 +15,10 @@ brew install mas
 echo "Installing Dropbox..."
 brew cask install dropbox
 
+# Install GitHub Desktop
+echo "Installing GitHub Desktop..."
+brew cask install github
+
 # Install Franz
 echo "Installing Franz..."
 brew cask install franz
@@ -84,6 +88,12 @@ mas install 682658836
 
 echo "Installing binary commands..."
 brew install bash
+brew install bash-completion2
+if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
+    echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
+    chsh -s /usr/local/bin/bash;
+fi;
+
 brew install nano
 brew install wget
 brew install python

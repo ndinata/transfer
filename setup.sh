@@ -2,6 +2,8 @@
 
 echo "Commence qsetup."
 
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+
 # Install Xcode command-line tools
 echo "Installing Xcode command-line tools..."
 xcode-select --install
