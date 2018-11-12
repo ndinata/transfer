@@ -50,6 +50,10 @@ brew cask install dash
 echo "Installing Discord..."
 brew cask install discord
 
+# Install Slack
+echo "Installing Slack..."
+brew cask install slack
+
 # Install Flock
 echo "Installing Flock..."
 mas install 883594849
