@@ -93,6 +93,7 @@ mas install 497799835
 brew install nano
 brew install wget
 brew install python
+pip3 install -U pytest
 
 
 # Cleanup
