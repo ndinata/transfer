@@ -90,6 +90,7 @@ mas install 497799835
 # Install binary commands
 ####################################
 
+brew install git
 brew install nano
 brew install wget
 brew install python

@@ -26,11 +26,11 @@ echo "Adding .bash_profile and .bashrc to $HOME..."
 cp .bash_profile $HOME && source $HOME/.bash_profile
 cp .bashrc $HOME && source $HOME/.bashrc
 
-# Set up git
-bash git-setup.sh
-
 # Set up installations
 bash install-setup.sh
+
+# Set up git
+bash git-setup.sh
 
 # Cleanup
 brew update && brew upgrade && brew cleanup && brew doctor
