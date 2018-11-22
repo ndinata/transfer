@@ -109,4 +109,6 @@ printf "\a"; printf "\a"; printf "\a";
 brew install bash
 bash bash-setup.sh
 
+brew install bash-completion@2
+
 echo "install-setup is done!"
