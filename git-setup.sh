@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-printf "\n------------------------\n"
 echo "Commence git-setup."
 
 printf "Git       | Type in your first and last name: "
@@ -28,4 +27,4 @@ echo "Git       | Installing and configuring git-lfs.."
 brew install git-lfs
 git lfs install
 
-echo "Git       | git-setup is done!"
+echo "git-setup is done!"

@@ -93,12 +93,16 @@ mas install 497799835
 ####################################
 
 echo "Installing binary commands/utilities..."
-brew install git
 brew install nano
 brew install wget
 
 brew install python
 pip3 install -U pytest
+
+echo "Installing git, prepare to answer some questions!"
+printf "\a"; printf "\a"; printf "\a";
+brew install git
+bash git-setup.sh
 
 echo "Installing Bash, sudo incoming!"
 printf "\a"; printf "\a"; printf "\a";

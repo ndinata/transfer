@@ -40,9 +40,6 @@ cp .bashrc $HOME && source $HOME/.bashrc
 # Set up installations
 bash install-setup.sh
 
-# Set up git
-bash git-setup.sh
-
 # Cleanup
 brew update && brew upgrade && brew cleanup && brew doctor
 
