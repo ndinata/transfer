@@ -48,6 +48,10 @@ brew cask install discord
 echo "Brew cask | Installing Slack..."
 brew cask install slack
 
+# Install VLC
+echo "Brew cask | Installing VLC..."
+brew cask install vlc
+
 # Install Mac App Store CLI
 echo "MAS       | Installing MAS..."
 brew install mas
