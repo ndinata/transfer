@@ -96,7 +96,4 @@ brew install python
 pip3 install -U pytest
 
 
-# Cleanup
-brew update && brew upgrade && brew cleanup && brew doctor
-
 echo "install-setup is done!"

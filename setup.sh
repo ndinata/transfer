@@ -18,6 +18,9 @@ echo "Updating Homebrew..."
 brew update
 brew upgrade --all
 
+# Opt out of Homebrew's analytics
+brew analytics off
+
 # Set up dotfiles
 echo "Adding .bash_profile and .bashrc to $HOME..."
 cp .bash_profile $HOME && source $HOME/.bash_profile
@@ -28,5 +31,8 @@ bash git-setup.sh
 
 # Set up installations
 bash install-setup.sh
+
+# Cleanup
+brew update && brew upgrade && brew cleanup && brew doctor
 
 echo "qsetup completed! Remember to restart for some changes to take into effect."
