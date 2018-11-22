@@ -3,8 +3,8 @@
 echo "Commence qsetup."
 echo "Before we proceed, please sign in to the Mac App Store for mas-cli to work."
 echo "Ready to go? [yes|no]"
-read -p "[yes] >>> "
-if [[ $REPLY =~ ^[yY] ]] || [[ -z $REPLY ]]; then
+read -p "[no] >>> "
+if [[ $REPLY =~ ^[yY] ]]; then
     echo "Let's go!"
 else
     echo "Cannot proceed until you have signed in. Please try again."
