@@ -18,7 +18,7 @@ defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 # Install Xcode command-line tools
 echo "Installing Xcode command-line tools..."
 xcode-select --install
-read -n1 -sp $'Press 'Enter' when the Xcode command-line tools have finished downloading.\n'
+read -n1 -sp $'Please press \'Enter\' when the Xcode command-line tools have finished downloading.\n'
 
 # Install Homebrew
 echo "Homebrew  | Installing Homebrew..."
