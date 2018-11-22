@@ -96,7 +96,13 @@ echo "Installing binary commands/utilities..."
 brew install git
 brew install nano
 brew install wget
+
 brew install python
 pip3 install -U pytest
+
+echo "Installing Bash, sudo incoming!"
+printf "\a"; printf "\a"; printf "\a";
+brew install bash
+bash bash-setup.sh
 
 echo "install-setup is done!"
