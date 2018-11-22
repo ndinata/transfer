@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
 echo "Commence qsetup."
+echo "Before we proceed, please sign in to the Mac App Store for mas-cli to work."
+echo "Ready to go? [yes|no]"
+read -p "[yes] >>> "
+if [[ $REPLY =~ ^[yY] ]] || [[ -z $REPLY ]]; then
+    echo "Let's go!"
+else
+    echo "Cannot proceed until you have signed in. Please try again."
+    exit 1
+fi
 
 # Fix sub-pixel AA
+echo "Fixing subpixel AA..."
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
 # Install Xcode command-line tools
@@ -10,15 +20,16 @@ echo "Installing Xcode command-line tools..."
 xcode-select --install
 
 # Install Homebrew
-echo "Installing Homebrew..."
+echo "Homebrew  | Installing Homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Update and upgrade Homebrew
-echo "Updating Homebrew..."
+echo "Homebrew  | Updating Homebrew..."
 brew update
 brew upgrade --all
 
 # Opt out of Homebrew's analytics
+echo "Homebrew  | Opting out of Homebrew's analytics..."
 brew analytics off
 
 # Set up dotfiles
