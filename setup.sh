@@ -5,20 +5,27 @@ echo "Before we proceed, please sign in to the Mac App Store for mas-cli to work
 echo "Ready to go? [yes|no]"
 read -p "[no] >>> "
 if [[ $REPLY =~ ^[yY] ]]; then
-    echo "Let's go!"
+    echo "Nice, let's continue."
 else
     echo "Cannot proceed until you have signed in. Please try again."
+    exit 1
+fi
+
+echo "Also, another thing. You need to have installed Xcode command-line tools."
+echo "You can do so by opening a new Terminal instance and running:"
+echo "      xcode-select --install"
+echo "Ready to go? [yes|no]"
+read -p "[no] >>> "
+if [[ $REPLY =~ ^[yY] ]]; then
+    echo "That's it. Let's go!"
+else
+    echo "Cannot proceed until you have downloaded the command-line tools. Please try again."
     exit 1
 fi
 
 # Fix sub-pixel AA
 echo "Fixing subpixel AA..."
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-
-# Install Xcode command-line tools
-echo "Installing Xcode command-line tools..."
-xcode-select --install
-read -n1 -sp $'Please press \'Enter\' when the Xcode command-line tools have finished downloading.\n'
 
 # Install Homebrew
 echo "Homebrew  | Installing Homebrew..."
