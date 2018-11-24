@@ -9,5 +9,13 @@
     ],
     "extensions.ignoreRecommendations": false,
     "files.insertFinalNewline": true,
-    "breadcrumbs.enabled": true
+    "breadcrumbs.enabled": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.overviewRulerBorder": false,
+    "editor.lineHeight": 17,
+    "editor.renderLineHighlight": "all",
+    "workbench.editor.tabCloseButton": "left",
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.showIcons": false,
+    "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace"
 }
