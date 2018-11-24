@@ -48,6 +48,9 @@ cp .bashrc $HOME && source $HOME/.bashrc
 # Set up installations
 bash install-setup.sh
 
+# Install fonts
+bash font-setup.sh
+
 # Cleanup
 brew update && brew upgrade && brew cleanup && brew doctor
 
