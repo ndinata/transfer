@@ -2,24 +2,24 @@
 
 echo "Commence font-setup."
 
+sf_source_dir="/Applications/Utilities/Terminal.app/Contents/Resources/Fonts"
+sf_test_file="SFMono-Regular.otf"
+sf_target_dir="$HOME/Library/Fonts"
+
 echo "Looking for SF Mono font..."
-source_font_path="/Applications/Utilities/Terminal.app/Contents/Resources/Fonts"
-font_file="SFMono-Regular.otf"
-target_font_path="$HOME/Library/Fonts"
-
-if [ -f $source_font_path/$font_file ]; then
+if [ -f $sf_source_dir/$sf_test_file ]; then
     echo "The font files are available! Installing them..."
-    cp $source_font_path/SFMono*.otf $target_font_path
+    cp $sf_source_dir/SFMono*.otf $sf_target_dir
 
-    echo "The following font files have been installed in $target_font_path:"
-    for fontfile in $target_font_path/SFMono*.otf; do
+    echo "The following font files have been installed in $sf_target_dir:"
+    for fontfile in $sf_target_dir/SFMono*.otf; do
         echo "        $fontfile"
     done
 else
-    echo "The fonts seem to be missing, or something must've gone wrong."
+    echo "Error: the font files seem to be missing, or their extension is not .otf"
     echo "Please check this directory:"
     echo
-    echo "$source_font_path"
+    echo "$sf_source_dir"
     echo
     echo "If they're there, please manually install them."
 fi
