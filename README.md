@@ -7,6 +7,7 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 ## To-do
 - [X] Update git version with the one from `brew`
 - [X] Install Bash 4 with autocomplete
+- [ ] Install `Lato` font
 - [ ] Look into using Brewfiles
 - [ ] Improve formatting + directory structure
 
