@@ -6,7 +6,7 @@ sf_source_dir="/Applications/Utilities/Terminal.app/Contents/Resources/Fonts"
 sf_test_file="SFMono-Regular.otf"
 sf_target_dir="$HOME/Library/Fonts"
 
-echo "Looking for SF Mono font..."
+echo "Looking for SFMono font..."
 if [ -f $sf_source_dir/$sf_test_file ]; then
     echo "The font files are available! Installing them..."
     cp $sf_source_dir/SFMono*.otf $sf_target_dir
@@ -16,7 +16,7 @@ if [ -f $sf_source_dir/$sf_test_file ]; then
         echo "        $fontfile"
     done
 else
-    echo "Error: the font files seem to be missing, or their extension is not .otf"
+    echo "Error: the SFMono font files seem to be missing, or their extension is not .otf"
     echo "Please check this directory:"
     echo
     echo "$sf_source_dir"
@@ -27,7 +27,7 @@ fi
 lato_source_url="https://www.fontsquirrel.com/fonts/download/lato"
 lato_temp_download_dir="$HOME/Downloads/lato"
 lato_test_file="Lato-Regular.ttf"
-lato_target_dir="$HOME/Desktop"
+lato_target_dir="$HOME/Library/Fonts"
 
 echo "Downloading Lato font files into $lato_temp_download_dir as a zip file..."
 mkdir $lato_temp_download_dir
@@ -48,7 +48,7 @@ if [ -f $lato_temp_download_dir/$lato_test_file ]; then
     echo "Cleaning up temporary download folder..."
     rm -rf $lato_temp_download_dir
 else
-    echo "Error: the font files seem to be missing, or their extension is not .ttf"
+    echo "Error: the Lato font files seem to be missing, or their extension is not .ttf"
     echo "Please check this directory:"
     echo
     echo "$lato_temp_download_dir"
