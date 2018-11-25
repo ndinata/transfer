@@ -76,10 +76,6 @@ mas install 409203825
 echo "MAS       | Installing Keynote..."
 mas install 409183694
 
-# Install Magnet
-echo "MAS       | Installing Magnet..."
-mas install 441258766
-
 # Install Garageband
 echo "MAS       | Installing Garageband..."
 mas install 682658836
