@@ -56,10 +56,6 @@ brew cask install vlc
 echo "MAS       | Installing MAS..."
 brew install mas
 
-# Install Flock
-echo "MAS       | Installing Flock..."
-mas install 883594849
-
 # Install 1Password 7
 echo "MAS       | Installing 1Password..."
 mas install 1333542190
