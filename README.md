@@ -10,6 +10,7 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 - [X] Install `Lato` font
 - [X] Look into using Brewfiles
 - [X] Improve formatting + directory structure
+- [ ] Add summary at the end of setup
 
 ## References
 - https://github.com/MarioCatuogno/Clean-macOS
