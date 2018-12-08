@@ -52,10 +52,10 @@ echo && echo "Adding .dotfiles to $HOME..."
 cp .bash_profile $HOME && source $HOME/.bash_profile
 cp .bashrc $HOME && source $HOME/.bashrc
 
-# Install fonts
-bash font-setup.sh
+# Final setup
+bash cleanup.sh
 
-# Cleanup
+# Cleanup brew
 brew update && brew upgrade && brew cleanup && brew doctor
 
 echo && echo "qsetup completed! Remember to restart for some changes to take into effect."
