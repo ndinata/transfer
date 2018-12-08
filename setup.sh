@@ -49,8 +49,8 @@ brew bundle
 
 # Set up dotfiles
 echo && echo "Adding .dotfiles to $HOME..."
-cp .bash_profile $HOME && source $HOME/.bash_profile
-cp .bashrc $HOME && source $HOME/.bashrc
+cp dotfiles/.bash_profile $HOME && source $HOME/.bash_profile
+cp dotfiles/.bashrc $HOME && source $HOME/.bashrc
 
 # Final setup
 bash cleanup.sh

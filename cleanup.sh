@@ -6,16 +6,16 @@ echo "Installing pytest..."
 pip install -U pytest
 
 # Setup VSCode
-bash vscode-setup.sh
+bash setup-scripts/vscode-setup.sh
 
 # Install fonts
-bash font-setup.sh
+bash setup-scripts/font-setup.sh
 
 # Setup new git and git-lfs
-bash git-setup.sh
+bash setup-scripts/git-setup.sh
 git lfs install
 
 # Setup new bash environment
-bash bash-setup.sh
+bash setup-scripts/bash-setup.sh
 
 echo "end cleanup.sh"

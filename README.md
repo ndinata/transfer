@@ -9,7 +9,7 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 - [X] Install Bash 4 with autocomplete
 - [X] Install `Lato` font
 - [X] Look into using Brewfiles
-- [ ] Improve formatting + directory structure
+- [X] Improve formatting + directory structure
 
 ## References
 - https://github.com/MarioCatuogno/Clean-macOS
