@@ -10,6 +10,6 @@ code --install-extension github.vscode-pull-request-github
 
 # Setup user preferences
 echo && echo "Copying user settings..."
-cp ../vscode/settings.json $HOME/Library/Application\ Support/Code/User/
+cp vscode/settings.json $HOME/Library/Application\ Support/Code/User/
 
 echo "end vscode-setup.sh"
