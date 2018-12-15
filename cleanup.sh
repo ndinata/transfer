@@ -5,6 +5,9 @@ echo && echo "cleanup.sh"
 echo "Installing pytest..."
 pip install -U pytest
 
+echo "Installing pylint..."
+pip install -U pylint
+
 # Setup VSCode
 bash setup-scripts/vscode-setup.sh
 
