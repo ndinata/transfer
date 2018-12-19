@@ -24,6 +24,7 @@ cask "slack"
 cask "spotify"
 cask "visual-studio-code"
 cask "vlc"
+cask "iterm2"
 
 # MAS apps
 mas "1Password 7", id: 1333542190
