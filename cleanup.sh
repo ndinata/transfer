@@ -8,6 +8,9 @@ pip install -U pytest
 echo "Installing pylint..."
 pip install -U pylint
 
+echo "Installing yapf..."
+pip install -U yapf
+
 # Setup VSCode
 bash setup-scripts/vscode-setup.sh
 
