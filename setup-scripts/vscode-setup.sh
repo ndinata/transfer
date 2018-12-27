@@ -13,4 +13,8 @@ code --install-extension vscodevim.vim
 echo && echo "Copying user settings..."
 cp vscode/settings.json $HOME/Library/Application\ Support/Code/User/
 
+# Enable key-repeating for vim plugin
+echo "Enabling key-repeating..."
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
 echo "end vscode-setup.sh"
