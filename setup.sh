@@ -51,6 +51,7 @@ brew bundle
 echo && echo "Adding .dotfiles to $HOME..."
 cp dotfiles/.bash_profile $HOME && source $HOME/.bash_profile
 cp dotfiles/.bashrc $HOME && source $HOME/.bashrc
+cp dotfiles/.vimrc $HOME
 
 # Final setup
 bash cleanup.sh
