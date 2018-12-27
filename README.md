@@ -5,11 +5,7 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 - automates installations of a bunch of graphical apps via `brew cask` and `mas-cli`, e.g. VSCode and Slack
 
 ## To-do
-- [X] Update git version with the one from `brew`
-- [X] Install Bash 4 with autocomplete
-- [X] Install `Lato` font
-- [X] Look into using Brewfiles
-- [X] Improve formatting + directory structure
+- [ ] Install fonts through brew
 - [ ] Add summary at the end of setup
 
 ## References
