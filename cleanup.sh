@@ -21,7 +21,7 @@ bash setup-scripts/font-setup.sh
 bash setup-scripts/git-setup.sh
 git lfs install
 
-# Setup new bash environment
-bash setup-scripts/bash-setup.sh
+# Setup fish
+bash setup-scripts/fish-setup.sh
 
 echo "end cleanup.sh"

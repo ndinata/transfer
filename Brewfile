@@ -3,8 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 
 # CLI tools
-brew "bash"
-brew "bash-completion@2"
+brew "fish"
 brew "git"
 brew "git-lfs"
 brew "mas"
