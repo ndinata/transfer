@@ -2,6 +2,8 @@
 
 echo && echo "cleanup.sh"
 
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 echo "Installing pytest..."
 pip install -U pytest
 

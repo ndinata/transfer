@@ -48,9 +48,13 @@ echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
 # Set up dotfiles
-echo && echo "Adding .dotfiles to $HOME..."
-cp dotfiles/.bash_profile $HOME && source $HOME/.bash_profile
+echo && echo "Adding .dotfiles and fish files..."
 cp dotfiles/.vimrc $HOME
+
+if [ ! -d "$HOME/.config/fish/functions/" ]; then
+  mkdir $HOME/.config/fish/functions/
+fi
+cp fishfiles/* $HOME/.config/fish/functions/
 
 # Final setup
 bash cleanup.sh
