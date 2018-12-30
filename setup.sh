@@ -52,7 +52,7 @@ echo "Adding .dotfiles and fish files..."
 cp dotfiles/.vimrc $HOME
 
 if [ ! -d "$HOME/.config/fish/functions/" ]; then
-  mkdir $HOME/.config/fish/functions/
+  mkdir -pv $HOME/.config/fish/functions/
 fi
 cp fishfiles/* $HOME/.config/fish/functions/
 
