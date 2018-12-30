@@ -56,9 +56,6 @@ if [ ! -d "$HOME/.config/fish/functions/" ]; then
 fi
 cp fishfiles/* $HOME/.config/fish/functions/
 
-# Add Python symlink path to $PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
 # Download theme for iTerm
 curl https://github.com/sindresorhus/iterm2-snazzy/raw/master/Snazzy.itermcolors -o $HOME/Downloads/Snazzy.itermcolors
 
