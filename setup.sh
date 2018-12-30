@@ -47,8 +47,8 @@ brew analytics off
 echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
-# Set up dotfiles
-echo && echo "Adding .dotfiles and fish files..."
+# Copy dotfiles and fish files
+echo "Adding .dotfiles and fish files..."
 cp dotfiles/.vimrc $HOME
 
 if [ ! -d "$HOME/.config/fish/functions/" ]; then
@@ -56,8 +56,27 @@ if [ ! -d "$HOME/.config/fish/functions/" ]; then
 fi
 cp fishfiles/* $HOME/.config/fish/functions/
 
-# Final setup
-bash cleanup.sh
+# Add Python symlink path to $PATH
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# Download theme for iTerm
+curl https://github.com/sindresorhus/iterm2-snazzy/raw/master/Snazzy.itermcolors -o $HOME/Downloads/Snazzy.itermcolors
+
+# Setup Python
+bash setup-scripts/python-setup.sh
+
+# Setup VSCode
+bash setup-scripts/vscode-setup.sh
+
+# Install fonts
+bash setup-scripts/font-setup.sh
+
+# Setup new git and git-lfs
+bash setup-scripts/git-setup.sh
+git lfs install
+
+# Setup fish
+bash setup-scripts/fish-setup.sh
 
 # Cleanup brew
 brew update && brew upgrade && brew cleanup && brew doctor
