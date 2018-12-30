@@ -26,4 +26,7 @@ git lfs install
 # Setup fish
 bash setup-scripts/fish-setup.sh
 
+# Download theme for iTerm
+curl https://github.com/sindresorhus/iterm2-snazzy/raw/master/Snazzy.itermcolors -o $HOME/Downloads/Snazzy.itermcolors
+
 echo "end cleanup.sh"
