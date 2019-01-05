@@ -2,6 +2,8 @@ set ic
 set is
 set autoindent
 set ruler
+set softtabstop=4
+set expandtab
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
