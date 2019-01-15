@@ -7,7 +7,6 @@ brew "fish"
 brew "git"
 brew "git-lfs"
 brew "mas"
-brew "nano"
 brew "python"
 brew "wget"
 
