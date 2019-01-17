@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 # CLI tools
@@ -18,6 +19,7 @@ cask "dropbox"
 cask "firefox"
 cask "franz"
 cask "iterm2"
+cask "java8"
 cask "notion"
 cask "rocket"
 cask "slack"
