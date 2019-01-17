@@ -8,6 +8,7 @@ code --install-extension zhuangtongfa.material-theme
 code --install-extension ms-python.python
 code --install-extension github.vscode-pull-request-github
 code --install-extension vscodevim.vim
+code --install-extension vscjava.vscode-java-pack
 
 # Setup user preferences
 echo && echo "Copying user settings..."
