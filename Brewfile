@@ -9,6 +9,7 @@ brew "git"
 brew "git-lfs"
 brew "mas"
 brew "python"
+brew "vim"
 brew "wget"
 
 # GUI apps
