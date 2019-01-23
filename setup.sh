@@ -52,12 +52,12 @@ echo "Adding .dotfiles and fish files..."
 cp dotfiles/.vimrc $HOME
 
 if [ ! -d "$HOME/.config/fish/functions/" ]; then
-  mkdir -pv $HOME/.config/fish/functions/
+    mkdir -pv $HOME/.config/fish/functions/
 fi
 cp fishfiles/* $HOME/.config/fish/functions/
 
 # Download theme for iTerm
-curl https://github.com/sindresorhus/iterm2-snazzy/raw/master/Snazzy.itermcolors -o $HOME/Downloads/Snazzy.itermcolors
+curl https://raw.githubusercontent.com/nathanbuchar/atom-one-dark-terminal/master/scheme/iterm/One%20Dark.itermcolors -o $HOME/Downloads/One\ Dark.itermcolors
 
 # Setup Python
 bash setup-scripts/python-setup.sh
