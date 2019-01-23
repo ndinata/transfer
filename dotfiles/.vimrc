@@ -8,6 +8,7 @@ set shiftwidth=4
 set expandtab
 
 set number
+set backspace=2
 
 "if &t_Co > 2 || has("gui_running")
 "  syntax on
