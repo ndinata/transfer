@@ -47,10 +47,8 @@ brew analytics off
 echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
-# Copy dotfiles and fish files
-echo "Adding .dotfiles and fish files..."
-cp dotfiles/.vimrc $HOME
-
+# Copy fish files
+echo "Adding fish files..."
 if [ ! -d "$HOME/.config/fish/functions/" ]; then
     mkdir -pv $HOME/.config/fish/functions/
 fi
@@ -71,6 +69,9 @@ bash setup-scripts/font-setup.sh
 # Setup new git and git-lfs
 bash setup-scripts/git-setup.sh
 git lfs install
+
+# Setup vim
+bash setup-scripts/vim-setup.sh
 
 # Setup fish
 bash setup-scripts/fish-setup.sh
