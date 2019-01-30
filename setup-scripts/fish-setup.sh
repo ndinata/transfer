@@ -15,4 +15,9 @@ echo "Fire up a fish session and type this:"
 echo && echo "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
 echo
 
+echo "Also, enable vi keybindings on fish by typing this:"
+echo && echo "fish_vi_key_bindings"
+echo
+
 echo "end fish-setup.sh"
+
