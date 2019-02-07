@@ -10,6 +10,10 @@ sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
 echo && echo "Changing default shell to fish..."
 chsh -s /usr/local/bin/fish
 
+echo && echo "Downloading and installing fish-pure..."
+curl git.io/pure-fish --output /tmp/pure_installer.fish --location --silent
+source /tmp/pure_installer.fish; and install_pure
+
 echo "Remember to add Brew's Python symlink location to PATH!"
 echo "Fire up a fish session and type this:"
 echo && echo "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
