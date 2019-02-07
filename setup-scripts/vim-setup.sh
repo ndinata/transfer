@@ -6,8 +6,8 @@ echo "Copying .vimrc..."
 cp dotfiles/.vimrc $HOME
 
 echo "Creating directory for vim colorschemes..."
-mkdir $HOME/.vim/colors
-mkdir $HOME/.vim/autoload
+mkdir -pv $HOME/.vim/colors
+mkdir -pv $HOME/.vim/autoload
 
 echo "Downloading vim colorschemes..."
 curl https://raw.githubusercontent.com/joshdick/onedark.vim/master/autoload/onedark.vim -o $HOME/.vim/autoload/onedark.vim
