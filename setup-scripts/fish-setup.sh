@@ -12,15 +12,16 @@ chsh -s /usr/local/bin/fish
 
 echo && echo "Downloading fish-pure..."
 curl git.io/pure-fish --output /tmp/pure_installer.fish --location --silent
-echo "Remember to actually install the prompt by firing a fish session and typing this:"
+
+echo && echo "Remember to do 3 things:"
+echo "1. Install the prompt by starting a fish session and typing this:"
 echo "source /tmp/pure_installer.fish; and install_pure"
 
-echo && echo "Remember to add Brew's Python symlink location to PATH!"
-echo "Fire up a fish session and type this:"
+echo && echo "2. Add Brew's Python symlink location to PATH by starting a fish session and typing this:"
 echo "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
 
-echo && echo "Also, enable vi keybindings on fish by typing this:"
-echo && echo "fish_vi_key_bindings"
+echo && echo "3. Enable vi keybindings on fish by typing this:"
+echo "fish_vi_key_bindings"
 echo
 
 echo "end fish-setup.sh"
