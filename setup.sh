@@ -36,8 +36,7 @@ echo && echo "Installing Homebrew..."
 
 # Update and upgrade Homebrew
 echo && echo "Updating Homebrew..."
-brew update
-brew upgrade --all
+brew update && brew upgrade
 
 # Opt out of Homebrew's analytics
 echo && echo "Opting out of Homebrew's analytics..."
