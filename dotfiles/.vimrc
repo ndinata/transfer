@@ -1,19 +1,31 @@
-set ic
-set is
-set autoindent
-set ruler
+set nocompatible
+filetype plugin indent on   " Load plugins according to detected filetype.
+syntax on                   " Enable syntax highlighting.
 
-set softtabstop=4
-set shiftwidth=4
-set expandtab
+set autoindent              " Indent according to previous line.
+set expandtab               " Use spaces instead of tabs.
+set softtabstop=4           " Tab key indents by 4 spaces.
+set shiftwidth=4            " Indents by 4 spaces.
+set shiftround              " Indents to next multiple of 'shiftwidth'.
 
-set number
-set backspace=2
+set backspace=indent,eol,start
+set display=lastline        " Show as much as possible of the last line.
 
-"if &t_Co > 2 || has("gui_running")
-"  syntax on
-"  set hlsearch
-"endif
+set mouse=a                 " Enable use of mouse.
+
+set ignorecase              " Case-insensitive search.
+set incsearch               " Highlight while searching with / or ?.
+set number                  " Display line numbers.
+set list                    " Show non-printable, e.g. '\n', characters.
+set ruler                   " Show cursor row and column position.
+
+set ttyfast                 " Faster redrawing.
+set lazyredraw              " Only redraw when necessary.
+
+set cursorline              " Improve visual indicator of current line.
+set wrapscan                " Searches wrap around EOF.
+"
+colorscheme onedark
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -30,7 +42,4 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-syntax on
-colorscheme onedark
 
