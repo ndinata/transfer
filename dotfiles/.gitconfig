@@ -1,0 +1,30 @@
+[fetch]
+	prune = true
+
+[alias]
+  # list aliases
+  aliases = config --get-regexp alias
+
+  # list all branches
+  branches = branch -a
+
+  # show diff summary between HEAD and commit before it
+  d = diff HEAD~ --stat
+
+  # find branches containing commit (`git fb <commit>`)
+  fb = "!f() { git branch -a --contains $1; }; f"
+
+  # find commits by keyword in commit messages (`git fm <pattern>`)
+  fm = "!f() { git log --format=format:'%C(blue)%h%C(reset) %C(cyan)%ad%C(reset) %C(white)%s%C(reset)' --date=human --grep=$1; }; f"
+
+  # pretty log
+	lg = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)%n''         %C(dim cyan)%aD%C(reset) %C(dim green)%ar%C(reset)'
+
+  # show verbose output about remotes
+  remotes = remote -v
+
+  # view status with short format
+  s = status -s
+
+[push]
+	followTags = true
