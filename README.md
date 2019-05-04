@@ -5,7 +5,6 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 - automates installations of a bunch of graphical apps via `brew cask` and `mas-cli`, e.g. iTerm and Xcode
 
 ## To-do
-- [ ] Install fonts through brew
 - [ ] Add summary at the end of setup
 
 ## References
