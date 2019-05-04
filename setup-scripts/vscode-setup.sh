@@ -9,6 +9,8 @@ code --install-extension ms-python.python
 code --install-extension github.vscode-pull-request-github
 code --install-extension vscodevim.vim
 code --install-extension vscjava.vscode-java-pack
+code --install-extension esbenp.prettier-vscode
+code --install-extension dbaeumer.vscode-eslint
 
 # Setup user preferences
 echo && echo "Copying user settings..."
