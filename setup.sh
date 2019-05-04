@@ -54,7 +54,8 @@ fi
 cp fishfiles/* $HOME/.config/fish/functions/
 
 # Download theme for iTerm
-curl https://raw.githubusercontent.com/nathanbuchar/atom-one-dark-terminal/master/scheme/iterm/One%20Dark.itermcolors -o $HOME/Downloads/One\ Dark.itermcolors
+echo "Copying iTerm theme file to ~/Downloads..."
+cp others/OneSnazzy.itermcolors $HOME/Downloads/
 
 # Setup Python
 bash setup-scripts/python-setup.sh
