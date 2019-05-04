@@ -24,36 +24,4 @@ else
     echo "If the files are there, please manually install them."
 fi
 
-lato_source_url="https://www.fontsquirrel.com/fonts/download/lato"
-lato_temp_download_dir="$HOME/Downloads/lato"
-lato_test_file="Lato-Regular.ttf"
-lato_target_dir="$HOME/Library/Fonts"
-
-echo "Downloading Lato font files into $lato_temp_download_dir as a zip file..."
-mkdir $lato_temp_download_dir
-curl $lato_source_url -o $lato_temp_download_dir/lato.zip
-
-echo "Extracting the zip file..."
-unzip $lato_temp_download_dir/lato.zip -d $lato_temp_download_dir/
-
-if [ -f $lato_temp_download_dir/$lato_test_file ]; then
-    echo "The font files are available! Installing them..."
-    mv $lato_temp_download_dir/Lato*.ttf $lato_target_dir/
-
-    echo "The following font files have been installed in $lato_target_dir:"
-    for fontfile in $lato_target_dir/Lato*.ttf; do
-        echo "        $fontfile"
-    done
-
-    echo "Cleaning up temporary download folder..."
-    rm -rf $lato_temp_download_dir
-else
-    echo "ERROR: the Lato font files seem to be missing, or their extension is not .ttf"
-    echo "Please check this directory:"
-    echo
-    echo "$lato_temp_download_dir"
-    echo
-    echo "If the files are there, please manually install them."
-fi
-
 echo "end font-setup.sh"
