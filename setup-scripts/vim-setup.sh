@@ -3,7 +3,8 @@
 echo && echo "vim-setup.sh"
 
 echo "Copying .vimrc..."
-cp dotfiles/.vimrc $HOME
+mkdir -pv $HOME/.vim
+cp dotfiles/.vimrc $HOME/.vim/vimrc
 
 echo "Creating directory for vim colorschemes..."
 mkdir -pv $HOME/.vim/colors
