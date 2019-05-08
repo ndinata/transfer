@@ -57,9 +57,6 @@ cp fishfiles/* $HOME/.config/fish/functions/
 echo "Copying iTerm theme file to ~/Downloads..."
 cp others/OneSnazzy.itermcolors $HOME/Downloads/
 
-# Setup Python
-bash setup-scripts/python-setup.sh
-
 # Setup VSCode
 bash setup-scripts/vscode-setup.sh
 
