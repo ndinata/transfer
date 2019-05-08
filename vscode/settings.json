@@ -20,5 +20,4 @@
     "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace",
     "githubPullRequests.telemetry.enabled": false,
     "python.pythonPath": "/usr/local/opt/python/libexec/bin/python",
-    "python.formatting.provider": "yapf"
 }
