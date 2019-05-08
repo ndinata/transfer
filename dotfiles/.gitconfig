@@ -11,6 +11,10 @@
   # show diff summary between HEAD and commit before it
   d = diff HEAD~ --stat
 
+  # show diff of specific file between current version and that `n` commits back
+  # usage: `git df <file_path> <number_of_commits_back>`
+  df = "!f() { git diff HEAD~$2:$1 $1; }; f"
+
   # find branches containing commit (`git fb <commit>`)
   fb = "!f() { git branch -a --contains $1; }; f"
 
@@ -22,6 +26,9 @@
 
   # show verbose output about remotes
   remotes = remote -v
+
+  # mixed-reset last commit
+  reset-last = reset HEAD~
 
   # view status with short format
   s = status -s
