@@ -13,6 +13,9 @@ chsh -s /usr/local/bin/fish
 echo && echo "Downloading fish-pure..."
 curl git.io/pure-fish --output /tmp/pure_installer.fish --location --silent
 
+echo && echo "Creating fish directory for linking..."
+mkdir -pv $HOME/.config/fish/conf.d/
+
 echo && echo "Remember to do 3 things:"
 echo "1. Install the prompt by starting a fish session and typing this:"
 echo "source /tmp/pure_installer.fish; and install_pure"
