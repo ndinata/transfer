@@ -8,9 +8,11 @@ code --install-extension zhuangtongfa.material-theme
 code --install-extension ms-python.python
 code --install-extension github.vscode-pull-request-github
 code --install-extension vscodevim.vim
-code --install-extension vscjava.vscode-java-pack
 code --install-extension esbenp.prettier-vscode
 code --install-extension dbaeumer.vscode-eslint
+code --install-extension kamikillerto.vscode-colorize
+code --install-extension rbbit.typescript-hero
+code --install-extension gruntfuggly.todo-tree
 
 # Setup user preferences
 echo && echo "Copying user settings..."
