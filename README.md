@@ -5,6 +5,9 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 - automates installations of a bunch of graphical apps via `brew cask` and `mas-cli`, e.g. iTerm and Xcode
 
 ## To-do
+- [ ] Install `fisher` and then `fish-pure` with it
+- [ ] Maintain `sudo` over the duration of the scripts
+- [ ] Redirect output to logfiles
 - [ ] Add summary at the end of setup
 
 ## References
