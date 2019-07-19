@@ -1,3 +1,7 @@
+[user]
+  name = Nico Dinata
+  email = ncdnt@icloud.com
+
 [fetch]
 	prune = true
 
