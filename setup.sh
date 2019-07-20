@@ -46,13 +46,6 @@ brew analytics off
 echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
-# Copy fish files
-echo "Adding fish files..."
-if [ ! -d "$HOME/.config/fish/functions/" ]; then
-    mkdir -pv $HOME/.config/fish/functions/
-fi
-cp fishfiles/* $HOME/.config/fish/functions/
-
 # Download theme for iTerm
 echo "Copying iTerm theme file to ~/Downloads..."
 cp others/OneSnazzy.itermcolors $HOME/Downloads/

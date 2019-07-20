@@ -2,6 +2,13 @@
 
 echo && echo "fish-setup.sh"
 
+# Copy fish function files
+echo "Adding fish files..."
+if [ ! -d "$HOME/.config/fish/functions/" ]; then
+    mkdir -pv $HOME/.config/fish/functions/
+fi
+cp fishfiles/* $HOME/.config/fish/functions
+
 # Add the new bash to the list of allowed shells
 echo "Adding fish to the list of allowed shells..."
 sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
