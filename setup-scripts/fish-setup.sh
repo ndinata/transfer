@@ -9,6 +9,10 @@ if [ ! -d "$HOME/.config/fish/functions/" ]; then
 fi
 cp fishfiles/* $HOME/.config/fish/functions
 
+# Install Fisher
+echo "Installing Fisher..."
+curl https://git.io/fisher --create-dirs -sLo $HOME/.config/fish/functions/fisher.fish
+
 # Add the new bash to the list of allowed shells
 echo "Adding fish to the list of allowed shells..."
 sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
