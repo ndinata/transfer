@@ -7,3 +7,4 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 ## References
 - https://github.com/MarioCatuogno/Clean-macOS
 - https://github.com/mathiasbynens/dotfiles
+- https://gist.github.com/cowboy/3118588

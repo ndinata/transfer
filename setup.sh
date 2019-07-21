@@ -26,6 +26,14 @@ else
     exit 1
 fi
 
+# Ask for sudo permissions upfront
+echo "Please provide sudo password for use by the script."
+sudo -v
+
+# Keep sudo "alive"
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
 # Fix sub-pixel AA
 echo "Fixing subpixel AA..."
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
