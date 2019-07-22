@@ -13,6 +13,7 @@ brew "postgresql@9.5"
 brew "python"
 brew "vim"
 brew "wget"
+brew "yarn"
 
 # GUI apps
 cask "adoptopenjdk8"

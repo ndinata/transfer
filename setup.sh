@@ -46,6 +46,9 @@ brew analytics off
 echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
+# Install Cocoapods
+sudo gem install cocoapods
+
 # Download theme for iTerm
 echo "Copying iTerm theme file to ~/Downloads..."
 cp others/OneSnazzy.itermcolors $HOME/Downloads/
