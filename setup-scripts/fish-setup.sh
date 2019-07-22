@@ -30,16 +30,19 @@ chsh -s /usr/local/bin/fish
 echo && echo "Creating fish directory for linking..."
 mkdir -pv $HOME/.config/fish/conf.d/
 
-echo && echo "Remember to do something:"
+# echo && echo "Remember to do something:"
 # echo "1. Install the prompt by starting a fish session and typing this:"
 # echo "source /tmp/pure_installer.fish; and install_pure"
 
 # echo && echo "1. Add Brew's Python symlink location to PATH by starting a fish session and typing this:"
 # echo "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
+echo "Adding Brew's python symlink location to \$PATH..."
 fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
 
-echo && echo "Enable vi keybindings on fish by typing this:"
-echo "fish_vi_key_bindings"
+# echo && echo "Enable vi keybindings on fish by typing this:"
+# echo "fish_vi_key_bindings"
+echo "Enabling vi keybindings on fish..."
+fish -c "fish_vi_key_bindings"
 echo
 
 echo "end fish-setup.sh"
