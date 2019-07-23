@@ -78,7 +78,6 @@ bash setup-scripts/vim-setup.sh
 bash setup-scripts/fish-setup.sh
 
 # Cleanup
-sudo xcodebuild -license accept
 brew update && brew upgrade && brew cleanup && brew doctor
 
 echo && echo "qsetup completed! Remember to restart for some changes to take into effect."
