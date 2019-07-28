@@ -17,8 +17,8 @@ echo "Installing fish pure..."
 fish -c "fisher add rafaelrinaldi/pure"
 
 # Change to the new shell
-echo && echo "Changing default shell to fish..."
-chsh -s /usr/local/bin/fish
+# echo && echo "Changing default shell to fish..."
+# chsh -s /usr/local/bin/fish
 
 # echo && echo "Downloading fish-pure..."
 # curl git.io/pure-fish --output /tmp/pure_installer.fish --location --silent
