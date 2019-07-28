@@ -84,6 +84,7 @@ bash setup-scripts/fish-setup.sh
 # Cleanup
 brew update && brew upgrade && brew cleanup && brew doctor
 
+echo
 echo "Please remember to set fish as the default shell by running:"
 echo
 echo "chsh -s /usr/local/bin/fish"

@@ -35,6 +35,9 @@ mkdir -pv $HOME/.config/fish/conf.d/
 echo "Adding Brew's python symlink location to \$PATH..."
 fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
 
+echo "Adding node@10 to \$PATH..."
+fish -c "set -U fish_user_paths /usr/local/opt/node@10/bin \$fish_user_paths"
+
 # echo && echo "Enable vi keybindings on fish by typing this:"
 # echo "fish_vi_key_bindings"
 echo "Enabling vi keybindings on fish..."
