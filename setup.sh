@@ -26,9 +26,20 @@ else
     exit 1
 fi
 
-# Fix sub-pixel AA
-echo "Fixing subpixel AA..."
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+# Ask for sudo permissions upfront
+# echo "Please provide sudo password for use by the script."
+# sudo -v
+
+# Keep sudo "alive"
+# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Install Cocoapods
+sudo gem install cocoapods
+
+# Add fish to the list of allowed shells
+# This "hack" is to circumvent homebrew invalidating sudo timestamp on each install.
+echo "Adding fish to the list of allowed shells..."
+sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
 
 # Install Homebrew
 echo && echo "Installing Homebrew..."
@@ -46,8 +57,9 @@ brew analytics off
 echo && echo "Installing tools and applications from ./Brewfile..."
 brew bundle
 
-# Install Cocoapods
-sudo gem install cocoapods
+# Fix sub-pixel AA
+echo "Fixing subpixel AA..."
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
 # Download theme for iTerm
 echo "Copying iTerm theme file to ~/Downloads..."
@@ -70,7 +82,12 @@ bash setup-scripts/vim-setup.sh
 bash setup-scripts/fish-setup.sh
 
 # Cleanup
-sudo xcodebuild -license accept
 brew update && brew upgrade && brew cleanup && brew doctor
 
+echo
+echo "Please remember to set fish as the default shell by running:"
+echo
+echo "chsh -s /usr/local/bin/fish"
+echo
 echo && echo "qsetup completed! Remember to restart for some changes to take into effect."
+

@@ -6,7 +6,6 @@ echo && echo "vscode-setup.sh"
 echo "Installing extensions..."
 code --install-extension zhuangtongfa.material-theme
 code --install-extension ms-python.python
-code --install-extension github.vscode-pull-request-github
 code --install-extension vscodevim.vim
 code --install-extension esbenp.prettier-vscode
 code --install-extension dbaeumer.vscode-eslint
