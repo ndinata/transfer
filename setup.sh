@@ -18,6 +18,7 @@ GREEN='\033[32m'
 BLUE='\033[34m'
 NC='\033[0m'
 SUCCESS="${GREEN}✔${NC}"
+FAIL="${RED}✖${NC}"
 ERROR="${RED}Error${NC}"
 ARROW="${BLUE}===>${NC}"
 DIVIDER="------------------------"
@@ -25,6 +26,28 @@ DIVIDER="------------------------"
 ###########################################################################
 
 errcho() { >&2 echo -e "$@"; }
+
+# $1: message to be printed on the console while the action is running
+# $2: action to be carried out
+# $3: logfile to send output of action to (required if error-handling is needed)
+try_action() {
+    echo -n "$1..."
+
+    # only redirect output of action if a logfile is supplied
+    if [[ -z $3 ]]; then
+        $2
+        echo -e "\r$1... Done! $SUCCESS"
+    else
+        if $2 >> "$3" 2>&1 ; then
+            echo -e "\r$1... Done! $SUCCESS"
+        else
+            echo -e "\r$1... $FAIL"
+            errcho "$ERROR something went wrong"
+            errcho "Please check the generated \"$3\"."
+            echo
+        fi
+    fi
+}
 
 ###########################################################################
 
