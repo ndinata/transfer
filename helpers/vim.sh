@@ -14,7 +14,7 @@ echo "$DIVIDER"
 echo -n "Copying .vimrc..."
 mkdir -pv "$vim_home_dir"
 cp "$vimrc_dir" "$vimrc_home_dir"
-echo -ne "\rCopying .vimrc... Done! $SUCCESS"
+echo -e "\rCopying .vimrc... Done! $SUCCESS"
 echo
 
 echo -n "Installing vim colorschemes..."
@@ -39,5 +39,5 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo -ne "\rInstalling vim colorschemes... Done! $SUCCESS"
+echo -e "\rInstalling vim colorschemes... Done! $SUCCESS"
 echo && echo

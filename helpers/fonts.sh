@@ -9,8 +9,7 @@ sf_target_dir="$HOME/Library/Fonts"
 
 echo -n "Looking for SFMono font files..."
 if [ -f $sf_source_dir/$sf_test_file ]; then
-    echo -ne "\rLooking for SFMono font files... They're available!"
-    echo
+    echo -e "\rLooking for SFMono font files... They're available!"
     echo -n "Installing them..."
     cp $sf_source_dir/SFMono*.otf $sf_target_dir
 
@@ -18,7 +17,7 @@ if [ -f $sf_source_dir/$sf_test_file ]; then
     for fontfile in $sf_target_dir/SFMono*.otf; do
         echo "        $fontfile" >> "$FONT_LOGFILE"
     done
-    echo -ne "\rInstalling them... Done! $SUCCESS"
+    echo -e "\rInstalling them... Done! $SUCCESS"
     echo
 else
     errcho "$ERROR SFMono font files seem to be missing, or their extension is not .otf"

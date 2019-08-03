@@ -12,7 +12,7 @@ if [ ! -d "$fish_function_dir/" ]; then
     mkdir -pv $fish_function_dir
 fi
 cp $fishfiles_dir/* $fish_function_dir
-echo -ne "\rAdding fish function files... Done! $SUCCESS"
+echo -e "\rAdding fish function files... Done! $SUCCESS"
 echo
 
 # Install Fisher
@@ -24,7 +24,7 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$FISH_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rInstalling Fisher... Done! $SUCCESS"
+echo -e "\rInstalling Fisher... Done! $SUCCESS"
 echo
 
 # Install fish-pure
@@ -36,7 +36,7 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$FISH_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rInstalling fish pure... Done! $SUCCESS"
+echo -e "\rInstalling fish pure... Done! $SUCCESS"
 echo
 
 # echo && echo "Creating fish directory for linking..."
@@ -44,15 +44,15 @@ echo
 
 echo -n "Adding Brew's python symlink location to \$PATH..."
 fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
-echo -ne "\rAdding Brew's python symlink location to \$PATH... Done! $SUCCESS"
+echo -e "\rAdding Brew's python symlink location to \$PATH... Done! $SUCCESS"
 echo
 
 echo -n "Adding node@10 to \$PATH..."
 fish -c "set -U fish_user_paths /usr/local/opt/node@10/bin \$fish_user_paths"
-echo -ne "\rAdding node@10 to \$PATH... Done! $SUCCESS"
+echo -e "\rAdding node@10 to \$PATH... Done! $SUCCESS"
 echo
 
 echo -n "Enabling vi keybindings on fish..."
 fish -c "fish_vi_key_bindings"
-echo -ne "\rEnabling vi keybindings on fish... Done! $SUCCESS"
+echo -e "\rEnabling vi keybindings on fish... Done! $SUCCESS"
 echo && echo

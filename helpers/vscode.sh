@@ -16,15 +16,15 @@ code --install-extension dbaeumer.vscode-eslint &> "$VSCODE_LOGFILE"
 code --install-extension kamikillerto.vscode-colorize &> "$VSCODE_LOGFILE"
 code --install-extension rbbit.typescript-hero &> "$VSCODE_LOGFILE"
 code --install-extension gruntfuggly.todo-tree &> "$VSCODE_LOGFILE"
-echo -ne "\rInstalling extensions... Done! $SUCCESS"
+echo -e "\rInstalling extensions... Done! $SUCCESS"
 
 # Setup user preferences
 echo -n "Copying user settings..."
 cp "$vscode_settings_file" "$vscode_settings_dir"
-echo -ne "\rCopying user settings... Done! $SUCCESS"
+echo -e "\rCopying user settings... Done! $SUCCESS"
 
 # Enable key-repeating for vim plugin
 echo -n "Enabling key-repeating for vim plugin..."
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-echo -ne "\rEnabling key-repeating for vim plugin... Done! $SUCCESS"
+echo -e "\rEnabling key-repeating for vim plugin... Done! $SUCCESS"
 echo && echo

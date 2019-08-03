@@ -19,13 +19,13 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$SUDO_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rInstalling Cocoapods... Done! $SUCCESS"
+echo -e "\rInstalling Cocoapods... Done! $SUCCESS"
 
 # Add fish to the list of allowed shells
 # This "hack" is to circumvent homebrew invalidating sudo timestamp on each install.
 echo -n "Adding fish to the list of allowed shells..."
 sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
-echo -ne "\rAdding fish to the list of allowed shells... Done! $SUCCESS"
+echo -e "\rAdding fish to the list of allowed shells... Done! $SUCCESS"
 
 # Install Homebrew
 echo -n "Installing Homebrew..."
@@ -36,7 +36,7 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$SUDO_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rInstalling Homebrew... Done! $SUCCESS"
+echo -e "\rInstalling Homebrew... Done! $SUCCESS"
 
 # Update and upgrade Homebrew
 echo -n "Updating Homebrew..."
@@ -48,12 +48,12 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$SUDO_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rUpdating Homebrew... Done! $SUCCESS"
+echo -e "\rUpdating Homebrew... Done! $SUCCESS"
 
 # Opt out of Homebrew's analytics
 echo -n "Opting out of Homebrew's analytics..."
 brew analytics off
-echo -ne "\rOpting out of Homebrew's analytics... Done! $SUCCESS"
+echo -e "\rOpting out of Homebrew's analytics... Done! $SUCCESS"
 
 # Install Brewfile
 echo -n "Installing tools and applications from ./Brewfile..."
@@ -64,5 +64,5 @@ if [ $? -ne 0 ]; then
     errcho "Please check the generated \`$SUDO_LOGFILE\`."
     exit 1
 fi
-echo -ne "\rInstalling tools and applications from ./Brewfile... Done! $SUCCESS"
+echo -e "\rInstalling tools and applications from ./Brewfile... Done! $SUCCESS"
 echo && echo

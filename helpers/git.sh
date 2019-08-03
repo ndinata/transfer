@@ -7,7 +7,7 @@ echo "$DIVIDER"
 
 echo -n "Copying .gitconfig..."
 cp "$gitconfig_dir" $HOME/
-echo -ne "\rCopying .gitconfig... Done! $SUCCESS"
+echo -e "\rCopying .gitconfig... Done! $SUCCESS"
 echo
 
 echo -n "Setting up git lfs..."
@@ -19,5 +19,5 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo -ne "\rSetting up git lfs... Done! $SUCCESS"
+echo -e "\rSetting up git lfs... Done! $SUCCESS"
 echo && echo

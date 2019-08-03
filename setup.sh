@@ -79,7 +79,7 @@ source helpers/util.sh
 echo "$DIVIDER"
 echo -n "Cleaning up..."
 (brew update && brew upgrade && brew cleanup && brew doctor) &> "$CLEANUP_LOGFILE"
-echo -ne "\rCleaning up... Done! $SUCCESS"
+echo -e "\rCleaning up... Done! $SUCCESS"
 echo
 
 echo "Please remember to set fish as the default shell by running:"
