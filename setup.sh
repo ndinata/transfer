@@ -4,6 +4,7 @@ NAME="qsetup"
 SCRIPT_NAME="setup"
 LOGFILE_DIR="$HOME/Desktop/${NAME}_logfiles"
 SUDO_LOGFILE="$LOGFILE_DIR/sudo.txt"
+BREW_LOGFILE="$LOGFILE_DIR/brew.txt"
 VSCODE_LOGFILE="$LOGFILE_DIR/vscode.txt"
 FONT_LOGFILE="$LOGFILE_DIR/fonts.txt"
 GIT_LOGFILE="$LOGFILE_DIR/git.txt"
@@ -56,6 +57,9 @@ source helpers/intro.sh
 
 # Carry out operations with sudo upfront to prevent further user interaction
 source helpers/all_sudo.sh
+
+# Setup Homebrew
+source helpers/brew.sh
 
 # Setup VSCode
 source helpers/vscode.sh
