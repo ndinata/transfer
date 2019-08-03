@@ -7,34 +7,36 @@ vim_colors_dir="$vim_home_dir/colors"
 vim_autoload_dir="$vim_home_dir/autoload"
 vim_color_theme_url="https://raw.githubusercontent.com/joshdick/onedark.vim/master/colors/onedark.vim"
 vim_autoload_theme_url="https://raw.githubusercontent.com/joshdick/onedark.vim/master/autoload/onedark.vim"
+vimrc_cmd() {
+    mkdir -pv "$vim_home_dir"
+    cp "$vimrc_dir" "$vimrc_home_dir"
+}
+vim_theme_install_cmd() {
+    mkdir -pv "$vim_colors_dir"
+    mkdir -pv "$vim_autoload_dir"
+    curl "$vim_autoload_theme_url" -o "$vim_autoload_dir/onedark.vim"
+    if [ $? -ne 0 ]; then
+        echo -e "\n"
+        errcho "$ERROR something went wrong when downloading vim autoload file"
+        errcho "Please check the generated \`$VIM_LOGFILE\`."
+    fi
+
+    curl "$vim_color_theme_url" -o "$vim_colors_dir/onedark.vim"
+    if [ $? -ne 0 ]; then
+        echo -e "\n"
+        errcho "$ERROR something went wrong when downloading vim colors file"
+        errcho "Please check the generated \`$VIM_LOGFILE\`."
+    fi
+}
+
+###########################################################################
 
 echo "Vim"
 echo "$DIVIDER"
 
-echo -n "Copying .vimrc..."
-mkdir -pv "$vim_home_dir"
-cp "$vimrc_dir" "$vimrc_home_dir"
-echo -e "\rCopying .vimrc... Done! $SUCCESS"
+# Copy .vimrc
+try_action "Copying .vimrc" vimrc_cmd
 
-echo -n "Installing vim colorschemes..."
-mkdir -pv "$vim_colors_dir"
-mkdir -pv "$vim_autoload_dir"
-
-curl "$vim_autoload_theme_url" -o "$vim_autoload_dir/onedark.vim" &> "$VIM_LOGFILE"
-if [ $? -ne 0 ]; then
-    echo -e "\n"
-    errcho "$ERROR something went wrong when downloading vim autoload file"
-    errcho "Please check the generated \`$VIM_LOGFILE\`."
-    exit 1
-fi
-
-curl "$vim_color_theme_url" -o "$vim_colors_dir/onedark.vim" &> "$VIM_LOGFILE"
-if [ $? -ne 0 ]; then
-    echo -e "\n"
-    errcho "$ERROR something went wrong when downloading vim colors file"
-    errcho "Please check the generated \`$VIM_LOGFILE\`."
-    exit 1
-fi
-
-echo -e "\rInstalling vim colorschemes... Done! $SUCCESS"
+# Install vim color schemes
+try_action "Installing vim colorschemes" vim_theme_install_cmd "$VIM_LOGFILE"
 echo && echo

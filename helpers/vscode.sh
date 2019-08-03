@@ -2,29 +2,31 @@
 
 vscode_settings_file="vscode/settings.json"
 vscode_settings_dir="$HOME/Library/Application Support/Code/User/"
+vscode_install_cmd() {
+    code --install-extension zhuangtongfa.material-theme
+    code --install-extension ms-python.python
+    code --install-extension vscodevim.vim
+    code --install-extension esbenp.prettier-vscode
+    code --install-extension dbaeumer.vscode-eslint
+    code --install-extension kamikillerto.vscode-colorize
+    code --install-extension rbbit.typescript-hero
+    code --install-extension gruntfuggly.todo-tree 
+}
+vscode_settings_cmd() { cp "$vscode_settings_file" "$vscode_settings_dir"; }
+vscode_vim_cmd() {
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+}
+
+###########################################################################
 
 echo "VSCode"
 echo "$DIVIDER"
 
 # Install extensions
-echo -n "Installing extensions..."
-code --install-extension zhuangtongfa.material-theme &> "$VSCODE_LOGFILE"
-code --install-extension ms-python.python &> "$VSCODE_LOGFILE"
-code --install-extension vscodevim.vim &> "$VSCODE_LOGFILE"
-code --install-extension esbenp.prettier-vscode &> "$VSCODE_LOGFILE"
-code --install-extension dbaeumer.vscode-eslint &> "$VSCODE_LOGFILE"
-code --install-extension kamikillerto.vscode-colorize &> "$VSCODE_LOGFILE"
-code --install-extension rbbit.typescript-hero &> "$VSCODE_LOGFILE"
-code --install-extension gruntfuggly.todo-tree &> "$VSCODE_LOGFILE"
-echo -e "\rInstalling extensions... Done! $SUCCESS"
+try_action "Installing extensions" vscode_install_cmd "$VSCODE_LOGFILE"
 
 # Setup user preferences
-echo -n "Copying user settings..."
-cp "$vscode_settings_file" "$vscode_settings_dir"
-echo -e "\rCopying user settings... Done! $SUCCESS"
+try_action "Copying user settings" vscode_settings_cmd
 
 # Enable key-repeating for vim plugin
-echo -n "Enabling key-repeating for vim plugin..."
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-echo -e "\rEnabling key-repeating for vim plugin... Done! $SUCCESS"
-echo && echo
+try_action "Enabling key-repeating for vim plugin" vscode_vim_cmd

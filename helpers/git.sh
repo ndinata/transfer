@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 
 gitconfig_dir="dotfiles/.gitconfig"
+gitconfig_cmd() { cp "$gitconfig_dir" $HOME; }
+git_lfs_cmd() { git lfs install; }
+
+###########################################################################
 
 echo "Git"
 echo "$DIVIDER"
 
-echo -n "Copying .gitconfig..."
-cp "$gitconfig_dir" $HOME/
-echo -e "\rCopying .gitconfig... Done! $SUCCESS"
+# Copy gitconfig
+try_action "Copying .gitconfig" gitconfig_cmd
 
-echo -n "Setting up git lfs..."
-git lfs install &> "$GIT_LOGFILE"
-if [ $? -ne 0 ]; then
-    echo -e "\n"
-    errcho "$ERROR something went wrong when setting up git lfs"
-    errcho "Please check the generated \`$GIT_LOGFILE\`."
-    exit 1
-fi
-
-echo -e "\rSetting up git lfs... Done! $SUCCESS"
+# Setup git lfs
+try_action "Setting up git lfs" git_lfs_cmd "$GIT_LOGFILE"
 echo && echo

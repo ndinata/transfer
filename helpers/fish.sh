@@ -2,52 +2,43 @@
 
 fish_function_dir="$HOME/.config/fish/functions"
 fishfiles_dir="fishfiles"
+fisher_install_dir="$HOME/.config/fish/functions/fisher.fish"
+fish_function_cmd() {
+    if [ ! -d "$fish_function_dir/" ]; then
+        mkdir -pv $fish_function_dir
+    fi
+    cp $fishfiles_dir/* $fish_function_dir
+}
+fisher_install_cmd() {
+    curl https://git.io/fisher --create-dirs -sLo "$fisher_install_dir"
+}
+fish_pure_install_cmd() {
+    fish -c "fisher add rafaelrinaldi/pure" 
+}
+fish_python_cmd() {
+    fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths" 
+}
+fish_node_cmd() {
+    fish -c "set -U fish_user_paths /usr/local/opt/node@10/bin \$fish_user_paths" 
+}
+fish_vi_cmd() { fish -c "fish_vi_key_bindings"; }
+
+###########################################################################
 
 echo "Fish"
 echo "$DIVIDER"
 
 # Copy fish function files
-echo -n "Adding fish function files..."
-if [ ! -d "$fish_function_dir/" ]; then
-    mkdir -pv $fish_function_dir
-fi
-cp $fishfiles_dir/* $fish_function_dir
-echo -e "\rAdding fish function files... Done! $SUCCESS"
+try_action "Adding fish function files" fish_function_cmd
 
 # Install Fisher
-echo -n "Installing Fisher..."
-curl https://git.io/fisher --create-dirs -sLo $HOME/.config/fish/functions/fisher.fish &> "$FISH_LOGFILE"
-if [ $? -ne 0 ]; then
-    echo -e "\n"
-    errcho "$ERROR something went wrong when installing Fisher"
-    errcho "Please check the generated \`$FISH_LOGFILE\`."
-    exit 1
-fi
-echo -e "\rInstalling Fisher... Done! $SUCCESS"
+try_action "Installing Fisher" fisher_install_cmd "$FISH_LOGFILE"
 
 # Install fish-pure
-echo -n "Installing fish pure..."
-fish -c "fisher add rafaelrinaldi/pure" &> "$FISH_LOGFILE"
-if [ $? -ne 0 ]; then
-    echo -e "\n"
-    errcho "$ERROR something went wrong when installing fish-pure"
-    errcho "Please check the generated \`$FISH_LOGFILE\`."
-    exit 1
-fi
-echo -e "\rInstalling fish pure... Done! $SUCCESS"
+try_action "Installing fish pure" fish_pure_install_cmd "$FISH_LOGFILE"
 
-# echo && echo "Creating fish directory for linking..."
-# mkdir -pv $HOME/.config/fish/conf.d/
-
-echo -n "Adding Brew's python symlink location to \$PATH..."
-fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths"
-echo -e "\rAdding Brew's python symlink location to \$PATH... Done! $SUCCESS"
-
-echo -n "Adding node@10 to \$PATH..."
-fish -c "set -U fish_user_paths /usr/local/opt/node@10/bin \$fish_user_paths"
-echo -e "\rAdding node@10 to \$PATH... Done! $SUCCESS"
-
-echo -n "Enabling vi keybindings on fish..."
-fish -c "fish_vi_key_bindings"
-echo -e "\rEnabling vi keybindings on fish... Done! $SUCCESS"
+# Setup fish PATH
+try_action "Adding Brew's python symlink location to \$PATH" fish_python_cmd
+try_action "Adding node@10 to \$PATH" fish_node_cmd
+try_action "Enabling vi keybindings on fish" fish_vi_cmd
 echo && echo

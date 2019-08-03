@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-echo "Fonts"
-echo "$DIVIDER"
-
 sf_source_dir="/Applications/Utilities/Terminal.app/Contents/Resources/Fonts"
 sf_test_file="SFMono-Regular.otf"
 sf_target_dir="$HOME/Library/Fonts"
 
+###########################################################################
+
+echo "Fonts"
+echo "$DIVIDER"
+
+# Install SFMono font, if available
 echo -n "Looking for SFMono font files..."
 if [ -f $sf_source_dir/$sf_test_file ]; then
     echo -e "\rLooking for SFMono font files... They're available!"
