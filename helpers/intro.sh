@@ -9,6 +9,7 @@ if [ $# != 0 ]; then
 fi
 
 # Check if signed in to Mac App Store
+echo
 echo "Hello! Starting $NAME."
 echo "Before we proceed, you need to be signed in to the Mac App Store for mas-cli to work."
 echo "Are you signed in? [yes|no]"
@@ -30,7 +31,7 @@ echo
 echo "Is the CLT installed? [yes|no]"
 read -p "[no] >> " REPLY
 if [[ $REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    echo "Let's start!"
+    echo -e "\nLet's start!"
     mkdir -pv "$LOGFILE_DIR"
     echo "$LOGFILE_DIR has been created to store logfiles."
     echo

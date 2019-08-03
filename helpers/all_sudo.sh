@@ -29,7 +29,7 @@ echo -ne "\rAdding fish to the list of allowed shells... Done! $SUCCESS"
 
 # Install Homebrew
 echo -n "Installing Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &> "$SUDO_LOGFILE"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null &> "$SUDO_LOGFILE"
 if [ $? -ne 0 ]; then
     echo -e "\n"
     errcho "$ERROR something went wrong when installing Homebrew"
