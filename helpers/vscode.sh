@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 vscode_settings_file="vscode/settings.json"
-vscode_settings_dir="$HOME/Library/Application\ Support/Code/User/"
+vscode_settings_dir="$HOME/Library/Application Support/Code/User/"
 
 echo "VSCode"
 echo "$DIVIDER"
