@@ -21,7 +21,6 @@ echo -n "Installing vim colorschemes..."
 mkdir -pv "$vim_colors_dir"
 mkdir -pv "$vim_autoload_dir"
 
-echo "Downloading vim autoload file..." >> "$VIM_LOGFILE"
 curl "$vim_autoload_theme_url" -o "$vim_autoload_dir/onedark.vim" &> "$VIM_LOGFILE"
 if [ $? -ne 0 ]; then
     echo -e "\n"
@@ -30,7 +29,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Downloading vim colors file..." >> "$VIM_LOGFILE"
 curl "$vim_color_theme_url" -o "$vim_colors_dir/onedark.vim" &> "$VIM_LOGFILE"
 if [ $? -ne 0 ]; then
     echo -e "\n"
