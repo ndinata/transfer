@@ -8,7 +8,6 @@ echo "$DIVIDER"
 echo -n "Copying .gitconfig..."
 cp "$gitconfig_dir" $HOME/
 echo -e "\rCopying .gitconfig... Done! $SUCCESS"
-echo
 
 echo -n "Setting up git lfs..."
 git lfs install &> "$GIT_LOGFILE"

@@ -76,14 +76,11 @@ source helpers/fish.sh
 source helpers/util.sh
 
 # Cleanup
-echo "$DIVIDER"
 echo -n "Cleaning up..."
 (brew update && brew upgrade && brew cleanup && brew doctor) &> "$CLEANUP_LOGFILE"
 echo -e "\rCleaning up... Done! $SUCCESS"
 echo
 
 echo "Please remember to set fish as the default shell by running:"
-echo
 echo "    chsh -s /usr/local/bin/fish"
-echo
 echo "$NAME completed! Remember to restart for some changes to take into effect."

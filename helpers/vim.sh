@@ -15,7 +15,6 @@ echo -n "Copying .vimrc..."
 mkdir -pv "$vim_home_dir"
 cp "$vimrc_dir" "$vimrc_home_dir"
 echo -e "\rCopying .vimrc... Done! $SUCCESS"
-echo
 
 echo -n "Installing vim colorschemes..."
 mkdir -pv "$vim_colors_dir"

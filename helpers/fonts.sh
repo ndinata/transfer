@@ -18,7 +18,6 @@ if [ -f $sf_source_dir/$sf_test_file ]; then
         echo "        $fontfile" >> "$FONT_LOGFILE"
     done
     echo -e "\rInstalling them... Done! $SUCCESS"
-    echo
 else
     errcho "$ERROR SFMono font files seem to be missing, or their extension is not .otf"
     errcho "Please check this directory:"
@@ -28,4 +27,4 @@ else
     errcho "If the files are there, please manually install them."
 fi
 
-echo
+echo && echo
