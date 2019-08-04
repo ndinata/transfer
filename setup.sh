@@ -16,12 +16,12 @@ CLEANUP_LOGFILE="$LOGFILE_DIR/cleanup.txt"
 BOLD='\033[1m'
 RED='\033[31m'
 GREEN='\033[32m'
-BLUE='\033[34m'
+# BLUE='\033[34m'
 NC='\033[0m'
 SUCCESS="${GREEN}✔${NC}"
 FAIL="${RED}✖${NC}"
 ERROR="${RED}Error${NC}"
-ARROW="${BLUE}===>${NC}"
+# ARROW="${BLUE}===>${NC}"
 DIVIDER="-------------------------------"
 
 ###########################################################################
@@ -85,9 +85,12 @@ echo -n "Cleaning up..."
 echo -e "\rCleaning up... Done! $SUCCESS"
 echo
 
-echo "Please remember to set fish as the default shell by running:"
+echo "$NAME completed!"
+echo "Please remember to do 3 more things:"
+echo "1. Set fish as the default shell by running:"
 echo
 echo "    chsh -s /usr/local/bin/fish"
 echo
-echo "$NAME completed! Remember to restart for some changes to take into effect."
+echo "2. Import iTerm theme file in $HOME/Downloads."
+echo "3. Restart for some changes to take into effect."
 echo
