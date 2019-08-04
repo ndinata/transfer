@@ -30,3 +30,4 @@ try_action "Copying user settings" vscode_settings_cmd
 
 # Enable key-repeating for vim plugin
 try_action "Enabling key-repeating for vim plugin" vscode_vim_cmd
+echo && echo

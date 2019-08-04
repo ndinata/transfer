@@ -86,5 +86,8 @@ echo -e "\rCleaning up... Done! $SUCCESS"
 echo
 
 echo "Please remember to set fish as the default shell by running:"
+echo
 echo "    chsh -s /usr/local/bin/fish"
+echo
 echo "$NAME completed! Remember to restart for some changes to take into effect."
+echo
