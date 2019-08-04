@@ -1,93 +1,96 @@
 #!/usr/bin/env bash
 
-echo "Commence qsetup."
-echo "Before we proceed, please sign in to the Mac App Store for mas-cli to work."
-echo "Ready to go? [yes|no]"
-read -p "[no] >>> "
-if [[ $REPLY =~ ^[yY] ]]; then
-    echo
-else
-    echo "ERROR: cannot proceed until you have signed in. Please try again."
-    exit 1
-fi
+NAME="qsetup"
+SCRIPT_NAME="setup"
+LOGFILE_DIR="$HOME/Desktop/${NAME}_logfiles"
+SUDO_LOGFILE="$LOGFILE_DIR/sudo.txt"
+BREW_LOGFILE="$LOGFILE_DIR/brew.txt"
+VSCODE_LOGFILE="$LOGFILE_DIR/vscode.txt"
+FONT_LOGFILE="$LOGFILE_DIR/fonts.txt"
+GIT_LOGFILE="$LOGFILE_DIR/git.txt"
+VIM_LOGFILE="$LOGFILE_DIR/vim.txt"
+FISH_LOGFILE="$LOGFILE_DIR/fish.txt"
+CLEANUP_LOGFILE="$LOGFILE_DIR/cleanup.txt"
 
-echo "You also need to have installed Xcode CLT."
-echo "You can do so by opening a new Terminal instance and running:"
-echo
-echo "xcode-select --install"
-echo
-echo "Ready to go? [yes|no]"
-read -p "[no] >>> "
-if [[ $REPLY =~ ^[yY] ]]; then
-    echo "Let's start!"
-    echo
-else
-    echo "ERROR: cannot proceed until you have downloaded the CLT. Please try again."
-    exit 1
-fi
+# Colourful output
+BOLD='\033[1m'
+RED='\033[31m'
+GREEN='\033[32m'
+# BLUE='\033[34m'
+NC='\033[0m'
+SUCCESS="${GREEN}✔${NC}"
+FAIL="${RED}✖${NC}"
+ERROR="${RED}Error${NC}"
+# ARROW="${BLUE}===>${NC}"
+DIVIDER="-------------------------------"
 
-# Ask for sudo permissions upfront
-# echo "Please provide sudo password for use by the script."
-# sudo -v
+###########################################################################
 
-# Keep sudo "alive"
-# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+errcho() { >&2 echo -e "$@"; }
 
-# Install Cocoapods
-sudo gem install cocoapods
+# $1: message to be printed on the console while the action is running
+# $2: action to be carried out
+# $3: logfile to send output of action to (required if error-handling is needed)
+try_action() {
+    echo -n "$1..."
 
-# Add fish to the list of allowed shells
-# This "hack" is to circumvent homebrew invalidating sudo timestamp on each install.
-echo "Adding fish to the list of allowed shells..."
-sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
+    # only redirect output of action if a logfile is supplied
+    if [[ -z $3 ]]; then
+        $2
+        echo -e "\r$1... Done! $SUCCESS"
+    else
+        if $2 >> "$3" 2>&1 ; then
+            echo -e "\r$1... Done! $SUCCESS"
+        else
+            echo -e "\r$1... $FAIL"
+            errcho "$ERROR something went wrong"
+            errcho "Please check the generated \"$3\"."
+            echo
+        fi
+    fi
+}
 
-# Install Homebrew
-echo && echo "Installing Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+###########################################################################
 
-# Update and upgrade Homebrew
-echo && echo "Updating Homebrew..."
-brew update && brew upgrade
+# Check if prerequisites for the script are satisfied
+source helpers/intro.sh
 
-# Opt out of Homebrew's analytics
-echo && echo "Opting out of Homebrew's analytics..."
-brew analytics off
+# Carry out operations with sudo upfront to prevent further user interaction
+source helpers/all_sudo.sh
 
-# Install Brewfile
-echo && echo "Installing tools and applications from ./Brewfile..."
-brew bundle
-
-# Fix sub-pixel AA
-echo "Fixing subpixel AA..."
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-
-# Download theme for iTerm
-echo "Copying iTerm theme file to ~/Downloads..."
-cp others/OneSnazzy.itermcolors $HOME/Downloads/
+# Setup Homebrew
+source helpers/brew.sh
 
 # Setup VSCode
-bash setup-scripts/vscode-setup.sh
+source helpers/vscode.sh
 
-# Install fonts
-bash setup-scripts/font-setup.sh
+# Install extra fonts
+source helpers/fonts.sh
 
-# Setup new git and git-lfs
-bash setup-scripts/git-setup.sh
-git lfs install
+# Setup git and git-lfs
+source helpers/git.sh
 
 # Setup vim
-bash setup-scripts/vim-setup.sh
+source helpers/vim.sh
 
 # Setup fish
-bash setup-scripts/fish-setup.sh
+source helpers/fish.sh
+
+# Run general utility stuff
+source helpers/util.sh
 
 # Cleanup
-brew update && brew upgrade && brew cleanup && brew doctor
+echo -n "Cleaning up..."
+(brew update && brew upgrade && brew cleanup && brew doctor) &> "$CLEANUP_LOGFILE"
+echo -e "\rCleaning up... Done! $SUCCESS"
+echo
 
+echo "$NAME completed!"
+echo "Please remember to do 3 more things:"
+echo "1. Set fish as the default shell by running:"
 echo
-echo "Please remember to set fish as the default shell by running:"
+echo "    chsh -s /usr/local/bin/fish"
 echo
-echo "chsh -s /usr/local/bin/fish"
+echo "2. Import iTerm theme file in $HOME/Downloads."
+echo "3. Restart for some changes to take into effect."
 echo
-echo && echo "qsetup completed! Remember to restart for some changes to take into effect."
-

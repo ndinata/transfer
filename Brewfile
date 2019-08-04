@@ -16,7 +16,7 @@ brew "wget"
 brew "yarn"
 
 # GUI apps
-cask "adoptopenjdk8"
+# cask "adoptopenjdk8" # requires sudo
 cask "cryptomator"
 cask "dash"
 cask "discord"
