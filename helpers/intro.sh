@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
 
 # Ensure correct usage of script
-if [ $# != 0 ]; then
+if [[ $# -gt 1 ]]; then
     echo
-    errcho "$ERROR extra parameters detected"
-    errcho "Usage: bash $SCRIPT_NAME.sh"
+    errcho "$ERROR excessive script arguments"
+    errcho "Usage: bash $SCRIPT_NAME.sh [-s|--showcase]"
     exit 1
+elif [[ $# -gt 0 ]]; then
+    if [[ $* =~ $SHOWCASE_FLAG_SHORT || $* =~ $SHOWCASE_FLAG_LONG ]]; then
+        IS_SHOWCASE_MODE=true
+    else
+        echo
+        errcho "$ERROR invalid argument"
+        errcho "Usage: bash $SCRIPT_NAME.sh [-s|--showcase]"
+        exit 1
+    fi
+fi
+
+if [[ "$IS_SHOWCASE_MODE" == true ]]; then
+    echo "Showcase mode"
+    exit 0
+else
+    echo "Operational mode"
+    exit 0
 fi
 
 # Check if signed in to Mac App Store

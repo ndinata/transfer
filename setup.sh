@@ -2,6 +2,9 @@
 
 NAME="qsetup"
 SCRIPT_NAME="setup"
+IS_SHOWCASE_MODE=false
+SHOWCASE_FLAG_LONG="^--showcase$"
+SHOWCASE_FLAG_SHORT="^-s$"
 LOGFILE_DIR="$HOME/Desktop/${NAME}_logfiles"
 SUDO_LOGFILE="$LOGFILE_DIR/sudo.txt"
 BREW_LOGFILE="$LOGFILE_DIR/brew.txt"
