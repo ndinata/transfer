@@ -39,16 +39,25 @@ try_action() {
 
     # only redirect output of action if a logfile is supplied
     if [[ -z $3 ]]; then
-        $2
+        if [[ $IS_SHOWCASE_MODE == true ]]; then
+            sleep 1s
+        else
+            $2
+        fi
         echo -e "\r$1... Done! $SUCCESS"
     else
-        if $2 >> "$3" 2>&1 ; then
+        if [[ $IS_SHOWCASE_MODE == true ]]; then
+            sleep 1s
             echo -e "\r$1... Done! $SUCCESS"
         else
-            echo -e "\r$1... $FAIL"
-            errcho "$ERROR something went wrong"
-            errcho "Please check the generated \"$3\"."
-            echo
+            if $2 >> "$3" 2>&1 ; then
+                echo -e "\r$1... Done! $SUCCESS"
+            else
+                echo -e "\r$1... $FAIL"
+                errcho "$ERROR something went wrong"
+                errcho "Please check the generated \"$3\"."
+                echo
+            fi
         fi
     fi
 }
