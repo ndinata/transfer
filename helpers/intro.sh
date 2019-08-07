@@ -18,11 +18,7 @@ elif [[ $# -gt 0 ]]; then
 fi
 
 if [[ "$IS_SHOWCASE_MODE" == true ]]; then
-    echo "Showcase mode"
-    exit 0
-else
-    echo "Operational mode"
-    exit 0
+    echo "[Showcase Mode]"
 fi
 
 # Check if signed in to Mac App Store
@@ -34,6 +30,7 @@ read -p "[no] >> " REPLY
 if [[ $REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then
     echo
 else
+    echo
     errcho "$ERROR not signed in to Mac App Store"
     errcho "Cannot proceed until you have signed in. Please try again."
     exit 1
@@ -53,6 +50,7 @@ if [[ $REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then
     echo "$LOGFILE_DIR has been created to store logfiles."
     echo
 else
+    echo
     errcho "$ERROR Xcode CLT not installed"
     errcho "Cannot proceed until you have downloaded the CLT. Please try again."
     exit 1
