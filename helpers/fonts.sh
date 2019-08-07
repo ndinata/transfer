@@ -6,7 +6,7 @@ sf_target_dir="$HOME/Library/Fonts"
 
 ###########################################################################
 
-echo "Fonts"
+echo_header "Fonts"
 echo "$DIVIDER"
 
 if [[ $IS_SHOWCASE_MODE == true ]]; then

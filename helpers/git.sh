@@ -6,7 +6,7 @@ git_lfs_cmd() { git lfs install; }
 
 ###########################################################################
 
-echo "Git"
+echo_header "Git"
 echo "$DIVIDER"
 
 # Copy gitconfig

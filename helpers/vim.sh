@@ -31,7 +31,7 @@ vim_theme_install_cmd() {
 
 ###########################################################################
 
-echo "Vim"
+echo_header "Vim"
 echo "$DIVIDER"
 
 # Copy .vimrc

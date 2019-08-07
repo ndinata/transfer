@@ -19,7 +19,7 @@ CLEANUP_LOGFILE="$LOGFILE_DIR/cleanup.txt"
 BOLD='\033[1m'
 RED='\033[31m'
 GREEN='\033[32m'
-# BLUE='\033[34m'
+BLUE='\033[34m'
 NC='\033[0m'
 SUCCESS="${GREEN}✔${NC}"
 FAIL="${RED}✖${NC}"
@@ -30,6 +30,8 @@ DIVIDER="-------------------------------"
 ###########################################################################
 
 errcho() { >&2 echo -e "$@"; }
+
+echo_header() { echo -e "${BLUE}$@${NC}"; }
 
 # $1: message to be printed on the console while the action is running
 # $2: action to be carried out
