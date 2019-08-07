@@ -9,7 +9,7 @@ brew_bundle_cmd() { brew bundle; }
 
 ###########################################################################
 
-echo "Homebrew"
+echo_header "Homebrew"
 echo "$DIVIDER"
 
 # Install Homebrew

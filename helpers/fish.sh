@@ -25,7 +25,7 @@ fish_vi_cmd() { fish -c "fish_vi_key_bindings"; }
 
 ###########################################################################
 
-echo "Fish"
+echo_header "Fish"
 echo "$DIVIDER"
 
 # Copy fish function files

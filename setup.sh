@@ -2,6 +2,9 @@
 
 NAME="qsetup"
 SCRIPT_NAME="setup"
+IS_SHOWCASE_MODE=false
+SHOWCASE_FLAG_LONG="^--showcase$"
+SHOWCASE_FLAG_SHORT="^-s$"
 LOGFILE_DIR="$HOME/Desktop/${NAME}_logfiles"
 SUDO_LOGFILE="$LOGFILE_DIR/sudo.txt"
 BREW_LOGFILE="$LOGFILE_DIR/brew.txt"
@@ -16,7 +19,7 @@ CLEANUP_LOGFILE="$LOGFILE_DIR/cleanup.txt"
 BOLD='\033[1m'
 RED='\033[31m'
 GREEN='\033[32m'
-# BLUE='\033[34m'
+BLUE='\033[34m'
 NC='\033[0m'
 SUCCESS="${GREEN}✔${NC}"
 FAIL="${RED}✖${NC}"
@@ -28,6 +31,8 @@ DIVIDER="-------------------------------"
 
 errcho() { >&2 echo -e "$@"; }
 
+echo_header() { echo -e "${BLUE}$@${NC}"; }
+
 # $1: message to be printed on the console while the action is running
 # $2: action to be carried out
 # $3: logfile to send output of action to (required if error-handling is needed)
@@ -36,16 +41,25 @@ try_action() {
 
     # only redirect output of action if a logfile is supplied
     if [[ -z $3 ]]; then
-        $2
+        if [[ $IS_SHOWCASE_MODE == true ]]; then
+            sleep 1s
+        else
+            $2
+        fi
         echo -e "\r$1... Done! $SUCCESS"
     else
-        if $2 >> "$3" 2>&1 ; then
+        if [[ $IS_SHOWCASE_MODE == true ]]; then
+            sleep 1s
             echo -e "\r$1... Done! $SUCCESS"
         else
-            echo -e "\r$1... $FAIL"
-            errcho "$ERROR something went wrong"
-            errcho "Please check the generated \"$3\"."
-            echo
+            if $2 >> "$3" 2>&1 ; then
+                echo -e "\r$1... Done! $SUCCESS"
+            else
+                echo -e "\r$1... $FAIL"
+                errcho "$ERROR something went wrong"
+                errcho "Please check the generated \"$3\"."
+                echo
+            fi
         fi
     fi
 }
@@ -80,11 +94,13 @@ source helpers/fish.sh
 source helpers/util.sh
 
 # Cleanup
-echo -n "Cleaning up..."
-(brew update && brew upgrade && brew cleanup && brew doctor) &> "$CLEANUP_LOGFILE"
-echo -e "\rCleaning up... Done! $SUCCESS"
-echo
+cleanup_cmd() {
+    brew update && brew upgrade
+    brew cleanup && brew doctor
+}
+try_action "Cleaning up" cleanup_cmd "$CLEANUP_LOGFILE"
 
+echo
 echo "$NAME completed!"
 echo "Please remember to do 3 more things:"
 echo "1. Set fish as the default shell by running:"

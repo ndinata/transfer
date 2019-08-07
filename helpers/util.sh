@@ -9,7 +9,7 @@ iterm_theme_cmd() { cp "$iterm_theme_dir" "$iterm_theme_dl_dir"; }
 
 ###########################################################################
 
-echo "Utilities"
+echo_header "Utilities"
 echo "$DIVIDER"
 
 # Fix sub-pixel AA

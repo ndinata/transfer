@@ -6,8 +6,14 @@ sf_target_dir="$HOME/Library/Fonts"
 
 ###########################################################################
 
-echo "Fonts"
+echo_header "Fonts"
 echo "$DIVIDER"
+
+if [[ $IS_SHOWCASE_MODE == true ]]; then
+    try_action "Looking for SFMono font files"
+    echo && echo
+    return 0
+fi
 
 # Install SFMono font, if available
 echo -n "Looking for SFMono font files..."

@@ -19,7 +19,7 @@ vscode_vim_cmd() {
 
 ###########################################################################
 
-echo "VSCode"
+echo_header "VSCode"
 echo "$DIVIDER"
 
 # Install extensions

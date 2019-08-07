@@ -5,7 +5,7 @@ fish_cmd() { sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"; }
 
 ###########################################################################
 
-echo "Sudo Operations"
+echo_header "Sudo Operations"
 echo "$DIVIDER"
 
 # Ask for sudo permissions

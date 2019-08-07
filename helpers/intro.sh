@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
 
 # Ensure correct usage of script
-if [ $# != 0 ]; then
+if [[ $# -gt 1 ]]; then
     echo
-    errcho "$ERROR extra parameters detected"
-    errcho "Usage: bash $SCRIPT_NAME.sh"
+    errcho "$ERROR excessive script arguments"
+    errcho "Usage: bash $SCRIPT_NAME.sh [-s|--showcase]"
     exit 1
+elif [[ $# -gt 0 ]]; then
+    if [[ $* =~ $SHOWCASE_FLAG_SHORT || $* =~ $SHOWCASE_FLAG_LONG ]]; then
+        IS_SHOWCASE_MODE=true
+    else
+        echo
+        errcho "$ERROR invalid argument"
+        errcho "Usage: bash $SCRIPT_NAME.sh [-s|--showcase]"
+        exit 1
+    fi
+fi
+
+if [[ "$IS_SHOWCASE_MODE" == true ]]; then
+    echo "[Showcase Mode]"
 fi
 
 # Check if signed in to Mac App Store
@@ -17,6 +30,7 @@ read -p "[no] >> " REPLY
 if [[ $REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then
     echo
 else
+    echo
     errcho "$ERROR not signed in to Mac App Store"
     errcho "Cannot proceed until you have signed in. Please try again."
     exit 1
@@ -36,6 +50,7 @@ if [[ $REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then
     echo "$LOGFILE_DIR has been created to store logfiles."
     echo
 else
+    echo
     errcho "$ERROR Xcode CLT not installed"
     errcho "Cannot proceed until you have downloaded the CLT. Please try again."
     exit 1
