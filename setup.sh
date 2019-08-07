@@ -92,11 +92,13 @@ source helpers/fish.sh
 source helpers/util.sh
 
 # Cleanup
-echo -n "Cleaning up..."
-(brew update && brew upgrade && brew cleanup && brew doctor) &> "$CLEANUP_LOGFILE"
-echo -e "\rCleaning up... Done! $SUCCESS"
-echo
+cleanup_cmd() {
+    brew update && brew upgrade
+    brew cleanup && brew doctor
+}
+try_action "Cleaning up" cleanup_cmd "$CLEANUP_LOGFILE"
 
+echo
 echo "$NAME completed!"
 echo "Please remember to do 3 more things:"
 echo "1. Set fish as the default shell by running:"
