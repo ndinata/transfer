@@ -17,6 +17,7 @@ brew "yarn"
 
 # GUI apps
 # cask "adoptopenjdk8" # requires sudo
+cask "android-studio"
 cask "cryptomator"
 cask "dash"
 cask "discord"
