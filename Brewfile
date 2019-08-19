@@ -12,6 +12,7 @@ brew "node@10"
 brew "postgresql@9.5"
 brew "python"
 brew "vim"
+brew "watchman"
 brew "wget"
 brew "yarn"
 
