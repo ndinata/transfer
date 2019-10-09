@@ -13,7 +13,6 @@ FONT_LOGFILE="$LOGFILE_DIR/fonts.txt"
 GIT_LOGFILE="$LOGFILE_DIR/git.txt"
 VIM_LOGFILE="$LOGFILE_DIR/vim.txt"
 FISH_LOGFILE="$LOGFILE_DIR/fish.txt"
-CLEANUP_LOGFILE="$LOGFILE_DIR/cleanup.txt"
 
 # Colourful output
 BOLD='\033[1m'
@@ -93,20 +92,17 @@ source helpers/fish.sh
 # Run general utility stuff
 source helpers/util.sh
 
-# Cleanup
-cleanup_cmd() {
-    brew update && brew upgrade
-    brew cleanup && brew doctor
-}
-try_action "Cleaning up" cleanup_cmd "$CLEANUP_LOGFILE"
-
 echo
 echo "$NAME completed!"
-echo "Please remember to do 3 more things:"
+echo "Please remember to do several more things:"
 echo "1. Set fish as the default shell by running:"
 echo
 echo "    chsh -s /usr/local/bin/fish"
 echo
 echo "2. Import iTerm theme file in $HOME/Downloads."
-echo "3. Restart for some changes to take into effect."
+echo "3. Clean up by running:"
+echo
+echo "    brew cleanup && brew doctor"
+echo 
+echo "4. Restart for some changes to take into effect."
 echo

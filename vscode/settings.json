@@ -16,14 +16,8 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.showIcons": false,
   "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace",
-  "githubPullRequests.telemetry.enabled": false,
   "python.pythonPath": "/usr/local/opt/python/libexec/bin/python",
   "editor.formatOnSave": true,
-  "todo-tree.defaultHighlight": {
-    "type": "tag",
-    "foreground": "#528bff"
-  },
-  "todo-tree.highlightDelay": 250,
   "typescriptHero.imports.multiLineWrapThreshold": 90,
   "colorize.enable_search_variables": false,
   "colorize.languages": [
@@ -37,5 +31,10 @@
     "xml",
     "svg",
     "javascript"
-  ]
+  ],
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "tag",
+    "foreground": "#528bff"
+  },
+  "todo-tree.highlights.highlightDelay": 250
 }
