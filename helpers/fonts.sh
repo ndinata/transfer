@@ -38,6 +38,7 @@ if [[ "$are_fontfiles_available" == true ]]; then
     done
     echo -e "\rInstalling them... Done! $SUCCESS"
 else
+    echo -e "\rLooking for SFMono font files... $FAIL"
     errcho "$ERROR SFMono font files seem to be missing, or their extension is not .otf"
     errcho "Please check this directory:"
     errcho
