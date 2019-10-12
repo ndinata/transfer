@@ -6,6 +6,7 @@ vscode_install_cmd() {
     code --install-extension zhuangtongfa.material-theme
     code --install-extension ms-python.python
     code --install-extension vscodevim.vim
+    code --install-extension flowtype.flow-for-vscode
     code --install-extension esbenp.prettier-vscode
     code --install-extension dbaeumer.vscode-eslint
     code --install-extension kamikillerto.vscode-colorize
