@@ -96,13 +96,11 @@ echo
 echo "$NAME completed!"
 echo "Please remember to do several more things:"
 echo "1. Set fish as the default shell by running:"
-echo
-echo "    chsh -s /usr/local/bin/fish"
+echo -e "   ${BOLD}chsh -s /usr/local/bin/fish${NC}"
 echo
 echo "2. Import iTerm theme file in $HOME/Downloads."
-echo "3. Clean up by running:"
+echo "3. Setup VS Code preferences after opening the app once by running this on the Desktop:"
+echo -e "   ${BOLD}bash vscode-setup.sh${NC}"
 echo
-echo "    brew cleanup && brew doctor"
-echo 
 echo "4. Restart for some changes to take into effect."
 echo
