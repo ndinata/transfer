@@ -36,5 +36,6 @@
     "type": "tag",
     "foreground": "#528bff"
   },
-  "todo-tree.highlights.highlightDelay": 250
+  "todo-tree.highlights.highlightDelay": 250,
+  "editor.suggest.snippetsPreventQuickSuggestions": false
 }
