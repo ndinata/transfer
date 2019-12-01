@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 vscode_settings_file="./settings.json"
-vscode_settings_dir="$HOME/Library/Application Support/Code/User/"
+vscode_snippets_file="./react-native.code-snippets"
+vscode_settings_dir="$HOME/Library/Application Support/Code/User"
+vscode_snippets_dir="${vscode_settings_dir}/snippets"
 
 # Install extensions
 code --install-extension zhuangtongfa.material-theme
@@ -14,5 +16,7 @@ code --install-extension kamikillerto.vscode-colorize
 code --install-extension rbbit.typescript-hero
 code --install-extension gruntfuggly.todo-tree 
 
-# Copy user preferences file
-mv "$vscode_settings_file" "$vscode_settings_dir"
+# Copy user preferences and snippets file
+mv "$vscode_settings_file" "${vscode_settings_dir}/"
+mv "$vscode_snippets_file" "${vscode_snippets_dir}/"
+
