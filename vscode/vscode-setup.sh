@@ -14,9 +14,9 @@ code --install-extension esbenp.prettier-vscode
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension kamikillerto.vscode-colorize
 code --install-extension rbbit.typescript-hero
-code --install-extension gruntfuggly.todo-tree 
+code --install-extension gruntfuggly.todo-tree
+code --install-extension coenraads.bracket-pair-colorizer-2
 
 # Copy user preferences and snippets file
 mv "$vscode_settings_file" "${vscode_settings_dir}/"
 mv "$vscode_snippets_file" "${vscode_snippets_dir}/"
-
