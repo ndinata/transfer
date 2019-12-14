@@ -3,7 +3,9 @@
 vscode_setup_cmd() {
     cp "vscode/settings.json" "$HOME/Desktop"
     cp "vscode/vscode-setup.sh" "$HOME/Desktop" 
+    cp "vscode/react-native.code-snippets" "$HOME/Desktop"
 }
+
 vscode_vim_cmd() {
     defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 }
