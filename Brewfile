@@ -4,6 +4,7 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 # CLI tools
+brew "bat"
 brew "fish"
 brew "git"
 brew "git-lfs"
