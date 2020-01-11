@@ -22,9 +22,7 @@ brew "yarn"
 # GUI apps
 # cask "adoptopenjdk8" # requires sudo
 cask "android-studio"
-cask "cryptomator"
 cask "discord"
-cask "dropbox"
 cask "figma"
 cask "firefox"
 cask "franz"
