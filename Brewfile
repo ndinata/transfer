@@ -22,11 +22,13 @@ brew "yarn"
 # GUI apps
 # cask "adoptopenjdk8" # requires sudo
 cask "android-studio"
+cask "caprine"
 cask "discord"
 cask "figma"
 cask "firefox"
 cask "franz"
 cask "iterm2"
+cask "notion"
 cask "postman"
 cask "spotify"
 cask "visual-studio-code"
