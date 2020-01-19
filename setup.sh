@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME="qsetup"
+NAME="Wake"
 SCRIPT_NAME="setup"
 IS_SHOWCASE_MODE=false
 SHOWCASE_FLAG_LONG="^--showcase$"
