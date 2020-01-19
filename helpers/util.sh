@@ -2,7 +2,7 @@
 
 iterm_theme_dir="others/OneSnazzy.itermcolors"
 iterm_theme_dl_dir="$HOME/Downloads/"
-tldr_autocomplete_url="https://github.com/tldr-pages/tldr-cpp-client/blob/master/autocomplete/complete.fish"
+tldr_autocomplete_url="https://raw.githubusercontent.com/tldr-pages/tldr-cpp-client/master/autocomplete/complete.fish"
 tldr_autocomplete_path="$HOME/.config/fish/completions/tldr.fish"
 bat_config_content="# Set theme to \"TwoDark\"\n--theme=\"TwoDark\""
 bat_config_path="$HOME/.config/bat"
