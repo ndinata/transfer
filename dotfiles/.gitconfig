@@ -3,7 +3,7 @@
   email = ncdnt@icloud.com
 
 [fetch]
-	prune = true
+  prune = true
 
 [alias]
   # list aliases
@@ -29,7 +29,7 @@
   fo = fetch origin
 
   # pretty log
-	lg = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)%n''         %C(dim cyan)%aD%C(reset) %C(dim green)%ar%C(reset)'
+  lg = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)%n''         %C(dim cyan)%aD%C(reset) %C(dim green)%ar%C(reset)'
 
   # show verbose output about remotes
   remotes = remote -v
@@ -41,4 +41,4 @@
   s = status -s
 
 [push]
-	followTags = true
+  followTags = true
