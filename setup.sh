@@ -89,6 +89,9 @@ source helpers/vim.sh
 # Setup fish
 source helpers/fish.sh
 
+# Setup macOS configs
+source helpers/macos.sh
+
 # Run general utility stuff
 source helpers/util.sh
 
