@@ -46,6 +46,9 @@ config_finder() {
 
   # Disable tags
   defaults write com.apple.finder ShowRecentTags -bool false
+
+  # Fix subpixel AA
+  defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
 }
 
 ###########################################################################
