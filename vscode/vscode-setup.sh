@@ -13,7 +13,6 @@ code --install-extension flowtype.flow-for-vscode
 code --install-extension esbenp.prettier-vscode
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension kamikillerto.vscode-colorize
-code --install-extension rbbit.typescript-hero
 code --install-extension gruntfuggly.todo-tree
 code --install-extension coenraads.bracket-pair-colorizer-2
 

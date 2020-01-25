@@ -18,7 +18,6 @@
   "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "python.pythonPath": "/usr/local/opt/python/libexec/bin/python",
   "editor.formatOnSave": false,
-  "typescriptHero.imports.multiLineWrapThreshold": 90,
   "colorize.enable_search_variables": false,
   "colorize.languages": [
     "css",
