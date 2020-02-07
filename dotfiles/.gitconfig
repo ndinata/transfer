@@ -36,6 +36,10 @@
   # switch to a branch, creating it if necessary (`git go <branch>`)
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
+  # create gitignore file from www.gitignore.io
+  # example: `git ignore flask,python >> .gitignore`
+  ignore = "!f() { curl -sL https://www.gitignore.io/api/$@ ;}; f"
+
   # pretty log
   l = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)'
 
