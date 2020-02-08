@@ -28,6 +28,14 @@ vim_theme_install_cmd() {
         errcho "Please check the generated \`$VIM_LOGFILE\`."
     fi
 }
+vim_plug_install_cmd() {
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [ $? -ne 0 ]; then
+        echo -e "\n"
+        errcho "$ERROR something went wrong when downloading vim-plug file"
+        errcho "Please check the generated \`$VIM_LOGFILE\`."
+    fi
+}
 
 ###########################################################################
 
@@ -39,4 +47,7 @@ try_action "Copying .vimrc" vimrc_cmd
 
 # Install vim color schemes
 try_action "Installing vim colorschemes" vim_theme_install_cmd "$VIM_LOGFILE"
+
+# Install vim-plug
+try_action "Installing vim-plug" vim_plug_install_cmd "$VIM_LOGFILE"
 echo && echo
