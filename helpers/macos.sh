@@ -49,6 +49,17 @@ config_finder() {
 
   # Fix subpixel AA
   defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
+
+  # Show all filename extensions
+  defaults write -g AppleShowAllExtensions -bool true
+}
+
+config_appstore() {
+  # Disable in-app reviews
+  defaults write com.apple.appstore InAppReviewEnabled -bool false
+
+  # Disable video auto-play
+  defaults write com.apple.appstore AutoPlayVideoSetting -string "off"
 }
 
 ###########################################################################
@@ -61,6 +72,9 @@ try_action "Configuring Dock settings" config_dock
 
 # Configure Finder
 try_action "Configuring Finder settings" config_finder
+
+# Configure App Store
+try_action "Configuring App Store" config_appstore
 
 # Configure keyboard
 try_action "Configuring keyboard settings" config_keyboard

@@ -4,8 +4,8 @@ syntax on                   " Enable syntax highlighting.
 
 set autoindent              " Indent according to previous line.
 set expandtab               " Use spaces instead of tabs.
-set softtabstop=4           " Tab key indents by 4 spaces.
-set shiftwidth=4            " Indents by 4 spaces.
+set softtabstop=2           " Tab key indents by 2 spaces.
+set shiftwidth=2            " Indents by 2 spaces.
 set shiftround              " Indents to next multiple of 'shiftwidth'.
 
 set backspace=indent,eol,start
@@ -16,7 +16,7 @@ set mouse=a                 " Enable use of mouse.
 set ignorecase              " Case-insensitive search.
 set incsearch               " Highlight while searching with / or ?.
 set number                  " Display line numbers.
-set list                    " Show non-printable, e.g. '\n', characters.
+" set list                    " Show non-printable, e.g. '\n', characters.
 set ruler                   " Show cursor row and column position.
 
 set ttyfast                 " Faster redrawing.
@@ -42,4 +42,28 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
+
+" let Vundle manage Vundle
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'chrisbra/Recover.vim'
+" " Plug 'scrooloose/syntastic'
+" Plug 'dense-analysis/ale'
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdtree'
+" Plug 'MattesGroeger/vim-bookmarks' "See :help Bookmarks
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'majutsushi/tagbar'
+" Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'junegunn/vim-peekaboo'
+" Plug 'hdima/python-syntax'
+" Plug 'skielbasa/vim-material-monokai'
+" Plug 'ayu-theme/ayu-vim'
+" Plug 'vim-scripts/BufOnly.vim'
+" Plug 'lervag/vimtex'
 
