@@ -1,6 +1,5 @@
 set nocompatible
 filetype plugin indent on   " Load plugins according to detected filetype.
-syntax on                   " Enable syntax highlighting.
 
 set autoindent              " Indent according to previous line.
 set expandtab               " Use spaces instead of tabs.
@@ -24,8 +23,6 @@ set lazyredraw              " Only redraw when necessary.
 
 set cursorline              " Improve visual indicator of current line.
 set wrapscan                " Searches wrap around EOF.
-"
-colorscheme onedark
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -47,10 +44,14 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'yggdroot/indentline'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
 " Plugin configs
 " yggdroot/indentline
 let g:indentLine_char = '▏'
+
+syntax on
+colorscheme onedark
 
