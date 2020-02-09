@@ -43,27 +43,14 @@ if (empty($TMUX))
   endif
 endif
 
-" let Vundle manage Vundle
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-sleuth'
-" Plug 'tpope/vim-rhubarb'
-" Plug 'chrisbra/Recover.vim'
-" " Plug 'scrooloose/syntastic'
-" Plug 'dense-analysis/ale'
-" Plug 'scrooloose/nerdcommenter'
-" Plug 'scrooloose/nerdtree'
-" Plug 'MattesGroeger/vim-bookmarks' "See :help Bookmarks
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'majutsushi/tagbar'
-" Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'junegunn/vim-peekaboo'
-" Plug 'hdima/python-syntax'
-" Plug 'skielbasa/vim-material-monokai'
-" Plug 'ayu-theme/ayu-vim'
-" Plug 'vim-scripts/BufOnly.vim'
-" Plug 'lervag/vimtex'
+" Plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'yggdroot/indentline'
+
+call plug#end()
+
+" Plugin configs
+" yggdroot/indentline
+let g:indentLine_char = '▏'
 
