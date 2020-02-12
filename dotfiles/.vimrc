@@ -6,6 +6,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'yggdroot/indentline'
 Plug 'joshdick/onedark.vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml'] }
 
 call plug#end()
 
@@ -55,12 +58,15 @@ if (empty($TMUX))
 endif
 
 
-
 " Plugin configs
 " -------------------------------------------------------------
 
 " yggdroot/indentline
 let g:indentLine_char = '▏'
+
+" prettier/vim-prettier
+let g:prettier#autoformat = 1                   " enable auto formatting
+let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
 
 
 " -------------------------------------------------------------
