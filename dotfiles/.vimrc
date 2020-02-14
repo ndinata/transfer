@@ -9,6 +9,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml'] }
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
