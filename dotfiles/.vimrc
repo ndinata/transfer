@@ -10,6 +10,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml'] }
 Plug 'jiangmiao/auto-pairs'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -68,6 +69,10 @@ let g:indentLine_char = '▏'
 " prettier/vim-prettier
 let g:prettier#autoformat = 1                   " enable auto formatting
 let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
+
+" pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1               " enable syntax highlighting for JSDocs
+let g:javascript_plugin_flow = 1                " enable syntax highlighting for Flow
 
 
 " -------------------------------------------------------------
