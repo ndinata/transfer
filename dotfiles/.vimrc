@@ -11,6 +11,7 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml'] }
 Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 
@@ -22,6 +23,7 @@ filetype plugin indent on   " Load plugins according to detected filetype.
 
 set autoindent              " Indent according to previous line.
 set backspace=indent,eol,start
+set cmdheight=2             " Set command-line height to 2 lines
 set cursorline              " Improve visual indicator of current line.
 set display=lastline        " Show as much as possible of the last line.
 set expandtab               " Use spaces instead of tabs.
