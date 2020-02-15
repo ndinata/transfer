@@ -65,6 +65,7 @@ endif
 
 " yggdroot/indentline
 let g:indentLine_char = '▏'
+let g:vim_json_conceal = 0                      " fix quotes not showing in JSON files
 
 " prettier/vim-prettier
 let g:prettier#autoformat = 1                   " enable auto formatting
