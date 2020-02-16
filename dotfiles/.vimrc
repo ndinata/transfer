@@ -12,13 +12,13 @@ Plug 'prettier/vim-prettier', {
 Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'vim-python/python-syntax'
 
 call plug#end()
 
 
 " Settings
 " -------------------------------------------------------------
-syntax on                   " Enable syntax highlighting.
 filetype plugin indent on   " Load plugins according to detected filetype.
 
 set autoindent              " Indent according to previous line.
@@ -26,6 +26,7 @@ set backspace=indent,eol,start
 set cmdheight=2             " Set command-line height to 2 lines
 set cursorline              " Improve visual indicator of current line.
 set display=lastline        " Show as much as possible of the last line.
+set encoding=utf-8
 set expandtab               " Use spaces instead of tabs.
 set ignorecase              " Case-insensitive search.
 set incsearch               " Highlight while searching with / or ?.
@@ -69,6 +70,9 @@ endif
 let g:indentLine_char = '▏'
 let g:vim_json_conceal = 0                      " fix quotes not showing in JSON files
 
+" joshdick/onedark.vim
+let g:onedark_hide_endofbuffer = 1              " hide end-of-buffer '~' lines
+
 " prettier/vim-prettier
 let g:prettier#autoformat = 1                   " enable auto formatting
 let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
@@ -77,6 +81,11 @@ let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't requir
 let g:javascript_plugin_jsdoc = 1               " enable syntax highlighting for JSDocs
 let g:javascript_plugin_flow = 1                " enable syntax highlighting for Flow
 
+" vim-python/python-syntax
+let g:python_highlight_all = 1
+let g:python_highlight_file_headers_as_comments = 1
+
 
 " -------------------------------------------------------------
+syntax on
 colorscheme onedark
