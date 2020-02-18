@@ -13,6 +13,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-python/python-syntax'
+Plug 'SolaWing/vim-objc-syntax'
 
 call plug#end()
 
@@ -39,6 +40,7 @@ set ruler                   " Show cursor row and column position.
 set scrolloff=3             " Show context above/below cursor line.
 set shiftround              " Indents to next multiple of 'shiftwidth'.
 set shiftwidth=2            " Indents by 2 spaces.
+set signcolumn=yes          " Always show sign column next to line number column
 set smartcase               " Case-sensitive search if any uppercase chars.
 set softtabstop=2           " Tab key indents by 2 spaces.
 set ttyfast                 " Faster redrawing.
