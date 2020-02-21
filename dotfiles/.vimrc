@@ -14,6 +14,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-python/python-syntax'
 Plug 'SolaWing/vim-objc-syntax'
+Plug 'rhysd/vim-clang-format', {
+  \ 'for': ['c', 'cpp', 'objc']
+  \ }
 
 call plug#end()
 
@@ -86,6 +89,10 @@ let g:javascript_plugin_flow = 1                " enable syntax highlighting for
 " vim-python/python-syntax
 let g:python_highlight_all = 1
 let g:python_highlight_file_headers_as_comments = 1
+
+" rhysd/vim-clang-format
+let g:clang_format#code_style = 'mozilla'
+let g:clang_format#auto_format = 1              " enable format on save
 
 
 " -------------------------------------------------------------
