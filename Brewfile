@@ -5,6 +5,7 @@ tap "homebrew/core"
 
 # CLI tools
 brew "bat"
+brew "clang-format"
 brew "fish"
 brew "git"
 brew "git-lfs"
