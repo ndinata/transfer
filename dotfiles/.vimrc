@@ -17,6 +17,7 @@ Plug 'SolaWing/vim-objc-syntax'
 Plug 'rhysd/vim-clang-format', {
   \ 'for': ['c', 'cpp', 'objc']
   \ }
+Plug 'arzg/vim-swift'
 
 call plug#end()
 
