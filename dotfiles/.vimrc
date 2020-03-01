@@ -23,6 +23,9 @@ Plug 'prettier/vim-prettier', {
 Plug 'rhysd/vim-clang-format', {
   \ 'for': ['c', 'cpp', 'objc']
   \ }
+Plug 'ruanyl/vim-sort-imports', {
+  \ 'for': ['javascript']
+  \ }
 
 " Colour schemes
 Plug 'joshdick/onedark.vim'
