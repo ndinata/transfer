@@ -4,20 +4,29 @@ set nocompatible
 " -------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 
+" General
 Plug 'yggdroot/indentline'
-Plug 'joshdick/onedark.vim'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml'] }
 Plug 'jiangmiao/auto-pairs'
+
+" Language syntax
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-python/python-syntax'
 Plug 'SolaWing/vim-objc-syntax'
+Plug 'arzg/vim-swift'
+
+" Formatter/fixer/linter
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml']
+  \ }
 Plug 'rhysd/vim-clang-format', {
   \ 'for': ['c', 'cpp', 'objc']
   \ }
-Plug 'arzg/vim-swift'
+
+" Colour schemes
+Plug 'joshdick/onedark.vim'
+
 
 call plug#end()
 
@@ -27,27 +36,44 @@ call plug#end()
 filetype plugin indent on   " Load plugins according to detected filetype.
 
 set autoindent              " Indent according to previous line.
+set autoread                " Detect file changes made outside of Vim.
 set backspace=indent,eol,start
-set cmdheight=2             " Set command-line height to 2 lines
+set cmdheight=2             " Set command-line height to 2 lines.
 set cursorline              " Improve visual indicator of current line.
-set display=lastline        " Show as much as possible of the last line.
+set display+=lastline       " Show as much as possible of the last line.
 set encoding=utf-8
 set expandtab               " Use spaces instead of tabs.
+set formatoptions+=j        " Delete comment character when joining commented lines.
+set history=1000            " History of : commands and search patterns.
 set ignorecase              " Case-insensitive search.
-set incsearch               " Highlight while searching with / or ?.
+set incsearch               " Highlight while searching with / or ?
 set laststatus=2            " Always show status line.
 set lazyredraw              " Only redraw when necessary.
+set list                    " Display invisible chars.
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 set mouse=a                 " Enable use of mouse.
-set noswapfile              " Load new buffer without creating a swapfile
+set noswapfile              " Load new buffer without creating a swapfile.
+set nrformats-=octal        " don't treat numbers starting with 0 to be octal.
 set number                  " Display line numbers.
 set ruler                   " Show cursor row and column position.
-set scrolloff=3             " Show context above/below cursor line.
+set scrolloff=5             " Show context above/below cursor line.
 set shiftround              " Indents to next multiple of 'shiftwidth'.
 set shiftwidth=2            " Indents by 2 spaces.
-set signcolumn=yes          " Always show sign column next to line number column
+set sidescrolloff=5         " Show context horizontally.
+set signcolumn=yes          " Always show sign column next to line number.
 set smartcase               " Case-sensitive search if any uppercase chars.
+set smarttab
 set softtabstop=2           " Tab key indents by 2 spaces.
+set ttimeout                " Allow timeout on key codes.
+set ttimeoutlen=100         " Wait for 100ms before timing out.
 set ttyfast                 " Faster redrawing.
+set viewoptions-=options    " Disable saving/restoring local options and mappings.
+set wildmenu                " Show options when attempting autocomplete.
+
+" Allow colour schemes to do bright colours without forcing bold.
+if &t_Co == 8 && $TERM !~# '^Eterm'
+  set t_Co=16
+endif
 
 
 " Onedark color scheme settings
