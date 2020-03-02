@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
+Plug 'airblade/vim-gitgutter'
 
 " Language syntax
 Plug 'pangloss/vim-javascript'
@@ -70,6 +71,7 @@ set softtabstop=2           " Tab key indents by 2 spaces.
 set ttimeout                " Allow timeout on key codes.
 set ttimeoutlen=100         " Wait for 100ms before timing out.
 set ttyfast                 " Faster redrawing.
+set updatetime=100          " Set delay before updates happen (ms)
 set viewoptions-=options    " Disable saving/restoring local options and mappings.
 set wildmenu                " Show options when attempting autocomplete.
 
