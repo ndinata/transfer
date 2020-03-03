@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
 
 " Language syntax
 Plug 'pangloss/vim-javascript'
@@ -63,6 +64,7 @@ set ruler                   " Show cursor row and column position.
 set scrolloff=5             " Show context above/below cursor line.
 set shiftround              " Indents to next multiple of 'shiftwidth'.
 set shiftwidth=2            " Indents by 2 spaces.
+set showcmd                 " Show partial commands.
 set sidescrolloff=5         " Show context horizontally.
 set signcolumn=yes          " Always show sign column next to line number.
 set smartcase               " Case-sensitive search if any uppercase chars.
