@@ -120,6 +120,9 @@ let g:python_highlight_file_headers_as_comments = 1
 let g:javascript_plugin_jsdoc = 1               " enable syntax highlighting for JSDocs
 let g:javascript_plugin_flow = 1                " enable syntax highlighting for Flow
 
+" maxmellon/vim-jsx-pretty
+let g:vim_jsx_pretty_colorful_config = 1        " highlight styles
+
 " rhysd/vim-clang-format
 let g:clang_format#auto_format = 1              " enable format on save
 let g:clang_format#code_style = 'mozilla'
