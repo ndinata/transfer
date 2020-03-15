@@ -5,25 +5,26 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " General
-Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
+Plug 'yggdroot/indentline'
 Plug 'airblade/vim-gitgutter'
+Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-surround'
 
 " Language syntax
+Plug 'vim-python/python-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'vim-python/python-syntax'
 Plug 'SolaWing/vim-objc-syntax'
 Plug 'arzg/vim-swift'
 
 " Formatter/fixer/linter
+Plug 'rhysd/vim-clang-format', {
+  \ 'for': ['c', 'cpp', 'objc']
+  \ }
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml']
-  \ }
-Plug 'rhysd/vim-clang-format', {
-  \ 'for': ['c', 'cpp', 'objc']
   \ }
 Plug 'ruanyl/vim-sort-imports', {
   \ 'for': ['javascript']
@@ -38,8 +39,6 @@ call plug#end()
 
 " Settings
 " -------------------------------------------------------------
-filetype plugin indent on   " Load plugins according to detected filetype.
-
 set autoindent              " Indent according to previous line.
 set autoread                " Detect file changes made outside of Vim.
 set backspace=indent,eol,start
@@ -77,6 +76,10 @@ set updatetime=100          " Set delay before updates happen (ms)
 set viewoptions-=options    " Disable saving/restoring local options and mappings.
 set wildmenu                " Show options when attempting autocomplete.
 
+" set italic escape codes
+set t_ZH=[3m
+set t_ZR=[23m
+
 " Allow colour schemes to do bright colours without forcing bold.
 if &t_Co == 8 && $TERM !~# '^Eterm'
   set t_Co=16
@@ -109,26 +112,31 @@ endif
 let g:indentLine_char = '▏'
 let g:vim_json_conceal = 0                      " fix quotes not showing in JSON files
 
-" joshdick/onedark.vim
-let g:onedark_hide_endofbuffer = 1              " hide end-of-buffer '~' lines
-
-" prettier/vim-prettier
-let g:prettier#autoformat = 1                   " enable auto formatting
-let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
+" vim-python/python-syntax
+let g:python_highlight_all = 1
+let g:python_highlight_file_headers_as_comments = 1
 
 " pangloss/vim-javascript
 let g:javascript_plugin_jsdoc = 1               " enable syntax highlighting for JSDocs
 let g:javascript_plugin_flow = 1                " enable syntax highlighting for Flow
 
-" vim-python/python-syntax
-let g:python_highlight_all = 1
-let g:python_highlight_file_headers_as_comments = 1
-
 " rhysd/vim-clang-format
-let g:clang_format#code_style = 'mozilla'
 let g:clang_format#auto_format = 1              " enable format on save
+let g:clang_format#code_style = 'mozilla'
+
+" prettier/vim-prettier
+let g:prettier#autoformat = 1                   " enable auto formatting
+let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
+
+" joshdick/onedark.vim
+let g:onedark_hide_endofbuffer = 1              " hide end-of-buffer '~' lines
 
 
 " -------------------------------------------------------------
 syntax on
 colorscheme onedark
+
+
+" -------------------------------------------------------------
+highlight MatchWord ctermfg=lightblue guifg=lightblue ctermbg=NONE guibg=NONE cterm=italic gui=italic
+
