@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " General
+Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'yggdroot/indentline'
 Plug 'airblade/vim-gitgutter'
@@ -107,6 +108,17 @@ endif
 
 " Plugin configs
 " -------------------------------------------------------------
+
+" dense-analysis/ale
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+  \ 'python': ['flake8', 'mypy', 'bandit'],
+  \ }
+let g:ale_fixers = {
+  \ 'python': ['black', 'isort'],
+  \ 'swift': ['swiftformat'],
+  \ }
+let g:ale_swift_swiftformat_options = '--indent 2 --indentcase true --maxwidth 120 --wrapcollections before-first'
 
 " yggdroot/indentline
 let g:indentLine_char = '▏'
