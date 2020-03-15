@@ -32,7 +32,7 @@ Plug 'ruanyl/vim-sort-imports', {
 
 " Colour schemes
 Plug 'joshdick/onedark.vim'
-
+Plug 'arzg/vim-colors-xcode'
 
 call plug#end()
 
@@ -134,10 +134,14 @@ let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't requir
 " joshdick/onedark.vim
 let g:onedark_hide_endofbuffer = 1              " hide end-of-buffer '~' lines
 
+" arzg/vim-colors-xcode
+let g:xcodedark_match_paren_style = 1
+let g:xcodedark_dim_punctuation = 0
+
 
 " -------------------------------------------------------------
 syntax on
-colorscheme onedark
+colorscheme xcodedark
 
 
 " -------------------------------------------------------------
