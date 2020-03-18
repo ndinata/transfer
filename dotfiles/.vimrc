@@ -8,6 +8,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'yggdroot/indentline'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-surround'
@@ -75,9 +77,10 @@ set ttimeoutlen=100         " Wait for 100ms before timing out.
 set ttyfast                 " Faster redrawing.
 set updatetime=100          " Set delay before updates happen (ms)
 set viewoptions-=options    " Disable saving/restoring local options and mappings.
+set wildignore+=*/node_modules/*
 set wildmenu                " Show options when attempting autocomplete.
 
-" set italic escape codes
+" Set italic escape codes
 set t_ZH=[3m
 set t_ZR=[23m
 
@@ -87,19 +90,28 @@ if &t_Co == 8 && $TERM !~# '^Eterm'
 endif
 
 
+" Key mappings
+" -------------------------------------------------------------
+let mapleader = ","
+
+" Switching between windows
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" preservim/nerdtree
+nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+
 " Onedark color scheme settings
 " -------------------------------------------------------------
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
   if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+
   if (has("termguicolors"))
     set termguicolors
   endif
@@ -118,30 +130,52 @@ let g:ale_fixers = {
   \ 'python': ['black', 'isort'],
   \ 'swift': ['swiftformat'],
   \ }
-let g:ale_swift_swiftformat_options = '--indent 2 --indentcase true --maxwidth 120 --wrapcollections before-first'
+let g:ale_swift_swiftformat_options = '
+      \ --indent 2
+      \ --indentcase true
+      \ --maxwidth 120
+      \ --wrapcollections before-first
+      \ '
 
 " yggdroot/indentline
 let g:indentLine_char = '▏'
 let g:vim_json_conceal = 0                      " fix quotes not showing in JSON files
+
+" preservim/nerdtree
+" close vim if NERDTree is last open window
+autocmd BufEnter * if (winnr("$") == 1 &&
+      \ exists("b:NERDTree") &&
+      \ b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden = 1                      " show hidden (dot) files
+
+" xuyuanp/nerdtree-git-plugin
+let g:NERDTreeIndicatorMapCustom = {
+  \ "Modified": "M",
+  \ "Staged": "S",
+  \ "Untracked": "U",
+  \ "Renamed": "R",
+  \ "Deleted": "D",
+  \ "Dirty": "*",
+  \ }
 
 " vim-python/python-syntax
 let g:python_highlight_all = 1
 let g:python_highlight_file_headers_as_comments = 1
 
 " pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1               " enable syntax highlighting for JSDocs
-let g:javascript_plugin_flow = 1                " enable syntax highlighting for Flow
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
 
 " maxmellon/vim-jsx-pretty
 let g:vim_jsx_pretty_colorful_config = 1        " highlight styles
 
 " rhysd/vim-clang-format
-let g:clang_format#auto_format = 1              " enable format on save
+let g:clang_format#auto_format = 1
 let g:clang_format#code_style = 'mozilla'
 
 " prettier/vim-prettier
-let g:prettier#autoformat = 1                   " enable auto formatting
-let g:prettier#autoformat_require_pragma = 0    " auto formatting doesn't require @pragma
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
 
 " joshdick/onedark.vim
 let g:onedark_hide_endofbuffer = 1              " hide end-of-buffer '~' lines
@@ -157,5 +191,8 @@ colorscheme xcodedark
 
 
 " -------------------------------------------------------------
-highlight MatchWord ctermfg=lightblue guifg=lightblue ctermbg=NONE guibg=NONE cterm=italic gui=italic
+highlight MatchWord
+      \ ctermfg=lightblue guifg=lightblue
+      \ ctermbg=NONE guibg=NONE
+      \ cterm=italic gui=italic
 
