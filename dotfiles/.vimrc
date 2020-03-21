@@ -19,6 +19,7 @@ Plug 'vim-python/python-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'SolaWing/vim-objc-syntax'
+Plug 'vim-ruby/vim-ruby'
 Plug 'arzg/vim-swift'
 
 " Formatter/fixer/linter
@@ -51,7 +52,8 @@ set display+=lastline       " Show as much as possible of the last line.
 set encoding=utf-8
 set expandtab               " Use spaces instead of tabs.
 set formatoptions+=j        " Delete comment character when joining commented lines.
-set history=1000            " History of : commands and search patterns.
+set history=1000            " History of :commands and search patterns.
+set hlsearch
 set ignorecase              " Case-insensitive search.
 set incsearch               " Highlight while searching with / or ?
 set laststatus=2            " Always show status line.
