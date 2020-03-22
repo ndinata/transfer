@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 
@@ -28,10 +29,10 @@ brew "yarn"
 # GUI apps
 # cask "adoptopenjdk8" # requires sudo
 cask "android-studio"
-cask "caprine"
 cask "discord"
 cask "figma"
 cask "firefox"
+cask "font-firacode-nerd-font"
 cask "franz"
 cask "iterm2"
 cask "notion"
