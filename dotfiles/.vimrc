@@ -8,10 +8,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'yggdroot/indentline'
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', {
+  \ 'on': 'NERDTreeToggle'
+  \ }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'andymass/vim-matchup'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {
+  \ 'on': 'NERDTreeToggle'
+  \ }
 Plug 'tpope/vim-surround'
 
 " Language syntax
@@ -38,6 +43,9 @@ Plug 'ruanyl/vim-sort-imports', {
 Plug 'joshdick/onedark.vim'
 Plug 'arzg/vim-colors-xcode'
 
+" Priority plugins
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 
@@ -53,7 +61,7 @@ set encoding=utf-8
 set expandtab               " Use spaces instead of tabs.
 set formatoptions+=j        " Delete comment character when joining commented lines.
 set history=1000            " History of :commands and search patterns.
-set hlsearch
+set hlsearch                " Highlight search matches.
 set ignorecase              " Case-insensitive search.
 set incsearch               " Highlight while searching with / or ?
 set laststatus=2            " Always show status line.
@@ -72,6 +80,7 @@ set showcmd                 " Show partial commands.
 set sidescrolloff=5         " Show context horizontally.
 set signcolumn=yes          " Always show sign column next to line number.
 set smartcase               " Case-sensitive search if any uppercase chars.
+set smartindent
 set smarttab
 set softtabstop=2           " Tab key indents by 2 spaces.
 set ttimeout                " Allow timeout on key codes.
@@ -149,6 +158,8 @@ autocmd BufEnter * if (winnr("$") == 1 &&
       \ exists("b:NERDTree") &&
       \ b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1                      " show hidden (dot) files
+let NERDTreeHighlightCursorline = 0
+let NERDTreeMinimalUI = 1                       " hide Help message
 
 " xuyuanp/nerdtree-git-plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -159,6 +170,23 @@ let g:NERDTreeIndicatorMapCustom = {
   \ "Deleted": "D",
   \ "Dirty": "*",
   \ }
+
+" tiagofumo/vim-nerdtree-syntax-highlight
+let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+let g:NERDTreeDisableExactMatchHighlight = 1
+let g:NERDTreeDisablePatternMatchHighlight = 1
+let g:NERDTreeSyntaxEnabledExtensions = [
+  \ 'css',
+  \ 'html',
+  \ 'java',
+  \ 'jpg',
+  \ 'js',
+  \ 'json',
+  \ 'md',
+  \ 'png',
+  \ 'py',
+  \ 'swift'
+  \ ]
 
 " vim-python/python-syntax
 let g:python_highlight_all = 1
