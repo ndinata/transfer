@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-vimrc_dir="dotfiles/.vimrc"
-vim_home_dir="$HOME/.vim"
-vimrc_home_dir="$vim_home_dir/vimrc"
+local_init_vim_file="dotfiles/init.vim"
+nvim_home_dir="$HOME/.config/nvim"
 vim_plug_download_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 vim_plug_install_dir="~/.local/share/nvim/site/autoload/plug.vim"
 
-vimrc_cmd() {
-    mkdir -pv "$vim_home_dir"
-    cp "$vimrc_dir" "$vimrc_home_dir"
+init_vim_cmd() {
+    mkdir -pv "$nvim_home_dir"
+    cp "$local_init_vim_file" "$nvim_home_dir"
 }
 vim_plug_install_cmd() {
     curl -fLo "$vim_plug_install_dir" --create-dirs "$vim_plug_download_url"
@@ -21,11 +20,11 @@ vim_plug_install_cmd() {
 
 ###########################################################################
 
-echo_header "Vim"
+echo_header "Neovim"
 echo "$DIVIDER"
 
 # Copy .vimrc
-try_action "Copying .vimrc" vimrc_cmd
+try_action "Copying init.vim" init_vim_cmd
 
 # Install vim-plug
 try_action "Installing vim-plug" vim_plug_install_cmd "$VIM_LOGFILE"
