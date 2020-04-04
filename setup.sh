@@ -83,8 +83,8 @@ source helpers/fonts.sh
 # Setup git and git-lfs
 source helpers/git.sh
 
-# Setup vim
-source helpers/vim.sh
+# Setup neovim
+source helpers/nvim.sh
 
 # Setup fish
 source helpers/fish.sh
