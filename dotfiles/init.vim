@@ -5,12 +5,13 @@ call plug#begin(stdpath('data') . '/plugged')
 " General
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'neoclide/coc.nvim'
+" Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
 " Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -48,28 +49,28 @@ call plug#end()
 
 " Settings
 " -------------------------------------------------------------------
-set cmdheight=2                                 " set command-line height to 2 lines
-set expandtab                                   " use spaces instead of tabs
-set ignorecase                                  " case-insensitive search
-set list                                        " display invisible characters
+set cmdheight=2                                   " set command-line height to 2 lines
+set expandtab                                     " use spaces instead of tabs
+set ignorecase                                    " case-insensitive search
+set list                                          " display invisible characters
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-set mouse=a                                     " enable mouse
-set noswapfile                                  " load new buffer without creating a swapfile
-set number                                      " display line numbers
-set scrolloff=5                                 " show vertical context by 5 lines
-set shiftround                                  " indent to next multiple of 'shiftwidth'
-set shiftwidth=2                                " indent by 2 spaces
+set mouse=a                                       " enable mouse
+set noswapfile                                    " load new buffer without creating a swapfile
+set number                                        " display line numbers
+set scrolloff=3                                   " show vertical context by 5 lines
+set shiftround                                    " indent to next multiple of 'shiftwidth'
+set shiftwidth=2                                  " indent by 2 spaces
+set shortmess+=c
 set showmatch
-set sidescrolloff=5                             " show horizontal context
-set signcolumn=yes                              " always show column next to line number
-set smartcase                                   " case-sensitive search if any uppercase characters
+set sidescrolloff=3                               " show horizontal context
+set signcolumn=yes                                " always show column next to line number
+set smartcase                                     " case-sensitive search if any uppercase characters
 set smartindent
-set softtabstop=2                               " tab key indents by 2 spaces
-set splitbelow                                  " split new panes below
-set splitright                                  " split new panes to the right
+set softtabstop=2                                 " tab key indents by 2 spaces
+set splitright                                    " split new panes to the right
 set termguicolors
-set updatetime=100                              " set delay before updates happen (ms)
-set viewoptions-=options                        " disable saving/restoring local options & mappings
+set updatetime=100                                " set delay before updates happen (ms)
+set viewoptions-=options                          " disable saving/restoring local options & mappings
 
 " Start terminal in Insert mode
 au TermOpen term://* startinsert
@@ -86,6 +87,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" [n] Switching between buffers
+nnoremap <S-Left> :bprev<CR>
+nnoremap <S-Right> :bnext<CR>
 
 " [nv] Toggle selected fold
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -121,7 +126,7 @@ autocmd FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 let g:fzf_action = {
   \ 'ctrl-t': 'vsplit',
-  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
   \ }
 nnoremap <C-p> :FZF<CR>
 
@@ -131,8 +136,8 @@ nnoremap <C-p> :FZF<CR>
 autocmd BufEnter * if (winnr("$") == 1 &&
   \ exists("b:NERDTree") &&
   \ b:NERDTree.isTabTree()) | q | endif
-let NERDTreeShowHidden = 1                      " show hidden (dot) files
-let NERDTreeMinimalUI = 1                       " hide Help message
+let NERDTreeShowHidden = 1                        " show hidden (dot) files
+let NERDTreeMinimalUI = 1                         " hide Help message
 let NERDTreeHighlightCursorline = 0
 nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
@@ -160,6 +165,11 @@ nnoremap <C-f> :NERDTreeFind<CR>
 "   \ "Clean"     : "#87939A",
 "   \ "Ignored"   : "#808080"
 "   \ }
+
+
+" vim-airline/vim-airline
+let g:airline#extensions#tabline#enabled = 1      " display all buffers
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 
 " tiagofumo/vim-nerdtree-syntax-highlight
@@ -193,7 +203,7 @@ let g:javascript_plugin_flow = 1
 
 
 " maxmellon/vim-jsx-pretty
-let g:vim_jsx_pretty_colorful_config = 1        " highlight styles
+let g:vim_jsx_pretty_colorful_config = 1          " highlight styles
 
 
 " rhysd/vim-clang-format
@@ -216,5 +226,3 @@ let g:prettier#autoformat_require_pragma = 0
 
 colorscheme dracula
 
-" default: :set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-" :set statusline=%F\ %h\ %w\ %y\ %m\ %r\ %=%(%l,%c\ %=\ %P%)
