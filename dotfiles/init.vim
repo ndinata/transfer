@@ -9,23 +9,26 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tsony-tsonev/nerdtree-git-plugin'
+" Plug 'luochen1990/rainbow'
 Plug 'vim-airline/vim-airline'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-surround'
 
 " Colour schemes
 " Plug 'joshdick/onedark.vim'
-" Plug 'arzg/vim-colors-xcode'
 Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'arzg/vim-colors-xcode'
 
 " Language syntax
 Plug 'vim-python/python-syntax'
+" Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'SolaWing/vim-objc-syntax'
 Plug 'vim-ruby/vim-ruby'
 Plug 'arzg/vim-swift'
@@ -49,8 +52,10 @@ call plug#end()
 
 " Settings
 " -------------------------------------------------------------------
+set autochdir                                     " update current directory on switching buffers
 set cmdheight=2                                   " set command-line height to 2 lines
 set expandtab                                     " use spaces instead of tabs
+set hidden                                        " hides a buffer when it's abandoned
 set ignorecase                                    " case-insensitive search
 set list                                          " display invisible characters
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -61,12 +66,13 @@ set scrolloff=3                                   " show vertical context by 5 l
 set shiftround                                    " indent to next multiple of 'shiftwidth'
 set shiftwidth=2                                  " indent by 2 spaces
 set shortmess+=c
-set showmatch
+set showmatch                                     " highlight matching [{()}]
 set sidescrolloff=3                               " show horizontal context
 set signcolumn=yes                                " always show column next to line number
 set smartcase                                     " case-sensitive search if any uppercase characters
 set smartindent
 set softtabstop=2                                 " tab key indents by 2 spaces
+set splitbelow                                    " split new panes to the bottom
 set splitright                                    " split new panes to the right
 set termguicolors
 set updatetime=100                                " set delay before updates happen (ms)
@@ -76,27 +82,30 @@ set viewoptions-=options                          " disable saving/restoring loc
 au TermOpen term://* startinsert
 
 " Automatically save and load folds
-" au BufWinLeave *.* mkview
-" au BufWinEnter *.* silent loadview
+au BufWinLeave *.* mkview
+au BufWinEnter *.* silent! loadview
 
 
 " Key Mappings
 " -------------------------------------------------------------------
-" [n] Switching between windows
+" [n] Switching between windows: Ctrl + h,j,k,l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" [n] Switching between buffers
+" [n] Switching between buffers: Shift + left,right
 nnoremap <S-Left> :bprev<CR>
 nnoremap <S-Right> :bnext<CR>
 
-" [nv] Toggle selected fold
+" [n] Open new empty buffer: <leader> t
+nnoremap <leader>t :enew<CR>
+
+" [nv] Toggle selected fold: Space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" [t] Turn terminal to normal mode
+" [t] Turn terminal to normal mode: Esc
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -117,13 +126,45 @@ let g:ale_swift_swiftformat_options = '
   \ --maxwidth 120
   \ --wrapcollections before-first
   \ '
+nnoremap ]e :ALENextWrap<CR>
+nnoremap [e :ALEPreviousWrap<CR>
+
+
+" neoclide/coc.nvim
+" use <tab> for trigger completion
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? "\<C-n>" :
+"   \ <SID>check_back_space() ? "\<TAB>" :
+"   \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1] =~# '\s'
+" endfunction
+"
+" inoremap <silent><expr> <S-Space> coc#refresh()
+
+" code navigation
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gt <Plug>(coc-type-definition)
+" nmap <silent> gr <Plug>(coc-references)
+
+" let g:coc_global_extensions = [
+"   \ 'coc-emmet',
+"   \ 'coc-css',
+"   \ 'coc-html',
+"   \ 'coc-json',
+"   \ 'coc-prettier',
+"   \ 'coc-tsserver'
+"   \ ]
 
 
 " junegunn/fzf
 " hide statusline for cleaner look
-autocmd! FileType fzf
-autocmd FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+au! FileType fzf
+au FileType fzf set laststatus=0 noshowmode noruler
+  \| au BufLeave <buffer> set laststatus=2 showmode ruler
 let g:fzf_action = {
   \ 'ctrl-t': 'vsplit',
   \ 'ctrl-s': 'split',
@@ -133,7 +174,7 @@ nnoremap <C-p> :FZF<CR>
 
 " preservim/nerdtree
 " close vim if NERDTree is last open window
-autocmd BufEnter * if (winnr("$") == 1 &&
+au BufEnter * if (winnr("$") == 1 &&
   \ exists("b:NERDTree") &&
   \ b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1                        " show hidden (dot) files
@@ -143,33 +184,26 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 
-" tsony-tsonev/nerdtree-git-plugin
-" let g:NERDTreeGitStatusWithFlags = 1
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" let g:NERDTreeGitStatusNodeColorization = 1
-" let g:NERDTreeIndicatorMapCustom = {
-"   \ "Untracked" : "U",
-"   \ "Modified"  : "M",
-"   \ "Staged"    : "S",
-"   \ "Renamed"   : "R",
-"   \ "Deleted"   : "D",
-"   \ "Dirty"     : "*",
-"   \ "Ignored"   : "☒",
-"   \ "Unknown"   : "?"
-"   \ }
-" let g:NERDTreeColorMapCustom = {
-"   \ "Untracked" : "#98c379",
-"   \ "Modified"  : "#e5c07b",
-"   \ "Staged"    : "#56b6c2",
-"   \ "Dirty"     : "#299999",
-"   \ "Clean"     : "#87939A",
-"   \ "Ignored"   : "#808080"
-"   \ }
+" Plug 'luochen1990/rainbow'
+" let g:rainbow_active = 1
 
 
 " vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1      " display all buffers
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+
+" tpope/vim-commentary
+" map to <C-_> because vim registers <C-/> as <C-_>
+nmap <C-_> gcc
+vmap <C-_> gc
+
+
+" airblade/vim-gitgutter
+nmap ghs :GitGutterStageHunk<CR>
+nmap ghu :GitGutterUndoHunk<CR>
+nmap ghp :GitGutterPreviewHunk<CR>
+nmap ghf :GitGutterFold<CR>
 
 
 " tiagofumo/vim-nerdtree-syntax-highlight
