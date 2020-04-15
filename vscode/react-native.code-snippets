@@ -1,230 +1,128 @@
 {
-	"Import Module": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "impo",
-		"body": "import ${2:moduleName} from '${1:module}';$0"
-	},
-	"Import Module (Destructured)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "impd",
-		"body": "import { $2 } from '${1:module}';$0"
-	},
-	"Export Default": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "expo",
-		"body": "export default $1;$0"
-	},
-	"Export (Destructured)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "expd",
-		"body": "export { $1 };$0"
-	},
-	"setTimeout()": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "seto",
-		"body": "setTimeout($0, ${1:delay});",
-	},
-	"Console Log": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "clog",
-		"body": "console.log($0);"
-	},
-	"Comment Block": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "comb",
-		"body": [
-			"/* $0",
-			"============================================================================= */",
-		]
-	},
-	"Class Component (Flow)": {
-		"scope": "javascript,javascriptreact",
-		"prefix": "clac",
-		"body": [
-			"/** @flow */",
-			"",
-			"import React, { Component } from 'react';",
-			"import { Text, View } from 'react-native';",
-			"",
-			"/* <${1:$TM_FILENAME_BASE} />",
-			"============================================================================= */",
-			"",
-			"type Props = {};",
-			"",
-			"class ${1:$TM_FILENAME_BASE} extends Component<Props> {",
-			"\trender() {",
-			"\t\treturn (",
-			"\t\t\t<View>",
-			"\t\t\t\t<Text>Hello$0</Text>",
-			"\t\t\t</View>",
-			"\t\t);",
-			"\t}",
-			"}",
-			"",
-			"export default ${1:$TM_FILENAME_BASE};"
-		]
-	},
-	"Just Class Component (Flow)": {
-		"scope": "javascript,javascriptreact",
-		"prefix": "jcla",
-		"body": [
-			"/* <$1 />",
-			"============================================================================= */",
-			"",
-			"type Props = {};",
-			"",
-			"class $1 extends Component<Props> {",
-			"\trender() {",
-			"\t\treturn (",
-			"\t\t\t<View>",
-			"\t\t\t\t<Text>Hello$0</Text>",
-			"\t\t\t</View>",
-			"\t\t);",
-			"\t}",
-			"}",
-		]
-	},
-	"Function Component (Flow)": {
-		"scope": "javascript,javascriptreact",
-		"prefix": "func",
-		"body": [
-			"/** @flow */",
-			"",
-			"import React from 'react';",
-			"import { Text, View } from 'react-native';",
-			"",
-			"/* <${1:$TM_FILENAME_BASE} />",
-			"============================================================================= */",
-			"",
-			"type Props = {};",
-			"",
-			"function ${1:$TM_FILENAME_BASE}(props: Props) {",
-			"\treturn (",
-			"\t\t<View>",
-			"\t\t\t<Text>Hello$0</Text>",
-			"\t\t</View>",
-			"\t);",
-			"};",
-			"",
-			"export default ${1:$TM_FILENAME_BASE};"
-		]
-	},
-	"Just Function Component (Flow)": {
-		"scope": "javascript,javascriptreact",
-		"prefix": "jfun",
-		"body": [
-			"/* <${1} />",
-			"============================================================================= */",
-			"",
-			"type Props = {};",
-			"",
-			"function ${1}(props: Props) {",
-			"\treturn (",
-			"\t\t<View>",
-			"\t\t\t<Text>Hello $0</Text>",
-			"\t\t</View>",
-			"\t);",
-			"};",
-		]
-	},
-	"Class Constructor": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",	
-		"prefix": "ccon",
-		"body": [
-			"constructor(props: Props) {",
-			"\tsuper(props);",
-			"\t$0",
-			"}"
-		]
-	},
-	"Empty State": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "esta",
-		"body": [
-			"this.state = {",
-			"\t$0",
-			"}"
-		]
-	},
-	"componentDidMount()": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "como",
-		"body": [
-			"componentDidMount() {",
-			"\t$0",
-			"}"
-		]
-	},
-	"componentWillUnmount()": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "coun",
-		"body": [
-			"componentWillUnmount() {",
-			"\t$0",
-			"}"
-		]
-	},
-	"render()": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "rend",
-		"body": [
-			"render() {",
-			"\treturn null;$0",
-			"}"
-		]
-	},
-	"Set State": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "sets",
-		"body": "this.setState({ $0 });"
-	},
-	"Set State (Func)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "setf",
-		"body": [
-			"this.setState((prevState) => {",
-			"\treturn { $0 }",
-			"});"
-		]
-	},
-	"Default Props": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "defa",
-		"body": [
-			"${1:$TM_FILENAME_BASE}.defaultProps = {",
-			"\t$2",
-			"};"
-		]
-	},
-	"Default Props (Static)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "sdef",
-		"body": [
-			"static defaultProps = {",
-			"\t$0",
-			"};"
-		]
-	},
-	"this.props (Destructured)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "tpro",
-		"body": "const { $0 } = this.props;",
-	},
-	"this.state (Destructured)": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "tsta",
-		"body": "const { $0 } = this.state;",
-	},
-	"StyleSheet": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "styl",
-		"body": [
-			"/* StyleSheet",
-			"============================================================================= */",
-			"",
-			"const styles = StyleSheet.create({",
-			"\t$0",
-			"});"
-		]
-	}
+  "Import Module": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "impo",
+    "body": "import ${2:moduleName} from '${1:module}';$0"
+  },
+  "Import Module (Destructured)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "impd",
+    "body": "import { $2 } from '${1:module}';$0"
+  },
+  "Export Default": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "expo",
+    "body": "export default $1;$0"
+  },
+  "Export (Destructured)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "expd",
+    "body": "export { $1 };$0"
+  },
+  "setTimeout()": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "seto",
+    "body": "setTimeout($0, ${1:delay});"
+  },
+  "Console Log": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "clog",
+    "body": "console.log($0);"
+  },
+  "Class Component (Flow)": {
+    "scope": "javascript,javascriptreact",
+    "prefix": "clac",
+    "body": [
+      "/** @flow */",
+      "",
+      "import React, { Component } from 'react';",
+      "import { StyleSheet, Text, View } from 'react-native';",
+      "",
+      "type Props = {};",
+      "",
+      "class ${1:$TM_FILENAME_BASE} extends Component<Props> {",
+      "\trender() {",
+      "\t\treturn (",
+      "\t\t\t<View>",
+      "\t\t\t\t<Text>Hello$0</Text>",
+      "\t\t\t</View>",
+      "\t\t);",
+      "\t}",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE};"
+    ]
+  },
+  "Function Component (Flow)": {
+    "scope": "javascript,javascriptreact",
+    "prefix": "func",
+    "body": [
+      "/** @flow */",
+      "",
+      "import React from 'react';",
+      "import { StyleSheet, Text, View } from 'react-native';",
+      "",
+      "type Props = {};",
+      "",
+      "function ${1:$TM_FILENAME_BASE}(props: Props) {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text>Hello$0</Text>",
+      "\t\t</View>",
+      "\t);",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE};"
+    ]
+  },
+  "Class Constructor": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "ccon",
+    "body": ["constructor(props: Props) {", "\tsuper(props);", "\t$0", "}"]
+  },
+  "Empty State": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "esta",
+    "body": ["this.state = {", "\t$0", "}"]
+  },
+  "componentDidMount()": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "como",
+    "body": ["componentDidMount() {", "\t$0", "}"]
+  },
+  "componentWillUnmount()": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "coun",
+    "body": ["componentWillUnmount() {", "\t$0", "}"]
+  },
+  "Set State": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "sets",
+    "body": "this.setState({ $0 });"
+  },
+  "Set State (Func)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "setf",
+    "body": ["this.setState(({ $1 }) => ({", "\t$0", "}));"]
+  },
+  "Default Props (Static)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "sdef",
+    "body": ["static defaultProps = {", "\t$0", "};"]
+  },
+  "this.props (Destructured)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "tpro",
+    "body": "const { $0 } = this.props;"
+  },
+  "this.state (Destructured)": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "tsta",
+    "body": "const { $0 } = this.state;"
+  },
+  "StyleSheet": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "styl",
+    "body": ["const styles = StyleSheet.create({", "\t$0", "});"]
+  }
 }
