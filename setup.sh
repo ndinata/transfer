@@ -102,8 +102,5 @@ echo "1. Set fish as the default shell by running:"
 echo -e "   ${BOLD}chsh -s /usr/local/bin/fish${NC}"
 echo
 echo "2. Import iTerm theme file in $HOME/Downloads."
-echo "3. Setup VS Code preferences after opening the app once by running this on the Desktop:"
-echo -e "   ${BOLD}bash vscode-setup.sh${NC}"
-echo
-echo "4. Restart for some changes to take into effect."
+echo "3. Restart for some changes to take into effect."
 echo
