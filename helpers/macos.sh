@@ -2,16 +2,13 @@
 
 config_dock() {
   # Set dock size
-  defaults write com.apple.dock tilesize -int 28
+  defaults write com.apple.dock tilesize -int 32
 
   # Turn on magnification
   defaults write com.apple.dock magnification -bool true
 
   # Set magnified size
   defaults write com.apple.dock largesize -int 38
-
-  # Set orientation to left of screen
-  defaults write com.apple.dock orientation -string "left"
 
   # Set windows-minimising effect
   defaults write com.apple.dock mineffect -string "scale"
