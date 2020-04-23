@@ -21,7 +21,6 @@ fish_python_cmd() {
 fish_node_cmd() {
     fish -c "set -U fish_user_paths /usr/local/opt/node@10/bin \$fish_user_paths" 
 }
-fish_vi_cmd() { fish -c "fish_vi_key_bindings"; }
 
 ###########################################################################
 
@@ -40,5 +39,4 @@ try_action "Installing fish pure" fish_pure_install_cmd "$FISH_LOGFILE"
 # Setup fish PATH
 try_action "Adding Brew's python symlink location to \$PATH" fish_python_cmd
 try_action "Adding node@10 to \$PATH" fish_node_cmd
-try_action "Enabling vi keybindings on fish" fish_vi_cmd
 echo && echo

@@ -19,7 +19,6 @@ brew "postgresql@9.5"
 brew "python"
 brew "ripgrep"
 brew "swiftformat"
-brew "swiftlint"
 brew "tldr"
 brew "tree"
 brew "vim"
@@ -27,20 +26,20 @@ brew "watchman"
 brew "wget"
 brew "yarn"
 
-# GUI apps
 # cask "adoptopenjdk8" # requires sudo
 cask "android-studio"
 cask "discord"
 cask "figma"
 cask "firefox"
 cask "font-firacode-nerd-font"
-cask "franz"
 cask "iterm2"
 cask "notion"
 cask "postman"
+cask "slack"
 cask "spotify"
 cask "visual-studio-code"
 cask "vlc"
+cask "whatsapp"
 
 # MAS apps
 mas "1Password 7", id: 1333542190
