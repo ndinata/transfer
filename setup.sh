@@ -102,5 +102,8 @@ echo "1. Set fish as the default shell by running:"
 echo -e "   ${BOLD}chsh -s /usr/local/bin/fish${NC}"
 echo
 echo "2. Import iTerm theme file in $HOME/Downloads."
-echo "3. Restart for some changes to take into effect."
+echo "3. Enable fish vi keybindings by running:"
+echo -e "   ${BOLD}fish_vi_key_bindings${NC}"
+echo
+echo "4. Restart for some changes to take into effect."
 echo
