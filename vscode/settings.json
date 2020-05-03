@@ -4,7 +4,9 @@
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "explorer.confirmDragAndDrop": false,
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "extensions.ignoreRecommendations": false,
   "files.insertFinalNewline": true,
   "breadcrumbs.enabled": true,
@@ -15,9 +17,11 @@
   "workbench.editor.tabCloseButton": "left",
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.showIcons": false,
-  "editor.fontFamily": "'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
   "python.pythonPath": "/usr/local/opt/python/libexec/bin/python",
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
   "colorize.enable_search_variables": false,
   "colorize.languages": [
     "css",
@@ -31,10 +35,16 @@
     "svg",
     "javascript"
   ],
-  "todo-tree.highlights.defaultHighlight": {
-    "type": "tag",
-    "foreground": "#528bff"
+  "workbench.activityBar.visible": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "todo-tree.highlights.highlightDelay": 250,
-  "editor.suggest.snippetsPreventQuickSuggestions": false
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
 }
