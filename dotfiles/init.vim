@@ -5,7 +5,6 @@ call plug#begin(stdpath('data') . '/plugged')
 " General
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
@@ -128,36 +127,6 @@ let g:ale_swift_swiftformat_options = '
   \ '
 nnoremap ]e :ALENextWrap<CR>
 nnoremap [e :ALEPreviousWrap<CR>
-
-
-" neoclide/coc.nvim
-" use <tab> for trigger completion
-" inoremap <silent><expr> <TAB>
-"   \ pumvisible() ? "\<C-n>" :
-"   \ <SID>check_back_space() ? "\<TAB>" :
-"   \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1] =~# '\s'
-" endfunction
-"
-" inoremap <silent><expr> <S-Space> coc#refresh()
-
-" code navigation
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gt <Plug>(coc-type-definition)
-" nmap <silent> gr <Plug>(coc-references)
-
-" let g:coc_global_extensions = [
-"   \ 'coc-emmet',
-"   \ 'coc-css',
-"   \ 'coc-html',
-"   \ 'coc-json',
-"   \ 'coc-prettier',
-"   \ 'coc-tsserver'
-"   \ ]
 
 
 " junegunn/fzf
