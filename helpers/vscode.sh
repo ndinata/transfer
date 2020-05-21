@@ -10,6 +10,8 @@ vscode_install_cmd() {
     code --install-extension kamikillerto.vscode-colorize
     code --install-extension dbaeumer.vscode-eslint
     code --install-extension flowtype.flow-for-vscode
+    code --install-extension bierner.markdown-checkbox
+    code --install-extension bierner.markdown-preview-github-styles
     code --install-extension zhuangtongfa.material-theme
     code --install-extension esbenp.prettier-vscode
     code --install-extension ms-python.python
