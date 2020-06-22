@@ -38,9 +38,11 @@
       "import React, { Component } from 'react';",
       "import { StyleSheet, Text, View } from 'react-native';",
       "",
-      "type Props = {};",
-      "",
       "class ${1:$TM_FILENAME_BASE} extends Component<Props> {",
+      "\tconstructor(props: Props) {",
+      "\t\tsuper(props);",
+      "\t}",
+      "",
       "\trender() {",
       "\t\treturn (",
       "\t\t\t<View>",
@@ -50,7 +52,8 @@
       "\t}",
       "}",
       "",
-      "export default ${1:$TM_FILENAME_BASE};"
+      "type Props = {};",
+      ""
     ]
   },
   "Function Component (Flow)": {
@@ -62,8 +65,6 @@
       "import React from 'react';",
       "import { StyleSheet, Text, View } from 'react-native';",
       "",
-      "type Props = {};",
-      "",
       "function ${1:$TM_FILENAME_BASE}(props: Props) {",
       "\treturn (",
       "\t\t<View>",
@@ -72,28 +73,9 @@
       "\t);",
       "}",
       "",
-      "export default ${1:$TM_FILENAME_BASE};"
+      "type Props = {};",
+      ""
     ]
-  },
-  "Class Constructor": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "ccon",
-    "body": ["constructor(props: Props) {", "\tsuper(props);", "\t$0", "}"]
-  },
-  "Empty State": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "esta",
-    "body": ["this.state = {", "\t$0", "}"]
-  },
-  "componentDidMount()": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "como",
-    "body": ["componentDidMount() {", "\t$0", "}"]
-  },
-  "componentWillUnmount()": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "coun",
-    "body": ["componentWillUnmount() {", "\t$0", "}"]
   },
   "Set State": {
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
@@ -105,24 +87,19 @@
     "prefix": "setf",
     "body": ["this.setState(({ $1 }) => ({", "\t$0", "}));"]
   },
-  "Default Props (Static)": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "sdef",
-    "body": ["static defaultProps = {", "\t$0", "};"]
-  },
-  "this.props (Destructured)": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "tpro",
-    "body": "const { $0 } = this.props;"
-  },
-  "this.state (Destructured)": {
-    "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "prefix": "tsta",
-    "body": "const { $0 } = this.state;"
-  },
   "StyleSheet": {
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "prefix": "styl",
     "body": ["const styles = StyleSheet.create({", "\t$0", "});"]
+  },
+  "useEffect": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "usee",
+    "body": ["useEffect(() => {", "\t$1", "}, [$0]);"]
+  },
+  "useState": {
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "prefix": "uses",
+    "body": ["const [$1, $2] = useState($0);"]
   }
 }
