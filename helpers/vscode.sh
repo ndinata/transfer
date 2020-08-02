@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-vscode_settings_file="../vscode/settings.json"
-vscode_snippets_file="../vscode/react-native.code-snippets"
+vscode_settings_file="vscode/settings.json"
+vscode_snippets_file="vscode/react-native.code-snippets"
 vscode_settings_dir="$HOME/Library/Application Support/Code/User"
 vscode_snippets_dir="${vscode_settings_dir}/snippets"
 
