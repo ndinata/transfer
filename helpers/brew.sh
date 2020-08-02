@@ -13,7 +13,7 @@ echo_header "Homebrew"
 echo "$DIVIDER"
 
 # Install Homebrew
-try_action "Installing Homebrew" brew_install_cmd "$BREW_LOGFILE"
+try_action "Installing Homebrew. Press Enter to continue" brew_install_cmd "$BREW_LOGFILE"
 
 # Update and upgrade Homebrew
 try_action "Updating Homebrew" brew_update_cmd "$BREW_LOGFILE"
