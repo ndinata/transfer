@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-cocoapods_cmd() { sudo gem install cocoapods; }
 fish_cmd() { sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"; }
 
 ###########################################################################
@@ -16,8 +15,6 @@ sudo -v
 # while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo
-# Install Cocoapods
-try_action "Installing Cocoapods" cocoapods_cmd "$SUDO_LOGFILE"
 
 # Add fish to the list of allowed shells
 # This "hack" is to circumvent homebrew invalidating sudo timestamp on each install.
