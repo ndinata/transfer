@@ -35,9 +35,6 @@ config_keyboard() {
 }
 
 config_finder() {
-  # Set sidebar icon size to 'Small'
-  defaults write -g NSTableViewDefaultSizeMode -int 1
-
   # Show path bar
   defaults write com.apple.finder ShowPathbar -bool true
 
