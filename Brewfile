@@ -50,3 +50,4 @@ mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Xcode", id: 497799835
+mas "AdGuard for Safari", id: 1440147259
