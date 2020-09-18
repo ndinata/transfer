@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NAME="Wake"
-SCRIPT_NAME="setup"
+SCRIPT_NAME="wake"
 IS_SHOWCASE_MODE=false
 SHOWCASE_FLAG_LONG="^--showcase$"
 SHOWCASE_FLAG_SHORT="^-s$"

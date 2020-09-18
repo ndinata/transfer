@@ -6,7 +6,7 @@ This repo contains my personal .dotfiles and shell scripts made to quickly get m
 
 ## How to Run
 ```
-bash setup.sh [-s|--showcase]
+bash wake.sh [-s|--showcase]
 
 -s, --showcase
     Simulates running the whole setup process, without actually carrying out the operations
