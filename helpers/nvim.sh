@@ -23,7 +23,7 @@ vim_plug_install_cmd() {
 echo_header "Neovim"
 echo "$DIVIDER"
 
-# Copy .vimrc
+# Copy vimrc
 try_action "Copying init.vim" init_vim_cmd
 
 # Install vim-plug
