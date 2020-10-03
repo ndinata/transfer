@@ -3,7 +3,7 @@
 local_init_vim_file="dotfiles/init.vim"
 nvim_home_dir="$HOME/.config/nvim"
 vim_plug_download_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-vim_plug_install_dir="~/.local/share/nvim/site/autoload/plug.vim"
+vim_plug_install_dir="$HOME/.local/share/nvim/site/autoload/plug.vim"
 
 init_vim_cmd() {
     mkdir -pv "$nvim_home_dir"
