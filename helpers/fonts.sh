@@ -38,6 +38,7 @@ if [[ "$are_fontfiles_available" == true ]]; then
       cp $sf_source_dir/SF-Mono*.otf $sf_target_dir
     else
       cp $sf_source_dir/SFMono*.otf $sf_target_dir
+    fi
 
     echo "The following font files have been installed in $sf_target_dir:" >> "$FONT_LOGFILE"
     for fontfile in $sf_target_dir/*.otf; do
