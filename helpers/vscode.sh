@@ -35,7 +35,7 @@ echo_header "VSCode"
 echo "$DIVIDER"
 
 # Install extensions
-try_action "Installing extensions" vscode_install_cmd
+try_action "Installing extensions" vscode_install_cmd "$VSCODE_LOGFILE"
 
 # Copy preferences and snippets file
 try_action "Copying preferences and snippets" vscode_setup_cmd
