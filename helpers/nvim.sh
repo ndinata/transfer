@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-local_init_vim_file="dotfiles/init.vim"
+local_init_vim_file="dotfiles/*.vim"
 nvim_home_dir="$HOME/.config/nvim"
 vim_plug_download_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 vim_plug_install_dir="$HOME/.local/share/nvim/site/autoload/plug.vim"
