@@ -13,7 +13,7 @@ fisher_install_cmd() {
     curl https://git.io/fisher --create-dirs -sLo "$fisher_install_dir"
 }
 fish_pure_install_cmd() {
-    fish -c "fisher add rafaelrinaldi/pure" 
+    fish -c "fisher install rafaelrinaldi/pure" 
 }
 fish_python_cmd() {
     fish -c "set -U fish_user_paths /usr/local/opt/python/libexec/bin \$fish_user_paths" 
