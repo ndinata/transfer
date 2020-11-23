@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "AdoptOpenJDK/openjdk"
 
 # CLI tools
 brew "bat"
@@ -27,7 +28,7 @@ brew "watchman"
 brew "wget"
 brew "yarn"
 
-# cask "adoptopenjdk8" # requires sudo
+# cask "adoptopenjdk11" # requires sudo
 cask "android-studio"
 cask "discord"
 cask "figma"
