@@ -4,9 +4,7 @@
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "explorer.confirmDragAndDrop": false,
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80],
   "extensions.ignoreRecommendations": false,
   "files.insertFinalNewline": true,
   "breadcrumbs.enabled": true,
@@ -16,8 +14,9 @@
   "workbench.editor.tabCloseButton": "left",
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.showIcons": false,
-  "editor.fontFamily": "FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'JetBrains Mono', FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
+  "editor.fontSize": 13,
   "python.pythonPath": "/usr/local/opt/python/libexec/bin/python",
   "editor.formatOnSave": true,
   "editor.suggest.snippetsPreventQuickSuggestions": false,
@@ -32,7 +31,8 @@
     "stylus",
     "xml",
     "svg",
-    "javascript"
+    "javascript",
+    "typescript"
   ],
   "workbench.activityBar.visible": false,
   "[javascript]": {

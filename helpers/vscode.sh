@@ -17,6 +17,7 @@ vscode_install_cmd() {
     code --install-extension ms-python.python
     code --install-extension amatiasq.sort-imports
     code --install-extension vscodevim.vim
+    code --install-extension EditorConfig.EditorConfig
 }
 
 vscode_setup_cmd() {
