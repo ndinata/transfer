@@ -6,18 +6,18 @@ vscode_settings_dir="$HOME/Library/Application Support/Code/User"
 vscode_snippets_dir="${vscode_settings_dir}/snippets"
 
 vscode_install_cmd() {
-    code --install-extension coenraads.bracket-pair-colorizer-2
-    code --install-extension kamikillerto.vscode-colorize
-    code --install-extension dbaeumer.vscode-eslint
-    code --install-extension flowtype.flow-for-vscode
+    code --install-extension amatiasq.sort-imports
     code --install-extension bierner.markdown-checkbox
     code --install-extension bierner.markdown-preview-github-styles
-    code --install-extension zhuangtongfa.material-theme
-    code --install-extension esbenp.prettier-vscode
-    code --install-extension ms-python.python
-    code --install-extension amatiasq.sort-imports
-    code --install-extension vscodevim.vim
+    code --install-extension coenraads.bracket-pair-colorizer-2
+    code --install-extension dbaeumer.vscode-eslint
     code --install-extension EditorConfig.EditorConfig
+    code --install-extension esbenp.prettier-vscode
+    code --install-extension flowtype.flow-for-vscode
+    code --install-extension kamikillerto.vscode-colorize
+    code --install-extension ms-python.python
+    code --install-extension vscodevim.vim
+    code --install-extension zhuangtongfa.material-theme
 }
 
 vscode_setup_cmd() {
