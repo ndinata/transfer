@@ -16,6 +16,7 @@ vscode_install_cmd() {
     code --install-extension flowtype.flow-for-vscode
     code --install-extension kamikillerto.vscode-colorize
     code --install-extension ms-python.python
+    code --install-extension ms-python.vscode-pylance
     code --install-extension vscodevim.vim
     code --install-extension zhuangtongfa.material-theme
 }

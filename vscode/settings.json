@@ -1,6 +1,6 @@
 {
   "breadcrumbs.enabled": true,
-  "editor.fontFamily": "Inconsolata, 'JetBrains Mono', 'Cascadia Code', FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Inconsolata, 'JetBrains Mono', FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 16,
   "editor.fontWeight": "500",
@@ -43,11 +43,16 @@
   ],
   "oneDarkPro.italic": false,
   "oneDarkPro.bold": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
 
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
