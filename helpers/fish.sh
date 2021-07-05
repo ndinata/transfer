@@ -13,11 +13,12 @@ fisher_install_cmd() {
     curl https://git.io/fisher --create-dirs -sLo "$fisher_install_dir"
 }
 fish_pkg_install_cmd() {
-    fish -c "fisher install rafaelrinaldi/pure" 
-    fish -c "fisher install jorgebucaran/nvm.fish" 
+    fish -c "fisher install rafaelrinaldi/pure"
+    fish -c "fisher install jorgebucaran/nvm.fish"
+    fish -c "fisher install wfxr/forgit"
 }
 fish_python_cmd() {
-    fish -c "set -U fish_user_paths /usr/local/opt/python@3.9/libexec/bin \$fish_user_paths" 
+    fish -c "set -U fish_user_paths /usr/local/opt/python@3.9/libexec/bin \$fish_user_paths"
 }
 
 ###########################################################################
