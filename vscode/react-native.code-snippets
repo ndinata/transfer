@@ -4,11 +4,6 @@
     "prefix": "impo",
     "body": "import ${2:moduleName} from '${1:module}';$0"
   },
-  "Export Module": {
-    "scope": "javascript,typescript,typescriptreact",
-    "prefix": "expo",
-    "body": "export { $1 };$0"
-  },
   "setTimeout": {
     "scope": "javascript,typescript,typescriptreact",
     "prefix": "seto",
@@ -26,7 +21,11 @@
       "import React, { Component } from 'react';",
       "import { StyleSheet, Text, View } from 'react-native';",
       "",
-      "class ${1:$TM_FILENAME_BASE} extends Component<Props, State> {",
+      "type Props = {};",
+      "",
+      "type State = {};",
+      "",
+      "export class ${1:$TM_FILENAME_BASE} extends Component<Props, State> {",
       "\tconstructor(props: Props) {",
       "\t\tsuper(props);",
       "\t}",
@@ -39,12 +38,6 @@
       "\t\t);",
       "\t}",
       "}",
-      "",
-      "type Props = {};",
-      "",
-      "type State = {};",
-      "",
-      "export { ${1:$TM_FILENAME_BASE} };",
       ""
     ]
   },
@@ -55,17 +48,15 @@
       "import React from 'react';",
       "import { StyleSheet, Text, View } from 'react-native';",
       "",
-      "function ${1:$TM_FILENAME_BASE}(props: Props) {",
+      "type Props = {};",
+      "",
+      "export function ${1:$TM_FILENAME_BASE}(props: Props) {",
       "\treturn (",
       "\t\t<View>",
       "\t\t\t<Text>Hello$0</Text>",
       "\t\t</View>",
       "\t);",
       "}",
-      "",
-      "type Props = {};",
-      "",
-      "export { ${1:$TM_FILENAME_BASE} }",
       ""
     ]
   },
