@@ -12,9 +12,12 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-telescope/telescope.nvim'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'norcalli/nvim-colorizer.lua'
 
 " Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-sleuth'
@@ -58,6 +61,7 @@ Plug 'vim-airline/vim-airline'
 
 " Colour schemes
 Plug 'joshdick/onedark.vim'
+Plug 'sainnhe/edge'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'arzg/vim-colors-xcode'
 
@@ -68,6 +72,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'SolaWing/vim-objc-syntax'
 Plug 'vim-ruby/vim-ruby'
 Plug 'arzg/vim-swift'
+Plug 'keith/swift.vim'
 " Plug 'peitalin/vim-jsx-typescript'
 " Plug 'leafgarland/typescript-vim'
 
@@ -228,6 +233,10 @@ let g:ale_floating_preview = 1
 let g:ale_hover_to_floating_preview = 1
 let g:ale_detail_to_floating_preview = 1
 let g:ale_close_preview_on_insert = 1
+
+" line-length = 80 chars
+let g:ale_python_black_options = "-l 80"
+
 " let g:ale_cursor_detail = 1
 " let g:ale_hover_cursor = 1
 " let g:ale_swift_swiftformat_options = '
@@ -264,6 +273,20 @@ inoremap <silent><expr> <S-Tab>
 " vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+
+" nvim-treesitter/nvim-treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 
 
 " preservim/nerdtree
@@ -325,6 +348,12 @@ let g:prettier#autoformat_require_pragma = 0
 " let g:xcodedark_dim_punctuation = 0
 
 
+" sainnhe/edge
+let g:edge_style = 'default'
+let g:edge_enable_italic = 0
+let g:edge_disable_italic_comment = 1
+
+
 " neoclide/coc.nvim
 " use <tab> to trigger completion options
 " inoremap <silent><expr> <Tab>
@@ -378,5 +407,5 @@ let g:prettier#autoformat_require_pragma = 0
 " au CursorHold * silent call CocActionAsync('highlight')
 
 
-colorscheme onedark
+colorscheme edge
 
