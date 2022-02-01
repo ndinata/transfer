@@ -5,8 +5,9 @@
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
   "editor.fontWeight": "400",
+  "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,
-  "editor.lineHeight": 22,
+  "editor.lineHeight": 23,
   "editor.minimap.enabled": false,
   "editor.overviewRulerBorder": false,
   "editor.renderLineHighlight": "all",
@@ -19,8 +20,9 @@
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": false,
   "files.insertFinalNewline": true,
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
+  "python.analysis.typeCheckingMode": "strict",
+  "python.languageServer": "Pylance",
+  "telemetry.telemetryLevel": "off",
   "terminal.integrated.fontFamily": "JetBrains Mono",
   "terminal.integrated.fontSize": 13,
   "workbench.activityBar.visible": false,
@@ -46,8 +48,6 @@
   ],
   "oneDarkPro.bold": false,
   "oneDarkPro.italic": false,
-  "python.analysis.typeCheckingMode": "basic",
-  "python.languageServer": "Pylance",
 
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
