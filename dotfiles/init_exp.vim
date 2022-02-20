@@ -2,88 +2,95 @@
 " -------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
-" General
-Plug 'jiangmiao/auto-pairs'
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
-Plug 'dense-analysis/ale'
-Plug 'vim-airline/vim-airline'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" General support:
+" - https://old.reddit.com/r/neovim/
+" - https://old.reddit.com/r/neovim/comments/qbh63a/how_do_you_personally_do_x_or_y_in_neovim/
 
-" Plug ctrlpvim/ctrlp.vim
-" Plug 'wincent/command-t'
-" Plug 'tpope/vim-sleuth'
-" Plug 'wellle/targets.vim'
-" Plug 'ervandew/supertab'
-" Plug 'rstacruz/vim-closer'
-" Plug 'tpope/vim-endwise'
-" Plug 'Raimondi/delimitMate'
-" Plug 'andymass/vim-matchup'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'bigfish/vim-js-context-coloring'
-" Plug 'neoclide/vim-jsx-improve'
-" Plug 'lifepillar/vim-mucomplete'
-" Plug 'iamcco/markdown-preview.nvim'
-" Plug 'vimwiki/vimwiki'
-" Plug 'nvie/vim-flake8'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tpope/vim-abolish'
-" Plug 'tpope/vim-eunuch'
-" Plug 'docunext/closetag.vim'
-" Plug 'easymotion/vim-easymotion'
-" Plug 'rking/ag.vim'
-" Plug 'rizzatti/funcoo.vim'
-" Plug 'rizzatti/dash.vim'
-" Plug 'mattn/webapi-vim'
-" Plug 'mattn/gist-vim'
-" Plug 'honza/vim-snippets'
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'dhruvasagar/vim-zoom'
-" Plug 'mechatroner/rainbow_csv'
-" Plug 'kshenoy/vim-signature'
-" Plug 'rhysd/vim-grammarous'
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'meain/vim-package-info', {'do': 'npm install' }
-" Plug 'A/vim-import-cost', { 'do': 'npm install' }
-" Plug 'Shougo/deoplete.nvim'
+" Sample configs:
+" - https://github.com/n3wborn/nvim
+" - https://github.com/mrnugget/vimconfig
+" - https://github.com/lucax88x/configs/tree/master/dotfiles/.config/nvim
+" - https://github.com/JoosepAlviste/dotfiles/tree/master/config/nvim
+" - https://github.com/shaunsingh/nix-darwin-dotfiles
+" - https://github.com/VapourNvim/VapourNvim
+" - https://github.com/NvChad/NvChad
+
+" Vimscript -> Lua transition:
+" - https://old.reddit.com/r/neovim/comments/io2snh/neovim_lua_config_example/
+" - https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+" - https://github.com/nanotee/nvim-lua-guide/
+
+" Core:
+" - package manager (https://github.com/wbthomason/packer.nvim)
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'b3nj5m1n/kommentary'
+
+" - lsp — goto, docs, autocompletion
+" + https://github.com/neovim/nvim-lspconfig
+" + https://github.com/glepnir/lspsaga.nvim (lsp plugin)
+" + https://github.com/stevearc/aerial.nvim (symbol skimming + navigation)
+
+" - statusline — airline/powerline
+
+" - filetree:
+" + https://github.com/kyazdani42/nvim-tree.lua
+
+" - git indicator — changed lines, active branch
+
+" - file search / go-to file / diagnostics:
+" + https://github.com/nvim-telescope/telescope.nvim
+" + https://github.com/folke/trouble.nvim — diagnostic, search etc. list
+
+" - project word-search
+
+" - bracket coloriser
+
+" - indent line
+" https://github.com/lukas-reineke/indent-blankline.nvim
+
+" - bracket pair
+
+" - inline hex colour display
+" https://github.com/norcalli/nvim-colorizer.lua
+
+" - vim-surround
+
+" - editorconfig
+
+" Nice to haves:
+" - multiple cursors
+" - filetree icons
+" - terminal support (https://github.com/akinsho/toggleterm.nvim)
+" - folding
+" - snippets (esp. JSX/TSX)
+" - replace all instances of search in file
+" - move buffers/tabs around?
+
+" Lang/framework specific:
+" - JS — JSX + Flow + Prettier + ESLint + import-sort
+" - TS — TSX + Prettier + ESLint + import-sort + utils:
+"   - https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+" - HTML/MD/JSON — Prettier
+"   - https://github.com/mattn/emmet-vim
+" - Python — flake8 + black + isort + virtualenv (optional) + mypy (optional)
+"   - https://github.com/jmcantrell/vim-virtualenv
+" - Rust — rust-analyzer + rustfmt + Clippy:
+"   - https://github.com/simrat39/rust-tools.nvim
+" - Swift — swiftlint + swiftformat
+
+" Misc.:
+" - https://github.com/pwntester/octo.nvim — github integration
+
 
 " Colour schemes
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/edge'
+" Plug 'Th3Whit3Wolf/one-nvim'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'arzg/vim-colors-xcode'
-
-" Language syntax
-Plug 'vim-python/python-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'SolaWing/vim-objc-syntax'
-Plug 'vim-ruby/vim-ruby'
-Plug 'arzg/vim-swift'
-Plug 'keith/swift.vim'
-" Plug 'peitalin/vim-jsx-typescript'
-" Plug 'leafgarland/typescript-vim'
-
-" Formatter/fixer/linter
-Plug 'rhysd/vim-clang-format', {
-  \ 'for': ['c', 'cpp', 'objc']
-  \ }
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'json', 'graphql', 'markdown', 'html', 'yaml']
-  \ }
-Plug 'ruanyl/vim-sort-imports', {
-  \ 'for': ['javascript', 'typescript']
-  \ }
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 
 call plug#end()
 
@@ -211,28 +218,39 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Plugin Settings
 " -------------------------------------------
+" b3nj5m1n/kommentary
+lua << EOF
+require('kommentary.config').configure_language("default", {
+    prefer_single_line_comments = true,
+})
+EOF
+nmap <C-_> gcc
+vmap <C-_> gc
+
+
+
 "  dense-analysis/ale
-let g:ale_linters = { 'python': ['flake8', 'mypy', 'pyright'] }
-let g:ale_fixers = {
-\ 'css': ['prettier'],
-\ 'html': ['prettier'],
-\ 'javascript': ['prettier'],
-\ 'typescript': ['prettier'],
-\ 'json': ['prettier'],
-\ 'python': ['black', 'isort'],
-\ 'swift': ['swiftformat'],
-\}
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_completion_delay = 50
-let g:ale_completion_autoimport = 1
-let g:ale_floating_preview = 1
-let g:ale_hover_to_floating_preview = 1
-let g:ale_detail_to_floating_preview = 1
-let g:ale_close_preview_on_insert = 1
+" let g:ale_linters = { 'python': ['flake8', 'mypy', 'pyright'] }
+" let g:ale_fixers = {
+" \ 'css': ['prettier'],
+" \ 'html': ['prettier'],
+" \ 'javascript': ['prettier'],
+" \ 'typescript': ['prettier'],
+" \ 'json': ['prettier'],
+" \ 'python': ['black', 'isort'],
+" \ 'swift': ['swiftformat'],
+" \}
+" let g:ale_fix_on_save = 1
+" let g:ale_completion_enabled = 1
+" let g:ale_completion_delay = 50
+" let g:ale_completion_autoimport = 1
+" let g:ale_floating_preview = 1
+" let g:ale_hover_to_floating_preview = 1
+" let g:ale_detail_to_floating_preview = 1
+" let g:ale_close_preview_on_insert = 1
 
 " line-length = 80 chars
-let g:ale_python_black_options = "-l 80"
+" let g:ale_python_black_options = "-l 80"
 
 " let g:ale_cursor_detail = 1
 " let g:ale_hover_cursor = 1
@@ -243,16 +261,16 @@ let g:ale_python_black_options = "-l 80"
 "   \ --wrapcollections before-first
 "   \ '
 
-nnoremap ]e :ALENextWrap<CR>
-nnoremap [e :ALEPreviousWrap<CR>
+" nnoremap ]e :ALENextWrap<CR>
+" nnoremap [e :ALEPreviousWrap<CR>
 
-nnoremap md :ALEDetail<CR>
-nnoremap mh :ALEHover<CR>
+" nnoremap md :ALEDetail<CR>
+" nnoremap mh :ALEHover<CR>
 
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-Tab>
-  \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" inoremap <silent><expr> <Tab>
+"   \ pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <silent><expr> <S-Tab>
+"   \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 
 " junegunn/fzf
@@ -268,48 +286,47 @@ inoremap <silent><expr> <S-Tab>
 
 
 " vim-airline/vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 
 " nvim-treesitter/nvim-treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
-EOF
-
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "maintained",
+"   highlight = {
+"     enable = true,              -- false will disable the whole extension
+"   },
+" }
+" EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 
 " preservim/nerdtree
 " close vim if NERDTree is last open window
-au BufEnter * if (winnr("$") == 1 &&
-  \ exists("b:NERDTree") &&
-  \ b:NERDTree.isTabTree()) | q | endif
+" au BufEnter * if (winnr("$") == 1 &&
+"   \ exists("b:NERDTree") &&
+"   \ b:NERDTree.isTabTree()) | q | endif
 
-let NERDTreeShowHidden = 1    " show hidden (dot) files
-let NERDTreeMinimalUI = 1     " hide Help message
+" let NERDTreeShowHidden = 1    " show hidden (dot) files
+" let NERDTreeMinimalUI = 1     " hide Help message
 
-nnoremap <C-b> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-b> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 
 " tpope/vim-commentary
 " map to <C-_> because vim registers <C-/> as <C-_>
-nmap <C-_> gcc
-vmap <C-_> gc
+" nmap <C-_> gcc
+" vmap <C-_> gc
 
 
 " airblade/vim-gitgutter
-nmap ghs :GitGutterStageHunk<CR>
-nmap ghu :GitGutterUndoHunk<CR>
-nmap ghp :GitGutterPreviewHunk<CR>
-nmap ghf :GitGutterFold<CR>
+" nmap ghs :GitGutterStageHunk<CR>
+" nmap ghu :GitGutterUndoHunk<CR>
+" nmap ghp :GitGutterPreviewHunk<CR>
+" nmap ghf :GitGutterFold<CR>
 
 
 " dracula/vim
@@ -317,27 +334,27 @@ nmap ghf :GitGutterFold<CR>
 
 
 " vim-python/python-syntax
-let g:python_highlight_all = 1
-let g:python_highlight_file_headers_as_comments = 1
+" let g:python_highlight_all = 1
+" let g:python_highlight_file_headers_as_comments = 1
 
 
 " pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_jsdoc = 1
+" let g:javascript_plugin_flow = 1
 
 
 " maxmellon/vim-jsx-pretty
-let g:vim_jsx_pretty_colorful_config = 1
+" let g:vim_jsx_pretty_colorful_config = 1
 
 
 " rhysd/vim-clang-format
-let g:clang_format#auto_format = 1
-let g:clang_format#code_style = 'mozilla'
+" let g:clang_format#auto_format = 1
+" let g:clang_format#code_style = 'mozilla'
 
 
 " prettier/vim-prettier
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
+" let g:prettier#autoformat = 1
+" let g:prettier#autoformat_require_pragma = 0
 
 
 " arzg/vim-colors-xcode
@@ -404,5 +421,5 @@ let g:edge_disable_italic_comment = 1
 " au CursorHold * silent call CocActionAsync('highlight')
 
 
-colorscheme edge
+colorscheme gruvbox
 
