@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 brew_install_cmd() {
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 brew_update_cmd() { brew update && brew upgrade; }
 brew_analytics_cmd() { brew analytics off; }
