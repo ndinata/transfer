@@ -7,15 +7,16 @@ vscode_snippets_dir="${vscode_settings_dir}/snippets"
 
 vscode_install_cmd() {
     code --install-extension amatiasq.sort-imports
+    code --install-extension bradlc.vscode-tailwindcss
     code --install-extension dbaeumer.vscode-eslint
     code --install-extension EditorConfig.EditorConfig
     code --install-extension esbenp.prettier-vscode
     code --install-extension flowtype.flow-for-vscode
+    code --install-extension GitHub.github-vscode-theme
     code --install-extension kamikillerto.vscode-colorize
     code --install-extension ms-python.python
+    code --install-extension rust-lang.rust-analyzer
     code --install-extension vscodevim.vim
-    code --install-extension zhuangtongfa.material-theme
-    code --install-extension matklad.rust-analyzer
 }
 
 vscode_setup_cmd() {
