@@ -96,7 +96,7 @@ set autochdir
 " set command-line height to 2 lines
 set cmdheight=2
 
-set completeopt=menu,noinsert
+set completeopt=menu,menuone,preview,noinsert
 
 " copy to the clipboard when yanking
 set clipboard=unnamed
@@ -113,6 +113,9 @@ set ignorecase
 " display invisible characters
 set list
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+
+" allow manually triggering ALE's completion with <C-x><C-o>
+set omnifunc=ale#completion#OmniFunc
 
 " enable mouse
 set mouse=a
@@ -212,7 +215,7 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 " Plugin Settings
 " -------------------------------------------
 "  dense-analysis/ale
-let g:ale_linters = { 'python': ['flake8', 'mypy', 'pyright'] }
+let g:ale_linters = { 'python': ['flake8', 'mypy', 'pyright'], 'rust': ['analyzer', 'cargo'] }
 let g:ale_fixers = {
 \ 'css': ['prettier'],
 \ 'html': ['prettier'],
@@ -221,6 +224,7 @@ let g:ale_fixers = {
 \ 'json': ['prettier'],
 \ 'python': ['black', 'isort'],
 \ 'swift': ['swiftformat'],
+\ 'rust': ['rustfmt'],
 \}
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
@@ -232,7 +236,7 @@ let g:ale_detail_to_floating_preview = 1
 let g:ale_close_preview_on_insert = 1
 
 " line-length = 80 chars
-let g:ale_python_black_options = "-l 80"
+" let g:ale_python_black_options = "-l 80"
 
 " let g:ale_cursor_detail = 1
 " let g:ale_hover_cursor = 1
@@ -253,6 +257,8 @@ inoremap <silent><expr> <Tab>
   \ pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <CR>
+  \ pumvisible() ? "\<C-y>" : "\<CR>"
 
 
 " junegunn/fzf
@@ -275,7 +281,29 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " nvim-treesitter/nvim-treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "fish",
+    "html",
+    "java",
+    "javascript",
+    "json",
+    "jsonc",
+    "kotlin",
+    "lua",
+    "python",
+    "regex",
+    "ruby",
+    "rust",
+    "toml",
+    "tsx",
+    "typescript",
+    "vim",
+    "yaml"
+  },
   highlight = {
     enable = true,              -- false will disable the whole extension
   },

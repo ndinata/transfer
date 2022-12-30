@@ -36,7 +36,8 @@ Plug 'b3nj5m1n/kommentary'
 " - filetree:
 " + https://github.com/kyazdani42/nvim-tree.lua
 
-" - git indicator — changed lines, active branch
+" - git indicator — changed lines, active branch, add specific hunks
+" - git blame — https://github.com/APZelos/blamer.nvim
 
 " - file search / go-to file / diagnostics:
 " + https://github.com/nvim-telescope/telescope.nvim
@@ -68,18 +69,22 @@ Plug 'b3nj5m1n/kommentary'
 " - move buffers/tabs around?
 
 " Lang/framework specific:
+" - Vue + TS — list of plugins
+"   - https://old.reddit.com/r/neovim/comments/o2knh8/vue_typescript_and_native_lsp/
 " - JS — JSX + Flow + Prettier + ESLint + import-sort
 " - TS — TSX + Prettier + ESLint + import-sort + utils:
 "   - https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
-" - HTML/MD/JSON — Prettier
+" - HTML — Emmet (tag bracket autocomplete) + Prettier
+" - CSS — autocomplete + lint + Prettier
+" - JSON, MD — Prettier
 "   - https://github.com/mattn/emmet-vim
-" - Python — flake8 + black + isort + virtualenv (optional) + mypy (optional)
+" - Python — pyright + flake8 + black + isort + virtualenv + mypy (optional)
 "   - https://github.com/jmcantrell/vim-virtualenv
 " - Rust — rust-analyzer + rustfmt + Clippy:
 "   - https://github.com/simrat39/rust-tools.nvim
 " - Swift — swiftlint + swiftformat
 
-" Misc.:
+" Miscellaneous:
 " - https://github.com/pwntester/octo.nvim — github integration
 
 
