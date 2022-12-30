@@ -11,20 +11,20 @@ fish_function_cmd() {
     cp $fishfiles_dir/* $fish_function_dir
 }
 fisher_install_cmd() {
-    curl https://git.io/fisher --create-dirs -sLo "$fisher_install_dir"
+    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 }
 fish_pkg_install_cmd() {
     fish -c "fisher install rafaelrinaldi/pure"
-    fish -c "fisher install jorgebucaran/nvm.fish"
-    fish -c "fisher install wfxr/forgit"
+    # fish -c "fisher install jorgebucaran/nvm.fish"
+    # fish -c "fisher install wfxr/forgit"
 }
 fish_python_cmd() {
-    fish -c "set -U fish_user_paths /usr/local/opt/python@3.9/libexec/bin \$fish_user_paths"
+    fish -c "fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin"
 }
-fish_forgit_cmd() {
-  echo "set -g FORGIT_FZF_DEFAULT_OPTS \"\$FORGIT_FZF_DEFAULT_OPTS --reverse --cycle\"" >> "$fish_config_file"
-  echo "set -g FORGIT_LOG_GRAPH_ENABLE true" >> "$fish_config_file"
-}
+# fish_forgit_cmd() {
+#   echo "set -x FORGIT_FZF_DEFAULT_OPTS \"\$FORGIT_FZF_DEFAULT_OPTS --reverse --cycle\"" >> "$fish_config_file"
+#   echo "set -x FORGIT_LOG_GRAPH_ENABLE true" >> "$fish_config_file"
+# }
 
 ###########################################################################
 
@@ -44,5 +44,5 @@ try_action "Installing fish packages" fish_pkg_install_cmd "$FISH_LOGFILE"
 try_action "Adding Brew's python symlink location to \$PATH" fish_python_cmd
 
 # Set up custom options for forgit
-try_action "Setting up custom options for forgit" fish_forgit_cmd "$FISH_LOGFILE"
+# try_action "Setting up custom options for forgit" fish_forgit_cmd "$FISH_LOGFILE"
 echo && echo
