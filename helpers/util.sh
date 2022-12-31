@@ -5,9 +5,8 @@ fish_config_file="$HOME/.config/fish/config.fish"
 # tldr_autocomplete_path="$HOME/.config/fish/completions/tldr.fish"
 bat_config_content="# Set theme to \"TwoDark\"\n--theme=\"TwoDark\""
 bat_config_path="$HOME/.config/bat"
-local_rg_config_file="dotfiles/.ripgreprc"
+local_rg_config_file="dotfiles/ripgreprc"
 rg_config_path="$HOME/.config/ripgrep/"
-rg_config_file_name=".ripgreprc"
 
 # download_tldr_cmd() { curl "$tldr_autocomplete_url" -sLo "$tldr_autocomplete_path"; }
 setup_config_bat_cmd() {
