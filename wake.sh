@@ -99,7 +99,7 @@ echo
 echo "$NAME completed!"
 echo "Please remember to do several more things:"
 echo "1. Set fish as the default shell by running:"
-echo -e "   ${BOLD}chsh -s /usr/local/bin/fish${NC}"
+echo -e "   ${BOLD}chsh -s /opt/homebrew/bin/fish${NC}"
 echo
 echo "2. Enable fish vi keybindings by running:"
 echo -e "   ${BOLD}fish_vi_key_bindings${NC}"

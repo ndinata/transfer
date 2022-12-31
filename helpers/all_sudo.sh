@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-fish_cmd() { sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"; }
+fish_cmd() { sudo bash -c "echo /opt/homebrew/bin/fish >> /etc/shells"; }
 
 ###########################################################################
 
