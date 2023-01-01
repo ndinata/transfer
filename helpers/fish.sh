@@ -6,7 +6,7 @@ fishfiles_dir="fishfiles"
 fisher_install_dir="$HOME/.config/fish/functions/fisher.fish"
 fish_function_cmd() {
     if [ ! -d "$fish_function_dir/" ]; then
-        mkdir -pv $fish_function_dir
+        mkdir -p $fish_function_dir
     fi
     cp $fishfiles_dir/* $fish_function_dir
 }
@@ -14,7 +14,7 @@ fisher_install_cmd() {
     curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 }
 fish_pkg_install_cmd() {
-    fish -c "fisher install rafaelrinaldi/pure"
+    fish -c "fisher install pure-fish/pure"
     # fish -c "fisher install jorgebucaran/nvm.fish"
     # fish -c "fisher install wfxr/forgit"
 }
