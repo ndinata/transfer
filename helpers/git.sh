@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-gitconfig_dir="dotfiles/.gitconfig"
-gitconfig_cmd() { cp "$gitconfig_dir" $HOME; }
+gitconfig_cmd() { cp dotfiles/.gitconfig $HOME; }
 
 ###########################################################################
 
