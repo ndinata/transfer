@@ -104,5 +104,8 @@ echo
 echo "2. Enable fish vi keybindings by running:"
 echo -e "   ${BOLD}fish_vi_key_bindings${NC}"
 echo
-echo "3. Restart for some changes to take into effect."
+echo "3. Load rbenv by running:"
+echo -e "   ${BOLD}rbenv init${NC}"
+echo
+echo "4. Restart for some changes to take into effect."
 echo
