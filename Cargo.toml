@@ -1,5 +1,5 @@
 [workspace]
-members = ["transfer"]
+members = ["transfer", "transfer-lib"]
 
 [workspace.package]
 authors = ["Nico Dinata <nicodnt@icloud.com>"]
@@ -9,8 +9,5 @@ keywords = ["cli", "macos", "dotfiles", "brewfile"]
 readme = "readme.md"
 repository = "https://github.com/nictar/transfer"
 version = "0.1.0"
-
-[workspace.dependencies]
-
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
