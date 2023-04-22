@@ -24,16 +24,6 @@ async fn main() {
         }
     }
 
-    for to_run in config.run {
-        if let Err(e) = transfer_lib::run_script(
-            &to_run.command,
-            vec!["-c", &to_run.script_path],
-            &to_run.script_path,
-        ) {
-            println!("RunScriptError('{0}'): {e}", to_run.script_path);
-        }
-    }
-
     let downloader = Downloader::new();
     for to_download in config.download {
         let log_download_progress = |(downloaded, total_size)| match total_size {
@@ -64,6 +54,16 @@ async fn main() {
             {
                 println!("DownloadError('{0}'): {e}", to_download.from);
             }
+        }
+    }
+
+    for to_run in config.run {
+        if let Err(e) = transfer_lib::run_script(
+            &to_run.command,
+            vec!["-c", &to_run.script_path],
+            &to_run.script_path,
+        ) {
+            println!("RunScriptError('{0}'): {e}", to_run.script_path);
         }
     }
 
