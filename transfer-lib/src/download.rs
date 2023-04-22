@@ -4,7 +4,7 @@ use std::io::Write;
 use std::process::Command;
 
 use futures_util::StreamExt;
-use reqwest::Client;
+use reqwest::{Client, Url};
 
 /// `DownloadProgress = (downloaded, Option<total_size>)`
 type DownloadProgress = (u64, Option<u64>);
@@ -13,7 +13,10 @@ type Result<T, E = DownloadError> = std::result::Result<T, E>;
 
 #[derive(thiserror::Error, Debug)]
 pub enum DownloadError {
-    #[error("{0} failed to run successfully")]
+    #[error("`{0}` is not a valid URL")]
+    InvalidUrl(String),
+
+    #[error("`{0}` failed to run successfully")]
     CannotRun(String),
 
     #[error(transparent)]
@@ -82,10 +85,10 @@ impl Downloader {
     pub async fn download_and_source<F: Fn(DownloadProgress)>(
         &self,
         from_url: &str,
-        filename: &str,
         dl_progress_cb: F,
     ) -> Result<()> {
-        self.download(from_url, filename, dl_progress_cb).await?;
+        let filename = self.get_filename_from_url(from_url)?;
+        self.download(from_url, &filename, dl_progress_cb).await?;
 
         println!("Running `{filename}`, hang on...");
 
@@ -96,12 +99,24 @@ impl Downloader {
             .or(Err(DownloadError::CannotRun("sh".to_string())))?
             .wait()?;
         if !status.success() {
-            return Err(DownloadError::CannotRun(filename.to_string()));
+            return Err(DownloadError::CannotRun(filename));
         }
 
         println!("Done running `{filename}`, deleting the file.");
         fs::remove_file(filename)?;
 
         Ok(())
+    }
+
+    fn get_filename_from_url(&self, url: &str) -> Result<String> {
+        let url = Url::parse(url).or(Err(DownloadError::InvalidUrl(url.to_string())))?;
+
+        let filename = url
+            .path_segments()
+            .ok_or(DownloadError::InvalidUrl(url.to_string()))?
+            .last()
+            .unwrap();
+
+        Ok(filename.to_owned())
     }
 }
