@@ -60,7 +60,7 @@ async fn main() {
     for to_run in config.run {
         if let Err(e) = transfer_lib::run_script(
             &to_run.command,
-            vec!["-c", &to_run.script_path],
+            vec![&to_run.script_path],
             &to_run.script_path,
         ) {
             println!("RunScriptError('{0}'): {e}", to_run.script_path);
