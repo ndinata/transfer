@@ -22,5 +22,4 @@ reminders = [
     { instruction = "Set fish as default shell", command = "chsh -s /opt/homebrew/bin/fish" },
     { instruction = "Enable fish vi keybindings", command = "fish_vi_key_bindings" },
     { instruction = "Load rbenv", command = "rbenv init" },
-    { instruction = "Load pyenv", command = "echo \"pyenv init - | source\" >> ~/.config/fish/config.fish" },
 ]
