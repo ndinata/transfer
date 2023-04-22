@@ -2,6 +2,60 @@
 " -------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
+" General support:
+" - https://old.reddit.com/r/neovim/
+" - https://old.reddit.com/r/neovim/comments/qbh63a/how_do_you_personally_do_x_or_y_in_neovim/
+
+" Sample configs:
+" - https://github.com/n3wborn/nvim
+" - https://github.com/mrnugget/vimconfig
+" - https://github.com/lucax88x/configs/tree/master/dotfiles/.config/nvim
+" - https://github.com/JoosepAlviste/dotfiles/tree/master/config/nvim
+" - https://github.com/shaunsingh/nix-darwin-dotfiles
+" - https://github.com/VapourNvim/VapourNvim
+" - https://github.com/NvChad/NvChad
+
+" Vimscript -> Lua transition:
+" - https://old.reddit.com/r/neovim/comments/io2snh/neovim_lua_config_example/
+" - https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+" - https://github.com/nanotee/nvim-lua-guide/
+
+" Core:
+" - package manager (https://github.com/wbthomason/packer.nvim)
+
+" - lsp — goto, docs, autocompletion
+" + https://github.com/neovim/nvim-lspconfig
+" + https://github.com/glepnir/lspsaga.nvim (lsp plugin)
+" + https://github.com/stevearc/aerial.nvim (symbol skimming + navigation)
+
+" - filetree:
+" + https://github.com/kyazdani42/nvim-tree.lua
+
+" - git indicator — changed lines, active branch, add specific hunks
+" - git blame — https://github.com/APZelos/blamer.nvim
+
+" https://github.com/folke/trouble.nvim — diagnostic, search etc. list
+" https://github.com/lukas-reineke/indent-blankline.nvim
+" https://github.com/norcalli/nvim-colorizer.lua
+" https://github.com/akinsho/toggleterm.nvim
+" https://github.com/pwntester/octo.nvim — github integration
+
+" Lang/framework specific:
+" - Vue + TS — list of plugins
+"   - https://old.reddit.com/r/neovim/comments/o2knh8/vue_typescript_and_native_lsp/
+" - JS — JSX + Flow + Prettier + ESLint + import-sort
+" - TS — TSX + Prettier + ESLint + import-sort + utils:
+"   - https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+" - HTML — Emmet (tag bracket autocomplete) + Prettier
+" - CSS — autocomplete + lint + Prettier
+" - JSON, MD — Prettier
+"   - https://github.com/mattn/emmet-vim
+" - Python — pyright + flake8 + black + isort + virtualenv + mypy (optional)
+"   - https://github.com/jmcantrell/vim-virtualenv
+" - Rust — rust-analyzer + rustfmt + Clippy:
+"   - https://github.com/simrat39/rust-tools.nvim
+" - Swift — swiftlint + swiftformat
+
 " General
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
@@ -14,6 +68,7 @@ Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'nvim-telescope/telescope.nvim'
+" Plug 'b3nj5m1n/kommentary'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -61,6 +116,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/edge'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'arzg/vim-colors-xcode'
+" Plug 'rktjmp/lush.nvim'
+" Plug 'ellisonleao/gruvbox.nvim'
 
 " Language syntax
 Plug 'vim-python/python-syntax'
@@ -214,6 +271,15 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Plugin Settings
 " -------------------------------------------
+" b3nj5m1n/kommentary
+" lua << EOF
+" require('kommentary.config').configure_language("default", {
+"    prefer_single_line_comments = true,
+" })
+" EOF
+" nmap <C-_> gcc
+" vmap <C-_> gc
+
 "  dense-analysis/ale
 let g:ale_linters = { 'python': ['flake8', 'mypy', 'pyright'], 'rust': ['analyzer', 'cargo'] }
 let g:ale_fixers = {
@@ -310,10 +376,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
-
-
 " preservim/nerdtree
 " close vim if NERDTree is last open window
 au BufEnter * if (winnr("$") == 1 &&
@@ -378,59 +440,4 @@ let g:edge_style = 'default'
 let g:edge_enable_italic = 0
 let g:edge_disable_italic_comment = 1
 
-
-" neoclide/coc.nvim
-" use <tab> to trigger completion options
-" inoremap <silent><expr> <Tab>
-"   \ pumvisible() ? "\<C-n>" :
-"   \ <SID>check_back_space() ? "\<Tab>" :
-"   \ coc#refresh()
-" inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" function! s:check_back_space() abort
-  " let col = col('.') - 1
-  " return !col || getline('.')[col - 1] =~# '\s'
-" endfunction
-
-" use <C-Space> to trigger completion
-" inoremap <silent><expr> <C-Space> coc#refresh()
-
-" use <CR> to select first completion item when no item is selected
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
-" navigate diagnostics
-" nmap <silent> [e <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]e <Plug>(coc-diagnostic-next)
-
-" go-to code navigation
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gt <Plug>(coc-type-definition)
-" nmap <silent> gr <Plug>(coc-references)
-
-" symbol renaming
-" nmap <leader>rn <Plug>(coc-rename)
-
-" search workspace symbols
-" nnoremap <silent> <leader>fs :CocList -I symbols<CR>
-
-" show commands
-" nnoremap <silent> <leader>fc :CocList commands<CR>
-
-" use K to show documentation in preview window
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-" highlight the symbol and its references when holding the cursor
-" au CursorHold * silent call CocActionAsync('highlight')
-
-
 colorscheme edge
-
