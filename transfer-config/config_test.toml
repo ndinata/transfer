@@ -1,0 +1,16 @@
+copy = [
+    { from = "dotfiles/git/.gitconfig", to = "~/Desktop/transfer-test/dotfiles/" },
+]
+
+download = [
+    { from = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", to = "~/Desktop/transfer-test/downloads/plug.vim" },
+    { from = "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish", run = true },
+]
+
+run = [
+    { script_path = "scripts/macos.sh", command = "bash", title = "Configuring macOS" },
+]
+
+reminders = [
+    { instruction = "Set fish as default shell", command = "chsh -s /opt/homebrew/bin/fish" },
+]
