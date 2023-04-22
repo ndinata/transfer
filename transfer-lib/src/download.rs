@@ -1,5 +1,4 @@
 use std::cmp;
-use std::error::Error;
 use std::fs::{self, File};
 use std::io::Write;
 use std::process::Command;
@@ -7,8 +6,22 @@ use std::process::Command;
 use futures_util::StreamExt;
 use reqwest::Client;
 
-/// `DownloadProgress = (downloaded, total_size)`
-type DownloadProgress = (u64, u64);
+/// `DownloadProgress = (downloaded, Option<total_size>)`
+type DownloadProgress = (u64, Option<u64>);
+
+type Result<T, E = DownloadError> = std::result::Result<T, E>;
+
+#[derive(thiserror::Error, Debug)]
+pub enum DownloadError {
+    #[error("{0} failed to run successfully")]
+    CannotRun(String),
+
+    #[error(transparent)]
+    RequestError(#[from] reqwest::Error),
+
+    #[error(transparent)]
+    IoError(#[from] std::io::Error),
+}
 
 pub struct Downloader {
     client: Client,
@@ -32,14 +45,18 @@ impl Downloader {
         from_url: &str,
         to_path: &str,
         dl_progress_cb: F,
-    ) -> Result<File, Box<dyn Error>> {
+    ) -> Result<File> {
         // reference:
         // https://gist.github.com/giuliano-oliveira/4d11d6b3bb003dba3a1b53f43d81b30d
 
         let res = self.client.get(from_url).send().await?;
-        let total_size = res.content_length().unwrap();
+        let total_size = res.content_length();
 
-        println!("Download starting, total size {total_size}.");
+        if let Some(total) = total_size {
+            println!("Download starting, total size is {total}B.");
+        } else {
+            println!("Download starting.");
+        }
 
         let mut file = File::create(to_path)?;
         let mut downloaded = 0;
@@ -49,13 +66,16 @@ impl Downloader {
             let chunk = item?;
             file.write_all(&chunk)?;
 
-            let new = cmp::min(downloaded + (chunk.len() as u64), total_size);
+            let new = match total_size {
+                Some(total) => cmp::min(downloaded + (chunk.len() as u64), total),
+                None => downloaded + (chunk.len() as u64),
+            };
             downloaded = new;
 
             dl_progress_cb((downloaded, total_size));
         }
 
-        println!("Downloaded {} to {}", from_url, to_path);
+        println!("Downloaded `{}` to `{}`.", from_url, to_path);
         Ok(file)
     }
 
@@ -64,21 +84,23 @@ impl Downloader {
         from_url: &str,
         filename: &str,
         dl_progress_cb: F,
-    ) -> Result<(), Box<dyn Error>> {
+    ) -> Result<()> {
         self.download(from_url, filename, dl_progress_cb).await?;
+
+        println!("Running `{filename}`, hang on...");
 
         let status = Command::new("sh")
             .arg("-c")
             .arg(format!("source {}", filename))
             .spawn()
-            .unwrap()
+            .or(Err(DownloadError::CannotRun("sh".to_string())))?
             .wait()?;
-
-        fs::remove_file(filename)?;
-
         if !status.success() {
-            return Err("source failed".into());
+            return Err(DownloadError::CannotRun(filename.to_string()));
         }
+
+        println!("Done running `{filename}`, deleting the file.");
+        fs::remove_file(filename)?;
 
         Ok(())
     }
