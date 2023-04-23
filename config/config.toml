@@ -1,3 +1,49 @@
+# brew tap
+brew.taps = [
+    "homebrew/bundle",
+    "homebrew/cask",
+    "homebrew/cask-versions",
+    "homebrew/core",
+    "homebrew/cask-fonts",
+]
+# brew install
+brew.formulae = [
+    "bat",
+    "clang-format",
+    "diff-so-fancy",
+    "fd",
+    "fish",
+    "fnm",
+    "gh",
+    "git",
+    "neovim",
+    "pyenv",
+    "rbenv",
+    "ripgrep",
+    "ruby-build",
+    "rust-analyzer",
+    "swiftformat",
+    "swiftlint",
+    "tree-sitter",
+    "watchman",
+]
+# brew install --cask
+brew.casks = [
+    # "android-studio",
+    # "discord",
+    "figma",
+    "firefox",
+    "font-jetbrains-mono",
+    "iterm2",
+    "mullvadvpn",
+    # "postman",
+    "slack",
+    "spotify",
+    "visual-studio-code",
+    "vlc",
+    "zulu11",
+]
+
 copy = [
     { from = "config/dotfiles/git/.gitconfig", to = "~/" },
     { from = "config/dotfiles/rg/ripgreprc", to = "~/.config/ripgrep/" },

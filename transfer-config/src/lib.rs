@@ -19,10 +19,18 @@ pub fn parse_config(file_path: &str) -> Result<Config, ConfigError> {
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
+    pub brew: Brew,
     pub copy: Vec<ToCopy>,
     pub download: Vec<ToDownload>,
     pub run: Vec<ToRun>,
     pub reminders: Vec<ToRemind>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Brew {
+    pub taps: Vec<String>,
+    pub formulae: Vec<String>,
+    pub casks: Vec<String>,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Eq)]
@@ -58,6 +66,18 @@ mod tests {
     #[test]
     fn parse_config_works() {
         let config: Config = parse_config("config_test.toml").unwrap();
+
+        assert_eq!(config.brew.taps, vec!["homebrew/bundle"]);
+        assert_eq!(config.brew.formulae, vec!["bat", "git"]);
+
+        // Verify that commented items are not included in the config object
+        // ```
+        // brew.casks = [
+        //   # "postman",
+        //   "slack",
+        // ]
+        // ```
+        assert_eq!(config.brew.casks, vec!["slack"]);
 
         assert_eq!(
             config.copy,

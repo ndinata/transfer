@@ -1,3 +1,10 @@
+brew.taps = ["homebrew/bundle"]
+brew.formulae = ["bat", "git"]
+brew.casks = [
+    # "postman",
+    "slack",
+]
+
 copy = [
     { from = "dotfiles/git/.gitconfig", to = "~/Desktop/transfer-test/dotfiles/" },
 ]
