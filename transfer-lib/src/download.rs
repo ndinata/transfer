@@ -1,13 +1,11 @@
-use std::cmp;
 use std::fs::{self, File};
 use std::io::Write;
 use std::process::Command;
 
-use futures_util::StreamExt;
-use reqwest::{Client, Url};
+use curl::easy::Easy;
 
-/// `DownloadProgress = (downloaded, Option<total_size>)`
-type DownloadProgress = (u64, Option<u64>);
+/// `DownloadProgress = (downloaded, total_size)`
+type DownloadProgress = (u64, u64);
 
 type Result<T, E = DownloadError> = std::result::Result<T, E>;
 
@@ -20,75 +18,95 @@ pub enum DownloadError {
     CannotRun(String),
 
     #[error(transparent)]
-    RequestError(#[from] reqwest::Error),
+    CurlError(#[from] curl::Error),
 
     #[error(transparent)]
     IoError(#[from] std::io::Error),
 }
 
 pub struct Downloader {
-    client: Client,
-}
-
-impl Default for Downloader {
-    fn default() -> Self {
-        Self::new()
-    }
+    client: Easy,
 }
 
 impl Downloader {
-    pub fn new() -> Downloader {
-        Downloader {
-            client: Client::new(),
-        }
+    pub fn init() -> Result<Downloader> {
+        let mut client = Easy::new();
+        client.fail_on_error(true)?;
+        client.follow_location(true)?;
+        client.progress(true)?;
+
+        Ok(Downloader { client })
     }
 
-    pub async fn download<F: Fn(DownloadProgress)>(
-        &self,
+    pub fn download<F: Fn(DownloadProgress)>(
+        &mut self,
         from_url: &str,
         to_path: &str,
         dl_progress_cb: F,
-    ) -> Result<File> {
-        // reference:
-        // https://gist.github.com/giuliano-oliveira/4d11d6b3bb003dba3a1b53f43d81b30d
+    ) -> Result<()> {
+        self.client.url(from_url)?;
 
-        let res = self.client.get(from_url).send().await?;
-        let total_size = res.content_length();
+        let mut tranfer = self.client.transfer();
+        tranfer.progress_function(|total_dl, downloaded, _, _| {
+            let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
+            if total_dl > 0 && downloaded < total_dl {
+                let percentage = downloaded * 100 / total_dl;
+                println!("Downloaded: {}% ({}/{}B)", percentage, downloaded, total_dl);
+                dl_progress_cb((downloaded, total_dl));
+            }
 
-        if let Some(total) = total_size {
-            println!("Download starting, total size is {total}B.");
-        } else {
-            println!("Download starting.");
-        }
+            true
+        })?;
 
         let mut file = File::create(to_path)?;
-        let mut downloaded = 0;
-        let mut stream = res.bytes_stream();
+        tranfer.write_function(move |data| {
+            file.write_all(data).unwrap();
+            Ok(data.len())
+        })?;
 
-        while let Some(item) = stream.next().await {
-            let chunk = item?;
-            file.write_all(&chunk)?;
+        println!("Download starting for {from_url}.");
+        tranfer.perform()?;
 
-            let new = match total_size {
-                Some(total) => cmp::min(downloaded + (chunk.len() as u64), total),
-                None => downloaded + (chunk.len() as u64),
-            };
-            downloaded = new;
+        // let res = self.client.get(from_url).send().await?;
+        // let total_size = res.content_length();
 
-            dl_progress_cb((downloaded, total_size));
-        }
+        // if let Some(total) = total_size {
+        //     println!("Download starting, total size is {total}B.");
+        // } else {
+        //     println!("Download starting.");
+        // }
+
+        // let mut downloaded = 0;
+        // let mut stream = res.bytes_stream();
+
+        // while let Some(item) = stream.next().await {
+        //     let chunk = item?;
+        //     file.write_all(&chunk)?;
+
+        //     let new = match total_size {
+        //         Some(total) => cmp::min(downloaded + (chunk.len() as u64), total),
+        //         None => downloaded + (chunk.len() as u64),
+        //     };
+        //     downloaded = new;
+
+        //     dl_progress_cb((downloaded, total_size));
+        // }
 
         println!("Downloaded `{}` to `{}`.", from_url, to_path);
-        Ok(file)
+        Ok(())
     }
 
-    pub async fn download_and_source<F: Fn(DownloadProgress)>(
-        &self,
+    pub fn download_and_source<F: Fn(DownloadProgress)>(
+        &mut self,
         from_url: &str,
         dl_progress_cb: F,
     ) -> Result<()> {
-        let filename = self.get_filename_from_url(from_url)?;
-        self.download(from_url, &filename, dl_progress_cb).await?;
+        let filename = from_url
+            .split('/')
+            .last()
+            .ok_or(DownloadError::InvalidUrl(from_url.to_string()))?;
+
+        self.download(from_url, filename, dl_progress_cb)?;
 
         println!("Running `{filename}`, hang on...");
 
@@ -99,7 +117,7 @@ impl Downloader {
             .or(Err(DownloadError::CannotRun("sh".to_string())))?
             .wait()?;
         if !status.success() {
-            return Err(DownloadError::CannotRun(filename));
+            return Err(DownloadError::CannotRun(filename.to_string()));
         }
 
         println!("Done running `{filename}`, deleting the file.");
@@ -108,15 +126,14 @@ impl Downloader {
         Ok(())
     }
 
-    fn get_filename_from_url(&self, url: &str) -> Result<String> {
-        let url = Url::parse(url).or(Err(DownloadError::InvalidUrl(url.to_string())))?;
+    // fn get_filename_from_url(&self, url: &str) -> Result<String> {
+    //     let url = Url::parse(url).or(Err(DownloadError::InvalidUrl(url.to_string())))?;
+    //     let filename = url
+    //         .path_segments()
+    //         .ok_or(DownloadError::InvalidUrl(url.to_string()))?
+    //         .last()
+    //         .unwrap();
 
-        let filename = url
-            .path_segments()
-            .ok_or(DownloadError::InvalidUrl(url.to_string()))?
-            .last()
-            .unwrap();
-
-        Ok(filename.to_owned())
-    }
+    //     Ok(filename.to_owned())
+    // }
 }

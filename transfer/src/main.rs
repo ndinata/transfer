@@ -31,41 +31,37 @@ async fn main() {
     eprintln!("Done copying files.");
     eprintln!();
 
-    eprintln!("Starting file downloads...");
-    let downloader = Downloader::new();
-    for to_download in config.download {
-        let log_download_progress = |(downloaded, total_size)| match total_size {
-            Some(total) => {
+    let downloader = Downloader::init();
+    if let Err(e) = downloader {
+        eprintln!("DownloaderError: {e}, skipping all downloads.",);
+    } else {
+        eprintln!("Starting file downloads...");
+        let mut downloader = downloader.unwrap();
+        for to_download in config.download {
+            let log_download_progress = |(downloaded, total)| {
                 let percentage = downloaded * 100 / total;
                 eprintln!("Downloaded {}% ({}/{}B)", percentage, downloaded, total);
-            }
-            None => {
-                eprintln!("Downloaded {}B", downloaded);
-            }
-        };
+            };
 
-        eprintln!("Downloading {}:", to_download.from);
-        if to_download.to.is_some() {
-            if let Err(e) = downloader
-                .download(
+            eprintln!("Downloading {}:", to_download.from);
+            if to_download.to.is_some() {
+                if let Err(e) = downloader.download(
                     &to_download.from,
                     &to_download.to.unwrap(),
                     log_download_progress,
-                )
-                .await
-            {
-                eprintln!("DownloadError('{0}'): {e}", to_download.from);
-            }
-        } else if to_download.run.is_some() {
-            if let Err(e) = downloader
-                .download_and_source(&to_download.from, log_download_progress)
-                .await
-            {
-                eprintln!("DownloadError('{0}'): {e}", to_download.from);
+                ) {
+                    eprintln!("DownloadError('{0}'): {e}", to_download.from);
+                }
+            } else if to_download.run.is_some() {
+                if let Err(e) =
+                    downloader.download_and_source(&to_download.from, log_download_progress)
+                {
+                    eprintln!("DownloadError('{0}'): {e}", to_download.from);
+                }
             }
         }
+        eprintln!("Done downloading files.");
     }
-    eprintln!("Done downloading files.");
     eprintln!();
 
     eprintln!("Running scripts...");

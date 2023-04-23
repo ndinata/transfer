@@ -8,7 +8,7 @@ repository.workspace = true
 version.workspace = true
 
 [dependencies]
+curl = "0.4"
 futures-util = "0.3"
-reqwest = { version = "0.11", features = ["stream"] }
 thiserror = "1"
 tokio = { version = "1", features = ["full"] }
