@@ -9,6 +9,5 @@ version.workspace = true
 
 [dependencies]
 curl = "0.4"
-futures-util = "0.3"
 thiserror = "1"
 xshell = "0.2"
