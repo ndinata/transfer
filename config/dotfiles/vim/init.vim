@@ -2,59 +2,14 @@
 " -------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
-" General support:
-" - https://old.reddit.com/r/neovim/
-" - https://old.reddit.com/r/neovim/comments/qbh63a/how_do_you_personally_do_x_or_y_in_neovim/
-
 " Sample configs:
-" - https://github.com/n3wborn/nvim
-" - https://github.com/mrnugget/vimconfig
-" - https://github.com/lucax88x/configs/tree/master/dotfiles/.config/nvim
-" - https://github.com/JoosepAlviste/dotfiles/tree/master/config/nvim
-" - https://github.com/shaunsingh/nix-darwin-dotfiles
-" - https://github.com/VapourNvim/VapourNvim
-" - https://github.com/NvChad/NvChad
-
-" Vimscript -> Lua transition:
-" - https://old.reddit.com/r/neovim/comments/io2snh/neovim_lua_config_example/
-" - https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
-" - https://github.com/nanotee/nvim-lua-guide/
-
-" Core:
-" - package manager (https://github.com/wbthomason/packer.nvim)
-
-" - lsp — goto, docs, autocompletion
-" + https://github.com/neovim/nvim-lspconfig
-" + https://github.com/glepnir/lspsaga.nvim (lsp plugin)
-" + https://github.com/stevearc/aerial.nvim (symbol skimming + navigation)
-
-" - filetree:
-" + https://github.com/kyazdani42/nvim-tree.lua
-
-" - git indicator — changed lines, active branch, add specific hunks
-" - git blame — https://github.com/APZelos/blamer.nvim
-
-" https://github.com/folke/trouble.nvim — diagnostic, search etc. list
-" https://github.com/lukas-reineke/indent-blankline.nvim
-" https://github.com/norcalli/nvim-colorizer.lua
-" https://github.com/akinsho/toggleterm.nvim
-" https://github.com/pwntester/octo.nvim — github integration
-
-" Lang/framework specific:
-" - Vue + TS — list of plugins
-"   - https://old.reddit.com/r/neovim/comments/o2knh8/vue_typescript_and_native_lsp/
-" - JS — JSX + Flow + Prettier + ESLint + import-sort
-" - TS — TSX + Prettier + ESLint + import-sort + utils:
-"   - https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
-" - HTML — Emmet (tag bracket autocomplete) + Prettier
-" - CSS — autocomplete + lint + Prettier
-" - JSON, MD — Prettier
-"   - https://github.com/mattn/emmet-vim
-" - Python — pyright + flake8 + black + isort + virtualenv + mypy (optional)
-"   - https://github.com/jmcantrell/vim-virtualenv
-" - Rust — rust-analyzer + rustfmt + Clippy:
-"   - https://github.com/simrat39/rust-tools.nvim
-" - Swift — swiftlint + swiftformat
+" https://github.com/n3wborn/nvim
+" https://github.com/mrnugget/vimconfig
+" https://github.com/lucax88x/configs/tree/master/dotfiles/.config/nvim
+" https://github.com/JoosepAlviste/dotfiles/tree/master/config/nvim
+" https://github.com/shaunsingh/nix-darwin-dotfiles
+" https://github.com/VapourNvim/VapourNvim
+" https://github.com/NvChad/NvChad
 
 " General
 Plug 'jiangmiao/auto-pairs'
@@ -71,45 +26,30 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'b3nj5m1n/kommentary'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'iamcco/markdown-preview.nvim'
+" https://github.com/wbthomason/packer.nvim
+" https://github.com/neovim/nvim-lspconfig
+" https://github.com/glepnir/lspsaga.nvim (lsp plugin)
+" https://github.com/stevearc/aerial.nvim (symbol skimming + navigation)
+" https://github.com/kyazdani42/nvim-tree.lua
+" https://github.com/APZelos/blamer.nvim
+" https://github.com/folke/trouble.nvim — diagnostic, search etc. list
+" https://github.com/lukas-reineke/indent-blankline.nvim
+" https://github.com/norcalli/nvim-colorizer.lua
+" https://github.com/akinsho/toggleterm.nvim
+" https://github.com/pwntester/octo.nvim — github integration
+" https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+" https://github.com/mattn/emmet-vim
+" https://github.com/simrat39/rust-tools.nvim
 
+" Plug 'wellle/targets.vim'
 " Plug ctrlpvim/ctrlp.vim
 " Plug 'wincent/command-t'
-" Plug 'tpope/vim-sleuth'
-" Plug 'wellle/targets.vim'
-" Plug 'ervandew/supertab'
-" Plug 'rstacruz/vim-closer'
-" Plug 'tpope/vim-endwise'
-" Plug 'Raimondi/delimitMate'
-" Plug 'andymass/vim-matchup'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'bigfish/vim-js-context-coloring'
 " Plug 'neoclide/vim-jsx-improve'
-" Plug 'lifepillar/vim-mucomplete'
-" Plug 'iamcco/markdown-preview.nvim'
-" Plug 'vimwiki/vimwiki'
-" Plug 'nvie/vim-flake8'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tpope/vim-abolish'
-" Plug 'tpope/vim-eunuch'
-" Plug 'docunext/closetag.vim'
 " Plug 'easymotion/vim-easymotion'
-" Plug 'rking/ag.vim'
-" Plug 'rizzatti/funcoo.vim'
-" Plug 'rizzatti/dash.vim'
-" Plug 'mattn/webapi-vim'
-" Plug 'mattn/gist-vim'
 " Plug 'honza/vim-snippets'
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'dhruvasagar/vim-zoom'
 " Plug 'mechatroner/rainbow_csv'
-" Plug 'kshenoy/vim-signature'
-" Plug 'rhysd/vim-grammarous'
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " Plug 'hail2u/vim-css3-syntax'
-" Plug 'meain/vim-package-info', {'do': 'npm install' }
-" Plug 'A/vim-import-cost', { 'do': 'npm install' }
-" Plug 'Shougo/deoplete.nvim'
 
 " Colour schemes
 Plug 'joshdick/onedark.vim'
