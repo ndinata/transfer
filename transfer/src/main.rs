@@ -1,5 +1,5 @@
 use std::process;
-use transfer_lib::{self, Downloader};
+use transfer_lib::{self, Brew, Downloader};
 
 #[tokio::main]
 async fn main() {
@@ -11,14 +11,48 @@ async fn main() {
     let config = match transfer_config::parse_config(CONFIG_FILE_PATH) {
         Ok(c) => c,
         Err(e) => {
-            eprintln!("ConfigError('{CONFIG_FILE_PATH}'): {e}");
+            eprintln!("ConfigError('{CONFIG_FILE_PATH}'): {e}, exiting.");
             process::exit(1);
         }
     };
-
     eprintln!("Config file parsed successfully.");
     eprintln!();
 
+    eprintln!("Installing Homebrew...");
+    let brew = match Brew::init().and_then(|brew| {
+        brew.install_self()?;
+        Ok(brew)
+    }) {
+        Ok(brew) => brew,
+        Err(e) => {
+            eprintln!("BrewError: {e}, exiting.");
+            process::exit(1);
+        }
+    };
+    eprintln!("Done installing Homebrew.");
+    eprintln!();
+
+    let brew_install_progress_cb = |(curr, total)| {
+        eprintln!("{}/{}", curr, total);
+    };
+
+    eprintln!("Installing Brew taps...");
+    if let Err(e) = brew
+        .install_taps(config.brew.taps, brew_install_progress_cb)
+        .and_then(|_| {
+            eprintln!("Installing Brew formulae...");
+            brew.install_formulae(config.brew.formulae, brew_install_progress_cb)
+        })
+        .and_then(|_| {
+            eprintln!("Installing Brew casks...");
+            brew.install_casks(config.brew.casks, brew_install_progress_cb)
+        })
+    {
+        eprintln!("BrewError: {e}, exiting.");
+        process::exit(1);
+    }
+
+    eprintln!();
     eprintln!("Copying files...");
     for to_copy in config.copy {
         if let Err(e) = transfer_lib::copy_file(&to_copy.from, &to_copy.to) {
