@@ -12,3 +12,4 @@ curl = "0.4"
 futures-util = "0.3"
 thiserror = "1"
 tokio = { version = "1", features = ["full"] }
+xshell = "0.2"
