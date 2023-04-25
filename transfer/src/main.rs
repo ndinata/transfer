@@ -1,8 +1,7 @@
 use std::process;
 use transfer_lib::{self, Brew, Downloader};
 
-#[tokio::main]
-async fn main() {
+fn main() {
     println!("Hello, world!");
 
     const CONFIG_FILE_PATH: &str = "config/config.toml";
