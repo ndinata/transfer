@@ -51,7 +51,7 @@ impl Downloader {
             let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
             if total_dl > 0 && downloaded < total_dl {
                 let percentage = downloaded * 100 / total_dl;
-                println!("Downloaded: {}% ({}/{}B)", percentage, downloaded, total_dl);
+                eprintln!("Downloaded: {}% ({}/{}B)", percentage, downloaded, total_dl);
                 dl_progress_cb((downloaded, total_dl));
             }
 
@@ -64,8 +64,8 @@ impl Downloader {
             Ok(data.len())
         })?;
 
-        println!();
-        println!("Downloading `{from_url}`...");
+        eprintln!();
+        eprintln!("Downloading `{from_url}`...");
         tranfer.perform()?;
 
         // let res = self.client.get(from_url).send().await?;
@@ -93,7 +93,7 @@ impl Downloader {
         //     dl_progress_cb((downloaded, total_size));
         // }
 
-        println!("Downloaded `{}` to `{}`.", from_url, to_path);
+        eprintln!("Downloaded `{}` to `{}`.", from_url, to_path);
         Ok(())
     }
 
@@ -109,7 +109,7 @@ impl Downloader {
 
         self.download(from_url, filename, dl_progress_cb)?;
 
-        println!("Running `{filename}`...");
+        eprintln!("Running `{filename}`...");
 
         let status = Command::new("sh")
             .arg("-c")
@@ -121,7 +121,7 @@ impl Downloader {
             return Err(DownloadError::CannotRun(filename.to_string()));
         }
 
-        println!("Done running `{filename}`, deleting the file.");
+        eprintln!("Done running `{filename}`, deleting the file.");
         fs::remove_file(filename)?;
 
         Ok(())
