@@ -7,7 +7,7 @@ async fn main() {
 
     const CONFIG_FILE_PATH: &str = "config/config.toml";
 
-    eprintln!("Parsing config file at {}.", CONFIG_FILE_PATH);
+    eprintln!("Parsing config file at `{}`...", CONFIG_FILE_PATH);
     let config = match transfer_config::parse_config(CONFIG_FILE_PATH) {
         Ok(c) => c,
         Err(e) => {
@@ -43,7 +43,6 @@ async fn main() {
                 eprintln!("Downloaded {}% ({}/{}B)", percentage, downloaded, total);
             };
 
-            eprintln!("Downloading {}:", to_download.from);
             if to_download.to.is_some() {
                 if let Err(e) = downloader.download(
                     &to_download.from,
@@ -81,7 +80,7 @@ async fn main() {
     println!("Don't forget to also do these things!");
     for (i, to_remind) in config.reminders.iter().enumerate() {
         println!("{}. {}", i + 1, to_remind.instruction);
-        println!("{}", to_remind.command);
+        println!("$ {}", to_remind.command);
         println!();
     }
 

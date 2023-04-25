@@ -64,7 +64,8 @@ impl Downloader {
             Ok(data.len())
         })?;
 
-        println!("Download starting for {from_url}.");
+        println!();
+        println!("Downloading `{from_url}`...");
         tranfer.perform()?;
 
         // let res = self.client.get(from_url).send().await?;
@@ -108,7 +109,7 @@ impl Downloader {
 
         self.download(from_url, filename, dl_progress_cb)?;
 
-        println!("Running `{filename}`, hang on...");
+        println!("Running `{filename}`...");
 
         let status = Command::new("sh")
             .arg("-c")
