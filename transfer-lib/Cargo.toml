@@ -9,5 +9,7 @@ version.workspace = true
 
 [dependencies]
 curl = "0.4"
+serde = { version = "1.0", features = ["derive"] }
 thiserror = "1"
+toml = "0.7"
 xshell = "0.2"
