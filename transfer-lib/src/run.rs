@@ -1,6 +1,8 @@
 use std::path::Path;
 use std::process::Command;
 
+use serde::Deserialize;
+
 #[derive(thiserror::Error, Debug)]
 pub enum RunError {
     #[error("`{0}` is an invalid file path")]
@@ -13,18 +15,27 @@ pub enum RunError {
     IoError(#[from] std::io::Error),
 }
 
-pub fn run_script(command: &str, args: Vec<&str>, script_path: &str) -> Result<(), RunError> {
-    if !Path::new(script_path).is_file() {
-        return Err(RunError::InvalidFile(script_path.to_string()));
-    }
+#[derive(Debug, Deserialize)]
+pub struct Runnable {
+    pub script_path: String,
+    pub command: String,
+    pub title: String,
+}
 
-    let status = Command::new(command)
-        .args(args)
-        .spawn()
-        .or(Err(RunError::FailedRun(command.to_string())))?
-        .wait()?;
-    if !status.success() {
-        return Err(RunError::FailedRun(command.to_string()));
+impl Runnable {
+    pub fn run_script(&self) -> Result<(), RunError> {
+        if !Path::new(&self.script_path).is_file() {
+            return Err(RunError::InvalidFile(self.script_path.to_string()));
+        }
+
+        let status = Command::new(&self.command)
+            .arg(&self.script_path)
+            .spawn()
+            .or(Err(RunError::FailedRun(self.command.to_string())))?
+            .wait()?;
+        if !status.success() {
+            return Err(RunError::FailedRun(self.command.to_string()));
+        }
+        Ok(())
     }
-    Ok(())
 }

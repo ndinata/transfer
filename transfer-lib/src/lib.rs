@@ -1,9 +1,13 @@
 mod brew;
+mod config;
 mod copy;
 mod download;
+mod remind;
 mod run;
 
 pub use self::brew::Brew;
-pub use self::copy::copy_file;
-pub use self::download::Downloader;
-pub use self::run::run_script;
+pub use self::config::parse_config;
+pub use self::copy::Copyable;
+pub use self::download::Downloadable;
+pub use self::remind::Remindable;
+pub use self::run::Runnable;

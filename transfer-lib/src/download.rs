@@ -3,6 +3,7 @@ use std::io::Write;
 use std::process::Command;
 
 use curl::easy::Easy;
+use serde::Deserialize;
 
 /// `DownloadProgress = (downloaded, total_size)`
 type DownloadProgress = (u64, u64);
@@ -17,6 +18,9 @@ pub enum DownloadError {
     #[error("`{0}` failed to run successfully")]
     CannotRun(String),
 
+    #[error("either `to` or `run` has to be defined in `download`")]
+    InvalidItem,
+
     #[error(transparent)]
     CurlError(#[from] curl::Error),
 
@@ -24,93 +28,87 @@ pub enum DownloadError {
     IoError(#[from] std::io::Error),
 }
 
-pub struct Downloader {
+#[derive(Debug, Deserialize)]
+pub struct Downloadable {
+    #[serde(skip, default = "init_client")]
     client: Easy,
+
+    pub from: String,
+    pub to: Option<String>,
+    pub run: Option<bool>,
 }
 
-impl Downloader {
-    pub fn init() -> Result<Downloader> {
-        let mut client = Easy::new();
-        client.fail_on_error(true)?;
-        client.follow_location(true)?;
-        client.progress(true)?;
+fn init_client() -> Easy {
+    let mut client = Easy::new();
+    if let Err(e) = client
+        .fail_on_error(true)
+        .and_then(|_| client.follow_location(true))
+        .and_then(|_| client.progress(true))
+    {
+        panic!("{e}");
+    }
+    client
+}
 
-        Ok(Downloader { client })
+impl Downloadable {
+    pub fn download<F: Fn(DownloadProgress)>(&mut self, dl_progress_cb: F) -> Result<()> {
+        // Either `to` or `run: true` has to be set
+        if self.to.is_none() && self.run.is_none() && !self.run.unwrap() {
+            return Err(DownloadError::InvalidItem);
+        }
+
+        if self.to.is_some() {
+            self.download_to_file(&self.to.clone().unwrap(), dl_progress_cb)?;
+        } else {
+            self.download_and_source(dl_progress_cb)?;
+        }
+        Ok(())
     }
 
-    pub fn download<F: Fn(DownloadProgress)>(
+    fn download_to_file<F: Fn(DownloadProgress)>(
         &mut self,
-        from_url: &str,
-        to_path: &str,
-        dl_progress_cb: F,
+        to: &str,
+        progress_cb: F,
     ) -> Result<()> {
-        self.client.url(from_url)?;
+        self.client.url(&self.from)?;
 
-        let mut tranfer = self.client.transfer();
-        tranfer.progress_function(|total_dl, downloaded, _, _| {
+        let mut transfer = self.client.transfer();
+        transfer.progress_function(|total_dl, downloaded, _, _| {
             let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
             if total_dl > 0 && downloaded < total_dl {
                 let percentage = downloaded * 100 / total_dl;
                 eprintln!("Downloaded: {}% ({}/{}B)", percentage, downloaded, total_dl);
-                dl_progress_cb((downloaded, total_dl));
+                progress_cb((downloaded, total_dl));
             }
-
             true
         })?;
 
-        let mut file = File::create(to_path)?;
-        tranfer.write_function(move |data| {
+        let mut file = File::create(to)?;
+        transfer.write_function(move |data| {
             file.write_all(data).unwrap();
             Ok(data.len())
         })?;
 
         eprintln!();
-        eprintln!("Downloading `{from_url}`...");
-        tranfer.perform()?;
-
-        // let res = self.client.get(from_url).send().await?;
-        // let total_size = res.content_length();
-
-        // if let Some(total) = total_size {
-        //     println!("Download starting, total size is {total}B.");
-        // } else {
-        //     println!("Download starting.");
-        // }
-
-        // let mut downloaded = 0;
-        // let mut stream = res.bytes_stream();
-
-        // while let Some(item) = stream.next().await {
-        //     let chunk = item?;
-        //     file.write_all(&chunk)?;
-
-        //     let new = match total_size {
-        //         Some(total) => cmp::min(downloaded + (chunk.len() as u64), total),
-        //         None => downloaded + (chunk.len() as u64),
-        //     };
-        //     downloaded = new;
-
-        //     dl_progress_cb((downloaded, total_size));
-        // }
-
-        eprintln!("Downloaded `{}` to `{}`.", from_url, to_path);
+        eprintln!("Downloading `{}`...", self.from);
+        transfer.perform()?;
+        eprintln!("Downloaded `{}` to `{}`.", self.from, to);
         Ok(())
     }
 
     pub fn download_and_source<F: Fn(DownloadProgress)>(
         &mut self,
-        from_url: &str,
         dl_progress_cb: F,
     ) -> Result<()> {
-        let filename = from_url
+        let from = self.from.clone();
+        let filename = from
             .split('/')
             .last()
-            .ok_or(DownloadError::InvalidUrl(from_url.to_string()))?;
+            .ok_or(DownloadError::InvalidUrl(from.to_string()))?;
 
-        self.download(from_url, filename, dl_progress_cb)?;
+        self.download_to_file(filename, dl_progress_cb)?;
 
         eprintln!("Running `{filename}`...");
-
         let status = Command::new("sh")
             .arg("-c")
             .arg(format!("source {}", filename))
@@ -123,7 +121,6 @@ impl Downloader {
 
         eprintln!("Done running `{filename}`, deleting the file.");
         fs::remove_file(filename)?;
-
         Ok(())
     }
 
