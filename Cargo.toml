@@ -1,5 +1,5 @@
 [workspace]
-members = ["transfer", "transfer-lib", "transfer-config"]
+members = ["transfer", "transfer-lib"]
 
 [workspace.package]
 authors = ["Nico Dinata <nicodnt@icloud.com>"]

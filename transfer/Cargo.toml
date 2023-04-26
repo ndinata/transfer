@@ -9,5 +9,4 @@ repository.workspace = true
 version.workspace = true
 
 [dependencies]
-transfer-config = { path = "../transfer-config" }
 transfer-lib = { path = "../transfer-lib" }
