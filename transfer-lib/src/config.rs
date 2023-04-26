@@ -45,3 +45,64 @@ pub struct Config {
     /// Reminders to be displayed.
     pub reminders: Vec<Remindable>,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn parse_config_works() {
+        let config: Config = parse_config("config_test.toml").unwrap();
+
+        assert_eq!(config.brew.taps, vec!["homebrew/bundle"]);
+        assert_eq!(config.brew.formulae, vec!["bat", "git"]);
+
+        // Verify that commented items are not included in the config object
+        // ```
+        // brew.casks = [
+        //   # "postman",
+        //   "slack",
+        // ]
+        // ```
+        assert_eq!(config.brew.casks, vec!["slack"]);
+
+        assert_eq!(
+            config.copy,
+            vec![Copyable {
+                from: "dotfiles/git/.gitconfig".to_string(),
+                to: "~/Desktop/transfer-test/dotfiles/".to_string()
+            }]
+        );
+        assert_eq!(
+            config.download,
+            vec![
+                Downloadable::new(
+                    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+                        .to_string(),
+                    Some("~/Desktop/transfer-test/downloads/plug.vim".to_string()),
+                    None,
+                ),
+                Downloadable::new(
+                    "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish".to_string(),
+                    None,
+                    Some(true)
+                )
+            ]
+        );
+        assert_eq!(
+            config.run,
+            vec![Runnable {
+                script_path: "scripts/macos.sh".to_string(),
+                command: "bash".to_string(),
+                title: "Configuring macOS".to_string()
+            }]
+        );
+        assert_eq!(
+            config.reminders,
+            vec![Remindable {
+                instruction: "Set fish as default shell".to_string(),
+                command: "chsh -s /opt/homebrew/bin/fish".to_string()
+            }]
+        )
+    }
+}

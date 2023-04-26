@@ -15,7 +15,7 @@ pub enum RunError {
     IoError(#[from] std::io::Error),
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq)]
 pub struct Runnable {
     pub script_path: String,
     pub command: String,

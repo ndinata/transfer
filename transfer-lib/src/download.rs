@@ -38,6 +38,12 @@ pub struct Downloadable {
     pub run: Option<bool>,
 }
 
+impl PartialEq for Downloadable {
+    fn eq(&self, other: &Self) -> bool {
+        self.from == other.from && self.to == other.to && self.run == other.run
+    }
+}
+
 fn init_client() -> Easy {
     let mut client = Easy::new();
     if let Err(e) = client
@@ -51,6 +57,17 @@ fn init_client() -> Easy {
 }
 
 impl Downloadable {
+    /// This function is not meant to be called directly (although it can be),
+    /// as it's intended mainly for setting up test cases.
+    pub fn new(from: String, to: Option<String>, run: Option<bool>) -> Self {
+        Downloadable {
+            client: init_client(),
+            from,
+            to,
+            run,
+        }
+    }
+
     pub fn download<F: Fn(DownloadProgress)>(&mut self, dl_progress_cb: F) -> Result<()> {
         // Either `to` or `run: true` has to be set
         if self.to.is_none() && self.run.is_none() && !self.run.unwrap() {

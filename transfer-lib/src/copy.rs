@@ -18,7 +18,7 @@ pub enum CopyError {
     IoError(#[from] std::io::Error),
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq)]
 pub struct Copyable {
     pub from: String,
     pub to: String,
