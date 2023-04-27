@@ -23,12 +23,6 @@ fn init_shell() -> Shell {
     Shell::new().expect("current dir should be able to be accessed")
 }
 
-pub enum BrewItem {
-    Taps,
-    Formulae,
-    Casks,
-}
-
 type Progress = (usize, usize);
 
 impl Brew {
@@ -43,12 +37,6 @@ impl Brew {
         cmd!(self.sh, "{BREW_ANALYTICS_OFF}").quiet().run()?;
 
         Ok(())
-    }
-
-    pub fn install_all<F: Fn(BrewItem, Progress)>(&self, progress_cb: F) -> Result<()> {
-        self.install_taps(|prog| progress_cb(BrewItem::Taps, prog))
-            .and_then(|_| self.install_formulae(|prog| progress_cb(BrewItem::Formulae, prog)))
-            .and_then(|_| self.install_casks(|prog| progress_cb(BrewItem::Casks, prog)))
     }
 
     pub fn install_taps<F: Fn(Progress)>(&self, progress_cb: F) -> Result<()> {
