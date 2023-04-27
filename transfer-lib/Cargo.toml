@@ -1,5 +1,6 @@
 [package]
 name = "transfer-lib"
+description = "helper library functions for the transfer program"
 authors.workspace = true
 edition.workspace = true
 keywords.workspace = true

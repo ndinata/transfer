@@ -3,7 +3,7 @@ members = ["transfer", "transfer-lib"]
 
 [workspace.package]
 authors = ["Nico Dinata <nicodnt@icloud.com>"]
-description = "command line tool to automate setting up a new dev environment"
+description = "command line tool to automate setting up my macOS dev environment"
 edition = "2021"
 keywords = ["cli", "macos", "dotfiles", "brewfile"]
 readme = "readme.md"
