@@ -15,6 +15,7 @@ pub enum RunError {
     IoError(#[from] std::io::Error),
 }
 
+/// The configuration schema for running scripts.
 #[derive(Debug, Deserialize, PartialEq)]
 pub struct Runnable {
     pub script_path: String,
@@ -23,6 +24,12 @@ pub struct Runnable {
 }
 
 impl Runnable {
+    /// Runs the script in `self.script_path` using `self.command`.
+    ///
+    /// # Errors
+    /// This function returns an error if:
+    /// - `self.script_path` isn't a valid file, or
+    /// - running the script is unsuccessful
     pub fn run_script(&self) -> Result<(), RunError> {
         if !Path::new(&self.script_path).is_file() {
             return Err(RunError::InvalidFile(self.script_path.to_string()));

@@ -28,6 +28,7 @@ pub enum DownloadError {
     IoError(#[from] std::io::Error),
 }
 
+/// The configuration schema for downloading files either to store or to run.
 #[derive(Debug, Deserialize)]
 pub struct Downloadable {
     #[serde(skip, default = "init_client")]
@@ -44,6 +45,14 @@ impl PartialEq for Downloadable {
     }
 }
 
+/// Initialises and returns the `curl` wrapper for downloading files. Also sets
+/// the following `curl` behaviours to `true`:
+/// - `fail_on_error`
+/// - `follow_location`
+/// - `progress`
+///
+/// # Panics
+/// This function panics if setting any of those behaviours fails.
 fn init_client() -> Easy {
     let mut client = Easy::new();
     if let Err(e) = client
@@ -58,7 +67,7 @@ fn init_client() -> Easy {
 
 impl Downloadable {
     /// This function is not meant to be called directly (although it can be),
-    /// as it's intended mainly for setting up test cases.
+    /// as it's intended only for setting up test cases.
     pub fn new(from: String, to: Option<String>, run: Option<bool>) -> Self {
         Downloadable {
             client: init_client(),
@@ -68,6 +77,15 @@ impl Downloadable {
         }
     }
 
+    /// If `self.to` is defined, downloads the file specified in the `self.from`
+    /// URL and store it in `self.to`. Otherwise, treats the file as a script
+    /// and run it after it's downloaded.
+    ///
+    /// # Errors
+    /// This function returns an error when both `self.to` and `self.run` are
+    /// undefined, as `self.from` is supposed to be either stored or run.
+    ///
+    /// All errors returned from the download process are also propagated.
     pub fn download<F: Fn(DownloadProgress)>(&mut self, dl_progress_cb: F) -> Result<()> {
         // Either `to` or `run: true` has to be set
         if self.to.is_none() && self.run.is_none() && !self.run.unwrap() {
@@ -113,10 +131,7 @@ impl Downloadable {
         Ok(())
     }
 
-    pub fn download_and_source<F: Fn(DownloadProgress)>(
-        &mut self,
-        dl_progress_cb: F,
-    ) -> Result<()> {
+    fn download_and_source<F: Fn(DownloadProgress)>(&mut self, dl_progress_cb: F) -> Result<()> {
         let from = self.from.clone();
         let filename = from
             .split('/')

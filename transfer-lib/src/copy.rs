@@ -18,6 +18,7 @@ pub enum CopyError {
     IoError(#[from] std::io::Error),
 }
 
+/// The configuration schema for copying files to the target machine.
 #[derive(Debug, Deserialize, PartialEq)]
 pub struct Copyable {
     pub from: String,
@@ -25,6 +26,12 @@ pub struct Copyable {
 }
 
 impl Copyable {
+    /// If `self.from` is a file, it is copied to the path defined in `self.to`.
+    /// Otherwise, `self.from` is treated as a dir, and every file in it is
+    /// copied to the path defined in `self.to`.
+    ///
+    /// # Errors
+    /// This function propagates any errors returned from the copying process.
     pub fn copy(&self) -> Result<()> {
         if Path::new(&self.from).is_file() {
             self.copy_single_file(&self.from, &self.to)?;

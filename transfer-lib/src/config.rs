@@ -13,10 +13,10 @@ pub enum ConfigError {
     InvalidFilePath(#[from] std::io::Error),
 }
 
-/// Tries to parse the TOML file at `file_path` and serialise it into the schema
+/// Parses the TOML file at `file_path` and serialises it into the schema
 /// defined in `Config`.
 ///
-/// ## Errors
+/// # Errors
 /// This function returns an error if:
 /// - the file at `file_path` cannot be read into a `String`, or
 /// - the file doesn't conform to the schema defined in `Config`
