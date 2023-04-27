@@ -4,6 +4,7 @@ description = "configuration schemas and functions for the `transfer` program"
 authors.workspace = true
 edition.workspace = true
 keywords.workspace = true
+license.workspace = true
 readme.workspace = true
 repository.workspace = true
 version.workspace = true

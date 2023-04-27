@@ -6,6 +6,7 @@ authors = ["Nico Dinata <nicodnt@icloud.com>"]
 description = "command line tool to automate setting up my macOS dev environment"
 edition = "2021"
 keywords = ["cli", "macos", "dotfiles", "brewfile"]
+license = "MIT"
 readme = "readme.md"
 repository = "https://github.com/nictar/transfer"
 version = "0.1.0"
