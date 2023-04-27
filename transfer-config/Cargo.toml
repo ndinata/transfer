@@ -1,6 +1,6 @@
 [package]
-name = "transfer-lib"
-description = "helper library functions for the transfer program"
+name = "transfer-config"
+description = "configuration schemas and functions for the `transfer` program"
 authors.workspace = true
 edition.workspace = true
 keywords.workspace = true

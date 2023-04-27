@@ -243,11 +243,11 @@ dependencies = [
 name = "transfer"
 version = "0.1.0"
 dependencies = [
- "transfer-lib",
+ "transfer-config",
 ]
 
 [[package]]
-name = "transfer-lib"
+name = "transfer-config"
 version = "0.1.0"
 dependencies = [
  "curl",

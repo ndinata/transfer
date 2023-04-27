@@ -6,7 +6,7 @@ fn main() {
     const CONFIG_FILE_PATH: &str = "config/config.toml";
 
     eprintln!("Parsing config file at `{}`...", CONFIG_FILE_PATH);
-    let config = match transfer_lib::parse_config(CONFIG_FILE_PATH) {
+    let config = match transfer_config::parse_config(CONFIG_FILE_PATH) {
         Ok(c) => c,
         Err(e) => {
             eprintln!("ConfigError('{CONFIG_FILE_PATH}'): {e}, exiting.");
