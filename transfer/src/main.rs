@@ -1,7 +1,17 @@
-use std::process;
+use std::process::{self, Command};
 
 fn main() {
     println!("Hello, world!");
+
+    let c = Command::new("xcode-select").arg("-p").output();
+
+    if c.is_err() || !c.unwrap().status.success() {
+        println!("You need to have installed Xcode's command-line tools.");
+        println!("You can do so by running this command:");
+        println!("  xcode-select --install");
+        println!("Please try again after you've done this!");
+        process::exit(0);
+    }
 
     const CONFIG_FILE_PATH: &str = "config/config.toml";
 

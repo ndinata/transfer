@@ -37,7 +37,7 @@ If you ran the program at its current state and your machine catches on fire, I 
 
 Goals:
 
-- [ ] Warn about `xcode-select --install` prerequisite
+- [x] Warn about `xcode-select --install` prerequisite
 - [ ] Improved logging (to files)
 - [ ] Prettier (T)UI
 
