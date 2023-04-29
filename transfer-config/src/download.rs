@@ -114,8 +114,6 @@ impl Downloadable {
         transfer.progress_function(|total_dl, downloaded, _, _| {
             let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
             if total_dl > 0 && downloaded < total_dl {
-                let percentage = downloaded * 100 / total_dl;
-                eprintln!("Downloaded: {}% ({}/{}B)", percentage, downloaded, total_dl);
                 progress_cb((downloaded, total_dl));
             }
             true
@@ -128,9 +126,9 @@ impl Downloadable {
         })?;
 
         eprintln!();
-        eprintln!("Downloading `{}`...", self.from);
+        eprintln!("Downloading to `{}`...", to);
         transfer.perform()?;
-        eprintln!("Downloaded `{}` to `{}`.", self.from, to);
+        eprintln!("Done!");
         Ok(())
     }
 
