@@ -1,4 +1,7 @@
 use std::process;
+use std::time::Duration;
+
+use indicatif::{ProgressBar, ProgressStyle};
 
 use transfer_config::Config;
 
@@ -34,34 +37,44 @@ pub fn run(config_file_path: &str) {
 }
 
 fn handle_brew(config: &Config) {
-    eprintln!("Installing Homebrew...");
+    let spinner = get_timed_spinner();
+
     let brew = &config.brew;
+    spinner.set_message("Installing Homebrew...");
     if let Err(e) = brew.install_self() {
-        eprintln!("BrewError: {e}, exiting.");
+        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
         process::exit(1);
     };
-    eprintln!("Done installing Homebrew.");
+    spinner.finish_with_message("Done installing Homebrew.");
     eprintln!();
 
-    let brew_install_progress_cb = |(curr, total)| {
+    let progress_cb = |(curr, total)| {
         eprintln!("{}/{}", curr, total);
     };
 
-    eprintln!("Installing Brew taps...");
-    if let Err(e) = brew
-        .install_taps(brew_install_progress_cb)
-        .and_then(|_| {
-            eprintln!("Installing Brew formulae...");
-            brew.install_formulae(brew_install_progress_cb)
-        })
-        .and_then(|_| {
-            eprintln!("Installing Brew casks...");
-            brew.install_casks(brew_install_progress_cb)
-        })
-    {
-        eprintln!("BrewError: {e}, exiting.");
+    let spinner = get_timed_spinner();
+    spinner.set_message("Installing Brew taps...");
+    if let Err(e) = brew.install_taps(progress_cb) {
+        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
         process::exit(1);
     }
+    spinner.finish_with_message("Done installing Brew taps.");
+
+    let spinner = get_timed_spinner();
+    spinner.set_message("Installing Brew formulae...");
+    if let Err(e) = brew.install_formulae(progress_cb) {
+        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
+        process::exit(1);
+    }
+    spinner.finish_with_message("Done installing Brew formulae.");
+
+    let spinner = get_timed_spinner();
+    spinner.set_message("Installing Brew casks...");
+    if let Err(e) = brew.install_casks(progress_cb) {
+        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
+        process::exit(1);
+    }
+    spinner.finish_with_message("Done installing Brew casks.");
 }
 
 fn handle_copies(config: &Config) {
@@ -93,10 +106,25 @@ fn handle_downloads(config: &mut Config) {
 fn handle_scripts(config: &Config) {
     eprintln!("Running scripts...");
     for runnable in config.run.iter() {
-        eprintln!("{}...", runnable.title);
+        let s = get_timed_spinner();
+        s.set_message(format!("{}...", runnable.title));
+
         if let Err(e) = runnable.run_script() {
-            eprintln!("RunScriptError('{0}'): {e}", runnable.script_path);
+            s.abandon_with_message(format!("RunScriptError('{0}'): {e}", runnable.script_path));
+        } else {
+            s.finish_with_message(format!("{} Done!", s.message()));
         }
     }
     eprintln!("Done running scripts.");
+}
+
+fn get_timed_spinner() -> ProgressBar {
+    let spinner = ProgressBar::new_spinner();
+    spinner.enable_steady_tick(Duration::from_millis(120));
+    spinner.set_style(
+        ProgressStyle::with_template("{spinner:.blue} {msg} ({elapsed})")
+            .unwrap()
+            .tick_strings(&["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"]),
+    );
+    spinner
 }
