@@ -1,4 +1,3 @@
-use std::env;
 use std::fs;
 use std::path::Path;
 
@@ -75,15 +74,10 @@ impl Copyable {
     }
 
     fn create_dir(&self, dir: &str) -> Result<String> {
-        let dir = self.macos_replace_home_dir(dir)?;
+        let dir = crate::macos_replace_home_dir(dir)?;
         if !Path::new(&dir).exists() {
             fs::create_dir_all(&dir)?;
         }
         Ok(dir)
-    }
-
-    fn macos_replace_home_dir(&self, dir: &str) -> Result<String> {
-        let home_dir = env::var("HOME")?;
-        Ok(dir.replace('~', &home_dir))
     }
 }

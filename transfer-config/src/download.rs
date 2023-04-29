@@ -26,6 +26,9 @@ pub enum DownloadError {
 
     #[error(transparent)]
     IoError(#[from] std::io::Error),
+
+    #[error(transparent)]
+    VarError(#[from] std::env::VarError),
 }
 
 /// The configuration schema for downloading files either to store or to run.
@@ -118,7 +121,7 @@ impl Downloadable {
             true
         })?;
 
-        let mut file = File::create(to)?;
+        let mut file = File::create(crate::macos_replace_home_dir(to)?)?;
         transfer.write_function(move |data| {
             file.write_all(data).unwrap();
             Ok(data.len())
