@@ -10,4 +10,5 @@ repository.workspace = true
 version.workspace = true
 
 [dependencies]
+indicatif = "0.17"
 transfer-config = { path = "../transfer-config" }
