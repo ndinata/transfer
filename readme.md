@@ -16,7 +16,7 @@ TODO!
 
 ## Usage
 
-This program is currently **not** ready for actual use yet (it's pretty close tho)! Every commit might introduce breaking changes, and adding funky items to the program config might make it do crazy things.
+This program is currently in active development, meaning things are unstable. Every commit might introduce breaking changes, and adding funky items to the program config might make it do crazy things.
 
 Nevertheless, if you still want to run it, you would need these:
 
@@ -35,16 +35,18 @@ If you ran the program at its current state and your machine catches on fire, I 
 
 ## Roadmap
 
-Goals:
+TODO:
 
-- [x] Warn about `xcode-select --install` prerequisite
+- [ ] Allow passing config file location via CLI flag
 - [ ] Improved logging (to files)
+- [ ] Add dry-run mode
 - [ ] Prettier (T)UI
 
 Non-goals:
 
-- TODO!
-- TODO!
+- Stability on OSes other than macOS
+- Support for all Brewfile options, e.g. `cask "firefox", args: { no_quarantine: true }`
+- Advanced error recovery: if things fail, rather than trying to fix errors on-the-spot, the program will defer to simply notifying the user about them. Example: if trying to copy to a dir you (the user) don't have write permissions for, the program will just skip the copy and notify you about this.
 
 ## Attributions
 
@@ -63,4 +65,5 @@ Writing `transfer` in Rust first impressions:
 - compiler error messages are the real MVPs
 - Rust's ownership doesn't bite me as often as I thought it would (although expected since I'm just... printing things and calling shell commands for the most part)
 - Cargo workspaces is neat
-- high-level features (pattern matching, `map` etc.) make this journey enjoyable!
+- high-level features (pattern matching, `map` etc.) have made this journey enjoyable
+- Availability and diversity of crates reminds me of [npm](https://www.npmjs.com), although most of the crates I've encountered in contrast don't really provide detailed docs and examples in English; they provide them in code in [docs.rs](https://docs.rs) instead. Have had to download and run the examples locally way more than I used to do with JS/TS packages, which is an interesting new experience.
