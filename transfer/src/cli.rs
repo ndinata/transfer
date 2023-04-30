@@ -93,11 +93,18 @@ fn handle_copies(config: &Config) {
 fn handle_downloads(config: &mut Config) {
     eprintln!("Starting file downloads...");
     for downloadable in config.download.iter_mut() {
-        if let Err(e) = downloadable.download(|(downloaded, total)| {
+        let s = get_timed_spinner();
+
+        if let Err(e) = downloadable.download(|(to, downloaded, total)| {
             let percentage = downloaded * 100 / total;
-            eprintln!("Downloaded {}% ({}/{}B)", percentage, downloaded, total);
+            s.set_message(format!(
+                "Downloading {}: {}% ({}/{}B)",
+                to, percentage, downloaded, total
+            ));
         }) {
-            eprintln!("DownloadError('{0}'): {e}", downloadable.from);
+            s.abandon_with_message(format!("DownloadError('{}'): {e}", downloadable.from));
+        } else {
+            s.finish_with_message(format!("{}, done!", s.message()));
         }
     }
     eprintln!("Done downloading files.");

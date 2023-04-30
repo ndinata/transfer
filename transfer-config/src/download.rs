@@ -5,8 +5,8 @@ use std::process::Command;
 use curl::easy::Easy;
 use serde::Deserialize;
 
-/// `DownloadProgress = (downloaded, total_size)`
-type DownloadProgress = (u64, u64);
+/// `DownloadProgress = (target_path, downloaded, total_size)`
+type DownloadProgress<'a> = (&'a str, u64, u64);
 
 type Result<T, E = DownloadError> = std::result::Result<T, E>;
 
@@ -113,8 +113,8 @@ impl Downloadable {
         let mut transfer = self.client.transfer();
         transfer.progress_function(|total_dl, downloaded, _, _| {
             let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
-            if total_dl > 0 && downloaded < total_dl {
-                progress_cb((downloaded, total_dl));
+            if total_dl > 0 && downloaded <= total_dl {
+                progress_cb((to, downloaded, total_dl));
             }
             true
         })?;
@@ -125,10 +125,7 @@ impl Downloadable {
             Ok(data.len())
         })?;
 
-        eprintln!();
-        eprintln!("Downloading to `{}`...", to);
         transfer.perform()?;
-        eprintln!("Done!");
         Ok(())
     }
 
