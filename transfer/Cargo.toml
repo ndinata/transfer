@@ -10,5 +10,9 @@ repository.workspace = true
 version.workspace = true
 
 [dependencies]
+curl = "0.4"
 indicatif = "0.17"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.7"
 transfer-config = { path = "../transfer-config" }
+xshell = "0.2"

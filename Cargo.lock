@@ -292,8 +292,12 @@ dependencies = [
 name = "transfer"
 version = "0.1.0"
 dependencies = [
+ "curl",
  "indicatif",
+ "serde",
+ "toml",
  "transfer-config",
+ "xshell",
 ]
 
 [[package]]
