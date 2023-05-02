@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-use anyhow::anyhow;
+use anyhow::{bail, ensure, Context};
 use serde::Deserialize;
 
 type Result<T, E = anyhow::Error> = std::result::Result<T, E>;
@@ -25,16 +25,18 @@ impl Copyable {
     /// It also propagates any errors returned from the copying process.
     pub fn copy(&self) -> Result<()> {
         let from = Path::new(&self.from);
-        if !from.exists() {
-            return Err(anyhow!(format!("{} doesn't exist", self.from)));
-        }
+        ensure!(from.exists(), "{} doesn't exist", self.from);
 
         if from.is_file() {
-            self.copy_single_file(&self.from, &self.to_dir)?;
+            self.copy_single_file(&self.from, &self.to_dir)
+                .with_context(|| format!("cannot copy {} to {}", self.from, self.to_dir))?;
         } else if from.is_dir() {
-            self.copy_dir_files(&self.from, &self.to_dir)?;
+            self.copy_dir_files(&self.from, &self.to_dir)
+                .with_context(|| {
+                    format!("cnanot copy files in {} to {}", self.from, self.to_dir)
+                })?;
         } else {
-            return Err(anyhow!(format!("{} is an invalid path", self.from)));
+            bail!("{} is an invalid path", self.from);
         }
         Ok(())
     }
