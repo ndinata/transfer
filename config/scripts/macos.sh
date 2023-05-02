@@ -35,3 +35,6 @@ defaults write -g AppleShowAllExtensions -bool true
 # Disable in-app reviews & video auto-play
 defaults write com.apple.appstore InAppReviewEnabled -bool false
 defaults write com.apple.appstore AutoPlayVideoSetting -string "off"
+
+# Disable ApplePressAndHold for VSCode
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
