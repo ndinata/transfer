@@ -35,13 +35,13 @@ brew.casks = [
     "firefox",
     "font-jetbrains-mono",
     "iterm2",
-    "mullvadvpn",
+    # "mullvadvpn",
     # "postman",
     "slack",
     "spotify",
     "visual-studio-code",
     "vlc",
-    "zulu11",
+    # "zulu11",
 ]
 
 copy = [
