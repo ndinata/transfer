@@ -314,7 +314,6 @@ dependencies = [
  "simple-home-dir",
  "toml",
  "transfer-config",
- "xshell",
 ]
 
 [[package]]
