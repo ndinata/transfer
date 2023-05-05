@@ -1,62 +1,16 @@
-# brew tap
-brew.taps = [
-    "homebrew/bundle",
-    "homebrew/cask",
-    "homebrew/cask-versions",
-    "homebrew/core",
-    "homebrew/cask-fonts",
-]
-# brew install
-brew.formulae = [
-    "bat",
-    "clang-format",
-    "diff-so-fancy",
-    "fd",
-    "fish",
-    "fnm",
-    "gh",
-    "git",
-    "neovim",
-    "pyenv",
-    "rbenv",
-    "ripgrep",
-    "ruby-build",
-    "rust-analyzer",
-    "swiftformat",
-    "swiftlint",
-    "tree-sitter",
-    "watchman",
-]
-# brew install --cask
-brew.casks = [
-    # "android-studio",
-    # "discord",
-    "figma",
-    "firefox",
-    "font-jetbrains-mono",
-    "iterm2",
-    # "mullvadvpn",
-    # "postman",
-    "slack",
-    "spotify",
-    "visual-studio-code",
-    "vlc",
-    # "zulu11",
-]
-
 copy = [
-    { from = "config/dotfiles/git/.gitconfig", to = "~/" },
-    { from = "config/dotfiles/rg/ripgreprc", to = "~/.config/ripgrep/" },
-    { from = "config/dotfiles/bat/config", to = "~/.config/bat/" },
-    { from = "config/dotfiles/fnm/fnm.fish", to = "~/.config/fish/conf.d/" },
-    { from = "config/dotfiles/vim/", to = "~/.config/nvim/" },
-    { from = "config/dotfiles/fish/", to = "~/.config/fish/functions/" },
-    { from = "/System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/", to = "~/Library/Fonts/" },
+    { from = "config/dotfiles/git/.gitconfig", to_dir = "~/" },
+    { from = "config/dotfiles/rg/ripgreprc", to_dir = "~/.config/ripgrep/" },
+    { from = "config/dotfiles/bat/config", to_dir = "~/.config/bat/" },
+    { from = "config/dotfiles/fnm/fnm.fish", to_dir = "~/.config/fish/conf.d/" },
+    { from = "config/dotfiles/vim/", to_dir = "~/.config/nvim/" },
+    { from = "config/dotfiles/fish/", to_dir = "~/.config/fish/functions/" },
+    { from = "/System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/", to_dir = "~/Library/Fonts/" },
 ]
 
 download = [
-    { from = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", to = "~/.local/share/nvim/site/autoload/plug.vim" },
-    { from = "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish", run = true },
+    { url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", to_path = "~/.local/share/nvim/site/autoload/plug.vim" },
+    # { url = "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish", run = true },
 ]
 
 run = [
