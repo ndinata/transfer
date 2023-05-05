@@ -1,3 +1,4 @@
+mod brew;
 mod copy;
 mod download;
 mod remind;
