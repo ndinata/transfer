@@ -1,7 +1,7 @@
+use std::path::Path;
 use std::process::Command;
-use std::{path::Path, process::Stdio};
 
-use anyhow::ensure;
+use anyhow::{ensure, Result};
 use serde::Deserialize;
 
 /// The configuration schema for running scripts.
@@ -19,19 +19,20 @@ impl Runnable {
     /// This function returns an error if:
     /// - `self.script_path` isn't a valid file, or
     /// - running the script is unsuccessful
-    pub fn run_script(&self) -> Result<(), anyhow::Error> {
+    pub fn run_script(&self) -> Result<()> {
         ensure!(
             Path::new(&self.script_path).is_file(),
-            format!("{} is not a valid file", self.script_path)
+            "{} is not a valid file",
+            self.script_path
         );
 
-        let status = Command::new(&self.command)
+        let output = Command::new(&self.command)
             .arg(&self.script_path)
-            .stderr(Stdio::null())
-            .status()?;
+            .output()?;
         ensure!(
-            status.success(),
-            format!("{} didn't terminate successfully", self.script_path)
+            output.status.success(),
+            "{} didn't terminate successfully",
+            self.script_path
         );
         Ok(())
     }
