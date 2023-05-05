@@ -1,8 +1,8 @@
-mod brew;
-mod copy;
-mod download;
-mod remind;
-mod run;
+pub mod brew;
+pub mod copy;
+pub mod download;
+pub mod remind;
+pub mod run;
 
 use std::fs;
 use std::path::Path;
