@@ -2,13 +2,12 @@ use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 
+use anyhow::{ensure, Result};
 use curl::easy::Easy;
 use serde::Deserialize;
 
-/// `DownloadProgress = (target_path, downloaded, total_size)`
-type DownloadProgress<'a> = (&'a str, u64, u64);
-
-type Result<T, E = anyhow::Error> = std::result::Result<T, E>;
+/// `DownloadProgress = (downloaded, total_size)`
+type DownloadProgress = (u64, u64);
 
 /// The configuration schema for downloading files either to store or to run.
 #[derive(Debug, Deserialize)]
@@ -17,13 +16,12 @@ pub struct Downloadable {
     client: Easy,
 
     pub url: String,
-    pub to_path: Option<String>,
-    pub run: Option<bool>,
+    pub to_path: String,
 }
 
 impl PartialEq for Downloadable {
     fn eq(&self, other: &Self) -> bool {
-        self.url == other.url && self.to_path == other.to_path && self.run == other.run
+        self.url == other.url && self.to_path == other.to_path
     }
 }
 
@@ -48,12 +46,11 @@ fn init_client() -> Easy {
 impl Downloadable {
     /// This function is not meant to be called directly (although it can be),
     /// as it's intended only for setting up test cases.
-    pub fn new(url: String, to_path: Option<String>, run: Option<bool>) -> Self {
+    pub fn new(url: String, to_path: String) -> Self {
         Downloadable {
             client: init_client(),
             url,
             to_path,
-            run,
         }
     }
 
@@ -88,12 +85,8 @@ impl Downloadable {
     /// # Errors
     /// This function propagates any errors returned from creating the dir,
     /// downloading the file, and writing the file.
-    pub fn download_to_file<P: AsRef<Path>, F: Fn(DownloadProgress)>(
-        &mut self,
-        to_path: &P,
-        progress_cb: F,
-    ) -> Result<()> {
-        let to = to_path.as_ref();
+    pub fn download_to_file<F: Fn(DownloadProgress)>(&mut self, progress_cb: F) -> Result<()> {
+        let to_path = Path::new(&self.to_path);
 
         self.client.url(&self.url)?;
 
@@ -101,13 +94,19 @@ impl Downloadable {
         transfer.progress_function(|total_dl, downloaded, _, _| {
             let (total_dl, downloaded) = (total_dl as u64, downloaded as u64);
             if total_dl > 0 && downloaded <= total_dl {
-                progress_cb((&to.display().to_string(), downloaded, total_dl));
+                progress_cb((downloaded, total_dl));
             }
             true
         })?;
 
-        crate::dir::create_dir(to.parent().unwrap())?;
-        let mut file: File = File::create(to)?;
+        ensure!(
+            to_path.parent().is_some(),
+            "cannot get parent path from {}",
+            to_path.display()
+        );
+        crate::dir::create_dir(to_path.parent().unwrap())?;
+
+        let mut file = File::create(to_path)?;
 
         transfer.write_function(move |data| {
             file.write_all(data)
