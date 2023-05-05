@@ -16,4 +16,3 @@ indicatif = "0.17"
 serde = { version = "1.0", features = ["derive"] }
 simple-home-dir = { version = "0.1", features = ["expand_tilde"] }
 toml = "0.7"
-transfer-config = { path = "../transfer-config" }
