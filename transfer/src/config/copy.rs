@@ -1,16 +1,35 @@
 use std::fs;
 use std::path::Path;
 
-use anyhow::{bail, ensure, Context};
-use serde::Deserialize;
-
-type Result<T, E = anyhow::Error> = std::result::Result<T, E>;
+use anyhow::{bail, ensure, Context, Result};
+use serde::{de, Deserialize};
 
 /// The configuration schema for copying files to the target machine.
 #[derive(Debug, Deserialize, PartialEq)]
 pub struct Copyable {
     pub from: String,
+
+    #[serde(deserialize_with = "deserialise_dir")]
     pub to_dir: String,
+}
+
+/// Custom deserialiser for `to_dir` to enforce it ending with a '/' so it is
+/// treated as a valid dir.
+///
+/// Reference:
+/// https://users.rust-lang.org/t/need-help-with-serde-deserialize-with/18374/5
+fn deserialise_dir<'de, D>(de: D) -> std::result::Result<String, D::Error>
+where
+    D: de::Deserializer<'de>,
+{
+    let s: String = String::deserialize(de)?;
+    if !s.ends_with('/') {
+        return Err(de::Error::custom(format!(
+            "'{}' in your config file needs to end with a '/' as it is a dir",
+            s
+        )));
+    }
+    Ok(s)
 }
 
 impl Copyable {
