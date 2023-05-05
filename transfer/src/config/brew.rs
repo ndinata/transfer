@@ -7,14 +7,14 @@ pub fn install_homebrew() -> Result<()> {
     const HOMEBREW_INSTALL_URL: &str =
         "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
 
-    let output = Command::new("curl")
-        .arg("-fsSL")
-        .arg(HOMEBREW_INSTALL_URL)
+    let output = Command::new("bash")
+        .arg("-c")
+        .arg(format!("$(curl -fsSL {})", HOMEBREW_INSTALL_URL))
         .env("NONINTERACTIVE", "1")
         .output()?;
     ensure!(
         output.status.success(),
-        "something went wrong when installing Homebrew"
+        "something went wrong when downloading and installing Homebrew"
     );
 
     let output = Command::new("eval")
