@@ -114,14 +114,3 @@ fn run_scripts(config: &Config) {
         }
     }
 }
-
-// fn get_timed_spinner() -> ProgressBar {
-//     let spinner = ProgressBar::new_spinner();
-//     spinner.enable_steady_tick(Duration::from_millis(120));
-//     spinner.set_style(
-//         ProgressStyle::with_template("{spinner:.blue} {msg} ({elapsed})")
-//             .unwrap()
-//             .tick_strings(&["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"]),
-//     );
-//     spinner
-// }
