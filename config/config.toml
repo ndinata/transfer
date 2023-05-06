@@ -10,7 +10,6 @@ copy = [
 
 download = [
     { url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", to_path = "~/.local/share/nvim/site/autoload/plug.vim" },
-    # { url = "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish", run = true },
 ]
 
 run = [

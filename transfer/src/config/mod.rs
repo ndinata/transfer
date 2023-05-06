@@ -15,7 +15,7 @@ use serde::Deserialize;
 ///
 /// # Errors
 /// This function returns an error if:
-/// - the file at `file_path` cannot be read into a `String`, or
+/// - the file at `file_path` cannot be read, or
 /// - the file doesn't match the schema defined in `Config`
 pub fn parse_config<P: AsRef<Path>>(file_path: P) -> Result<Config> {
     let content = fs::read_to_string(file_path)?;

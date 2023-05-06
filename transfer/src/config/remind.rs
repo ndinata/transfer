@@ -13,6 +13,6 @@ impl Remindable {
     /// Prints the reminder's instruction and command.
     pub fn display_reminder(&self, count: usize) {
         println!("{}. {}", count, self.instruction);
-        println!("$ {}", self.command);
+        println!("$ {}\n", self.command);
     }
 }

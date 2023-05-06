@@ -10,7 +10,7 @@ use anyhow::Result;
 fn main() -> Result<()> {
     println!("Hello, world!");
 
-    if xcode::require_xcode_tools() {
+    if !xcode::has_xcode_tools() {
         xcode::show_xcode_instructions();
         process::exit(0);
     }

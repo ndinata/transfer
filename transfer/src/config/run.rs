@@ -13,16 +13,16 @@ pub struct Runnable {
 }
 
 impl Runnable {
-    /// Runs the script in `self.script_path` using `self.command`.
+    /// Runs the script in `self.script_path` with `self.command`.
     ///
     /// # Errors
     /// This function returns an error if:
     /// - `self.script_path` isn't a valid file, or
-    /// - running the script is unsuccessful
+    /// - the script doesn't terminate successfully
     pub fn run_script(&self) -> Result<()> {
         ensure!(
             Path::new(&self.script_path).is_file(),
-            "{} is not a valid file",
+            "'{}' is not a valid script file",
             self.script_path
         );
 
@@ -31,7 +31,7 @@ impl Runnable {
             .output()?;
         ensure!(
             output.status.success(),
-            "{} didn't terminate successfully",
+            "'{}' didn't terminate successfully",
             self.script_path
         );
         Ok(())
