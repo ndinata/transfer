@@ -44,16 +44,6 @@ fn init_client() -> Easy {
 }
 
 impl Downloadable {
-    /// This function is not meant to be called directly (although it can be),
-    /// as it's intended only for setting up test cases.
-    pub fn new(url: String, to_path: String) -> Self {
-        Downloadable {
-            client: init_client(),
-            url,
-            to_path,
-        }
-    }
-
     /// If `self.to_path` is defined, downloads the file specified in `self.url`
     /// and store it in that path. Otherwise, treats the file as a script and
     /// runs it after it's downloaded.

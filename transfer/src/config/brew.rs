@@ -72,13 +72,3 @@ pub fn install_bundle<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     );
     Ok(())
 }
-
-#[test]
-fn bash_works() {
-    let c = Command::new("bash")
-        .arg("-c")
-        .arg("echo 'hello world!'")
-        .status()
-        .unwrap();
-    assert!(c.success());
-}
