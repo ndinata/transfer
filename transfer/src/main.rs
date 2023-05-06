@@ -18,6 +18,11 @@ fn main() -> Result<()> {
     const CONFIG_FILE_PATH: &str = "config/config.toml";
     const BREWFILE_PATH: &str = "config/Brewfile";
 
+    if let Err(e) = cli::check_fish_shell(BREWFILE_PATH) {
+        eprintln!("CheckFishError: {e}");
+        process::exit(1);
+    }
+
     cli::run(CONFIG_FILE_PATH, BREWFILE_PATH)?;
 
     println!("Done!");

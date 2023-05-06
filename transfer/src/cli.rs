@@ -1,10 +1,9 @@
+use std::fs;
 use std::path::Path;
 
-use anyhow::{Context, Result};
+use anyhow::{bail, Context, Result};
 
 use crate::config::{self, Config};
-
-// TODO: show intro instruction to add `fish` to list of shells
 
 /// Parses the specified config file, and reports progress to the CLI when
 /// carrying out the operations in this order: set up Homebrew, copy local files,
@@ -43,6 +42,33 @@ pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> 
         remindable.display_reminder(i + 1);
     }
 
+    Ok(())
+}
+
+/// Checks if `fish` is in the list of acceptable shells if it is detected to be
+/// part of the Brewfile bundle installation.
+///
+/// # Errors
+/// This function returns an error if it fails to read the Brewfile specified by
+/// the path, or if it fails to read `/etc/shells`, or if `fish` is included in
+/// the Brewfile but it isn't yet included in the list of acceptable shells.
+pub fn check_fish_shell<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
+    let brewfile = fs::read_to_string(brewfile_path)?;
+    let fish = brewfile.lines().find(|l| l.contains("brew \"fish\""));
+    if fish.is_some() {
+        let shells = fs::read_to_string("/etc/shells")?;
+        let fish = shells.lines().find(|l| l.contains("fish"));
+        if fish.is_none() {
+            println!("Looks like you will be installing `fish` in your Brewfile.");
+            println!("In that case, you need to do the following before running this program, as it tries to not request sudo permissions during runtime:");
+            println!("  sudo bash -c \"echo /opt/homebrew/bin/fish >> /etc/shells\"");
+            println!(
+                "This is to prevent errors that might come up during any `fish`-related setup."
+            );
+            println!("Please try again after you've done this!");
+            bail!("`fish` isn't in list of acceptable shells yet");
+        }
+    }
     Ok(())
 }
 
