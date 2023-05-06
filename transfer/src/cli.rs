@@ -6,6 +6,13 @@ use crate::config::{self, Config};
 
 // TODO: show intro instruction to add `fish` to list of shells
 
+/// Parses the specified config file, and reports progress to the CLI when
+/// carrying out the operations in this order: set up Homebrew, copy local files,
+/// download remote files, run scripts, and print out reminders.
+///
+/// # Errors
+/// This function returns an error if parsing the config file failed, or if the
+/// Homebrew setup process failed.
 pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> {
     let config_file_path = config_file_path.as_ref();
 
@@ -39,6 +46,12 @@ pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> 
     Ok(())
 }
 
+/// Does the following Homebrew operations in sequence: installs Homebrew,
+/// updates Homebrew, disables Homebrew analytics, and installs the Homebrew
+/// bundle defined in `brewfile_path`.
+///
+/// # Errors
+/// This function propagates any errors returned by any one of those operations.
 fn setup_brew<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     use crate::config::brew;
 
@@ -49,6 +62,7 @@ fn setup_brew<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     Ok(())
 }
 
+/// Copies all files defined in the config file.
 fn copy_files(config: &Config) {
     for copyable in config.copy.iter() {
         if let Err(e) = copyable.copy() {
@@ -57,6 +71,7 @@ fn copy_files(config: &Config) {
     }
 }
 
+/// Downloads and stores all files defined in the config file.
 fn download_files(config: &mut Config) {
     for downloadable in config.download.iter_mut() {
         if let Err(e) = downloadable.download_to_file(|_| ()) {
@@ -65,6 +80,7 @@ fn download_files(config: &mut Config) {
     }
 }
 
+/// Runs all scripts defined in the config file.
 fn run_scripts(config: &Config) {
     for runnable in config.run.iter() {
         if let Err(e) = runnable.run_script() {
