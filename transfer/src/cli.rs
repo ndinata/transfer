@@ -22,7 +22,7 @@ pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> 
     eprintln!("Config file parsed successfully!\n");
 
     eprintln!("Setting up Homebrew...");
-    setup_brew(brewfile_path).context("Homebrew setup failed")?;
+    setup_brew(brewfile_path)?;
     eprintln!("Homebrew setup successful!\n");
 
     eprintln!("Copying files...");
@@ -81,10 +81,10 @@ pub fn check_fish_shell<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
 fn setup_brew<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     use crate::config::brew;
 
-    brew::install_homebrew()?;
-    brew::update_brew()?;
-    brew::disable_brew_analytics()?;
-    brew::install_bundle(brewfile_path)?;
+    brew::install_homebrew().context("failed to install Homebrew")?;
+    brew::update_brew().context("failed to update Homebrew")?;
+    brew::disable_brew_analytics().context("failed to disable Homebrew analytics")?;
+    brew::install_bundle(brewfile_path).context("failed to install Homebrew bundle")?;
     Ok(())
 }
 
