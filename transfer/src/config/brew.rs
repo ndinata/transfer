@@ -3,6 +3,14 @@ use std::process::Command;
 
 use anyhow::{ensure, Result};
 
+/// Downloads the Homebrew installer script and runs it.
+///
+/// If installation is successful, load Homebrew's `bin` dir into `$PATH` for this
+/// shell session.
+///
+/// # Errors
+/// This function returns an error if the download or installation failed, or
+/// if loading the dir failed.
 pub fn install_homebrew() -> Result<()> {
     const HOMEBREW_INSTALL_URL: &str =
         "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
@@ -28,6 +36,11 @@ pub fn install_homebrew() -> Result<()> {
     Ok(())
 }
 
+/// Runs `brew update` and `brew upgrade` in sequence.
+///
+/// # Errors
+/// This function returns an error if either of those two commands failed to
+/// terminate successfully.
 pub fn update_brew() -> Result<()> {
     let mut brew = Command::new("brew");
 
@@ -44,6 +57,10 @@ pub fn update_brew() -> Result<()> {
     Ok(())
 }
 
+/// Disables Homebrew analytics by running `brew analytics off`.
+///
+/// # Errors
+/// This function returns an error if the command didn't terminate successfully.
 pub fn disable_brew_analytics() -> Result<()> {
     let output = Command::new("brew").arg("analytics").arg("off").output()?;
     ensure!(
@@ -53,6 +70,11 @@ pub fn disable_brew_analytics() -> Result<()> {
     Ok(())
 }
 
+/// Runs `brew bundle` using the Brewfile specified by `brewfile_path`.
+///
+/// # Errors
+/// This function returns an error if the path is invalid or if the command itself
+/// returns an error.
 pub fn install_bundle<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     let brewfile_path_str = brewfile_path.as_ref().to_str();
     ensure!(
