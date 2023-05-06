@@ -1,32 +1,30 @@
-use std::process;
-use std::time::Duration;
+use std::path::Path;
 
-use indicatif::{ProgressBar, ProgressStyle};
+use anyhow::{Context, Result};
 
-use transfer_config::Config;
+use crate::config::{self, Config};
 
-pub fn run(config_file_path: &str) {
-    eprintln!("Parsing config file at `{}`...", config_file_path);
-    let mut config = match transfer_config::parse_config(config_file_path) {
-        Ok(c) => c,
-        Err(e) => {
-            eprintln!("ConfigError('{config_file_path}'): {e}, exiting.");
-            process::exit(1);
-        }
-    };
-    eprintln!("Config file parsed successfully.");
+// TODO: show intro instruction to add `fish` to list of shells
+
+pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> {
+    let config_file_path = config_file_path.as_ref();
+    eprintln!("Parsing config file at `{}`...", config_file_path.display());
+
+    let mut config = config::parse_config(config_file_path)
+        .with_context(|| format!("unable to parse config at '{}'", config_file_path.display()))?;
+
+    eprintln!("Config file parsed successfully.\n");
+
+    setup_brew(brewfile_path)?;
     eprintln!();
 
-    handle_brew(&config);
+    copy_files(&config)?;
     eprintln!();
 
-    handle_copies(&config);
+    download_files(&mut config);
     eprintln!();
 
-    handle_downloads(&mut config);
-    eprintln!();
-
-    handle_scripts(&config);
+    run_scripts(&config);
     eprintln!();
 
     println!("Don't forget to also do these things!");
@@ -34,104 +32,84 @@ pub fn run(config_file_path: &str) {
         remindable.display_reminder(i + 1);
         println!();
     }
+
+    Ok(())
 }
 
-fn handle_brew(config: &Config) {
-    let spinner = get_timed_spinner();
+fn setup_brew<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
+    use crate::config::brew;
 
-    let brew = &config.brew;
-    spinner.set_message("Installing Homebrew...");
-    if let Err(e) = brew.install_self() {
-        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
-        process::exit(1);
-    };
-    spinner.finish_with_message("Done installing Homebrew.");
-    eprintln!();
-
-    let progress_cb = |(curr, total)| {
-        eprintln!("{}/{}", curr, total);
-    };
-
-    let spinner = get_timed_spinner();
-    spinner.set_message("Installing Brew taps...");
-    if let Err(e) = brew.install_taps(progress_cb) {
-        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
-        process::exit(1);
-    }
-    spinner.finish_with_message("Done installing Brew taps.");
-
-    let spinner = get_timed_spinner();
-    spinner.set_message("Installing Brew formulae...");
-    if let Err(e) = brew.install_formulae(progress_cb) {
-        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
-        process::exit(1);
-    }
-    spinner.finish_with_message("Done installing Brew formulae.");
-
-    let spinner = get_timed_spinner();
-    spinner.set_message("Installing Brew casks...");
-    if let Err(e) = brew.install_casks(progress_cb) {
-        spinner.abandon_with_message(format!("BrewError: {e}, exiting."));
-        process::exit(1);
-    }
-    spinner.finish_with_message("Done installing Brew casks.");
+    brew::install_homebrew()?;
+    brew::update_brew()?;
+    brew::disable_brew_analytics()?;
+    brew::install_bundle(brewfile_path)?;
+    Ok(())
 }
 
-fn handle_copies(config: &Config) {
+fn copy_files(config: &Config) -> Result<()> {
     eprintln!("Copying files...");
     for copyable in config.copy.iter() {
         if let Err(e) = copyable.copy() {
-            eprintln!(
-                "CopyFileError('{0}' -> '{1}'): {e}",
-                copyable.from, copyable.to
-            );
+            eprintln!("CopyError('{}'): {e}", copyable.from);
         }
     }
     eprintln!("Done copying files.");
+    Ok(())
 }
 
-fn handle_downloads(config: &mut Config) {
+fn download_files(config: &mut Config) {
     eprintln!("Starting file downloads...");
     for downloadable in config.download.iter_mut() {
-        let s = get_timed_spinner();
+        if let Err(e) = downloadable.download_to_file(|_| ()) {
+            eprintln!("DownloadError('{}'): {e}", downloadable.url);
+        };
 
-        if let Err(e) = downloadable.download(|(to, downloaded, total)| {
-            let percentage = downloaded * 100 / total;
-            s.set_message(format!(
-                "Downloading {}: {}% ({}/{}B)",
-                to, percentage, downloaded, total
-            ));
-        }) {
-            s.abandon_with_message(format!("DownloadError('{}'): {e}", downloadable.from));
-        } else {
-            s.finish_with_message(format!("{}, done!", s.message()));
-        }
+        // let s = get_timed_spinner();
+        // let dl_filename = &downloadable.to_path;
+
+        // let progress_cb = |(downloaded, total)| {
+        //     let percentage = downloaded * 100 / total;
+        //     s.set_message(format!(
+        //         "Downloading {}: {}% ({}/{}B)",
+        //         dl_filename, percentage, downloaded, total
+        //     ));
+        // };
+
+        // if let Err(e) = downloadable.download_to_file(progress_cb) {
+        //     s.abandon_with_message(format!("DownloadError('{}'): {e}", downloadable.url));
+        // } else {
+        //     s.finish_with_message(format!("{}, done!", s.message()));
+        // }
     }
     eprintln!("Done downloading files.");
 }
 
-fn handle_scripts(config: &Config) {
+fn run_scripts(config: &Config) {
     eprintln!("Running scripts...");
     for runnable in config.run.iter() {
-        let s = get_timed_spinner();
-        s.set_message(format!("{}...", runnable.title));
+        // let s = get_timed_spinner();
+        // s.set_message(format!("{}...", runnable.title));
 
         if let Err(e) = runnable.run_script() {
-            s.abandon_with_message(format!("RunScriptError('{0}'): {e}", runnable.script_path));
-        } else {
-            s.finish_with_message(format!("{} Done!", s.message()));
+            eprintln!("RunScriptError('{}'): {e}", runnable.script_path);
         }
+
+        // if let Err(e) = runnable.run_script() {
+        //     s.abandon_with_message(format!("RunScriptError('{0}'): {e}", runnable.script_path));
+        // } else {
+        //     s.finish_with_message(format!("{} Done!", s.message()));
+        // }
     }
     eprintln!("Done running scripts.");
 }
 
-fn get_timed_spinner() -> ProgressBar {
-    let spinner = ProgressBar::new_spinner();
-    spinner.enable_steady_tick(Duration::from_millis(120));
-    spinner.set_style(
-        ProgressStyle::with_template("{spinner:.blue} {msg} ({elapsed})")
-            .unwrap()
-            .tick_strings(&["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"]),
-    );
-    spinner
-}
+// fn get_timed_spinner() -> ProgressBar {
+//     let spinner = ProgressBar::new_spinner();
+//     spinner.enable_steady_tick(Duration::from_millis(120));
+//     spinner.set_style(
+//         ProgressStyle::with_template("{spinner:.blue} {msg} ({elapsed})")
+//             .unwrap()
+//             .tick_strings(&["▹▹▹▹▹", "▸▹▹▹▹", "▹▸▹▹▹", "▹▹▸▹▹", "▹▹▹▸▹", "▹▹▹▹▸"]),
+//     );
+//     spinner
+// }
