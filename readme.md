@@ -1,6 +1,6 @@
 # Transfer
 
-Transfer is a command-line program with the goal of setting up my macOS dev environment, e.g. after a factory reset/on a new machine.
+Transfer is a simple command-line program made with the goal of setting up my macOS dev environment, e.g. after a factory reset/on a new machine.
 
 This program helps me automate:
 
@@ -12,16 +12,27 @@ Read the [config](#config) section for more details on the program's behaviour.
 
 ## Config
 
-TODO!
+### Homebrew
+
+This program currently assumes a brand new environment, so Homebrew is going to be installed by default. The default Brewfile location that the program will try to read from is `config/Brewfile`. If this file doesn't exist, the program will halt.
+
+### Other behaviours
+
+In addition to Homebrew, Transfer supports doing the following operations:
+
+- copying files to the new dev environment,
+- downloading remote files,
+- running scripts
 
 ## Usage
 
-This program is currently in active development, meaning things are unstable. Every commit might introduce breaking changes, and adding funky items to the program config might make it do crazy things.
+This program has been tested only on macOS, so running it on other platforms may do whatever! It is pretty stable now, although new features and improvements are planned. The program handles only simple configs though, so if you pass funky items into it the program might do unexpected things.
 
-Nevertheless, if you still want to run it, you would need these:
+If you want to run it, you would need these first:
 
-- `cargo` installed
-- Internet connection
+- Internet connection,
+- stable Rust [toolchain](https://rustup.rs),
+- Xcode command-line tools (will be prompted by the program if you don't have it),
 
 Then do this:
 
@@ -31,26 +42,19 @@ $ cd transfer
 $ cargo run --release
 ```
 
-If you ran the program at its current state and your machine catches on fire, I warned you!
-
 ## Roadmap
 
 TODO:
 
-- [ ] Allow passing config file location via CLI flag
+- [ ] Allow overriding config file location via CLI flag
 - [ ] Improved logging (to files)
 - [ ] Add dry-run mode
 - [ ] Prettier (T)UI
 
 Non-goals:
 
-- Stability on OSes other than macOS
-- Support for all Brewfile options, e.g. `cask "firefox", args: { no_quarantine: true }`
-- Advanced error recovery: if things fail, rather than trying to fix errors on-the-spot, the program will defer to simply notifying the user about them. Example: if trying to copy to a dir you (the user) don't have write permissions for, the program will just skip the copy and notify you about this.
-
-## Attributions
-
-TODO!
+- support for non-macOS platforms
+- advanced error recovery: if things fail, rather than trying to fix errors on-the-spot, the program will defer to simply notifying the user about them. Example: if trying to copy to a dir you (the user) don't have write permissions for, the program will just skip the copy and notify you about this
 
 ## Learning
 
