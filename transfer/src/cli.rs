@@ -21,27 +21,15 @@ pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> 
 
     eprintln!("Config file parsed successfully!\n");
 
-    eprintln!("Setting up Homebrew...");
     setup_brew(brewfile_path)?;
-    eprintln!("Homebrew setup successful!\n");
 
-    eprintln!("Copying files...");
     copy_files(&config);
-    eprintln!("Done copying files.\n");
 
-    eprintln!("Starting file downloads...");
     download_files(&mut config);
-    eprintln!("Done downloading files.\n");
 
-    eprintln!("Running scripts...");
     run_scripts(&config);
-    eprintln!("Done running scripts.\n");
 
-    println!("Don't forget to also do these things!");
-    for (i, remindable) in config.reminders.iter().enumerate() {
-        remindable.display_reminder(i + 1);
-    }
-
+    display_reminders(&config);
     Ok(())
 }
 
@@ -81,36 +69,71 @@ pub fn check_fish_shell<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
 fn setup_brew<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     use crate::config::brew;
 
+    eprintln!("Setting up Homebrew...");
     brew::install_homebrew().context("failed to install Homebrew")?;
     brew::update_brew().context("failed to update Homebrew")?;
     brew::disable_brew_analytics().context("failed to disable Homebrew analytics")?;
     brew::install_bundle(brewfile_path).context("failed to install Homebrew bundle")?;
+    eprintln!("Homebrew setup successful!\n");
     Ok(())
 }
 
 /// Copies all files defined in the config file.
 fn copy_files(config: &Config) {
+    if config.copy.is_empty() {
+        eprintln!("No files to copy, skipping.\n");
+        return;
+    }
+
+    eprintln!("Copying files...");
     for copyable in config.copy.iter() {
         if let Err(e) = copyable.copy() {
             eprintln!("CopyError('{}'): {e}", copyable.from);
         }
     }
+    eprintln!("Done copying files.\n");
 }
 
 /// Downloads and stores all files defined in the config file.
 fn download_files(config: &mut Config) {
+    if config.download.is_empty() {
+        eprintln!("No files to download, skipping.\n");
+        return;
+    }
+
+    eprintln!("Starting file downloads...");
     for downloadable in config.download.iter_mut() {
         if let Err(e) = downloadable.download_to_file(|_| ()) {
             eprintln!("DownloadError('{}'): {e}", downloadable.url);
         };
     }
+    eprintln!("Done downloading files.\n");
 }
 
 /// Runs all scripts defined in the config file.
 fn run_scripts(config: &Config) {
+    if config.run.is_empty() {
+        eprintln!("No scripts to run, skipping.\n");
+        return;
+    }
+
+    eprintln!("Running scripts...");
     for runnable in config.run.iter() {
         if let Err(e) = runnable.run_script() {
             eprintln!("RunScriptError('{}'): {e}", runnable.script_path);
         }
+    }
+    eprintln!("Done running scripts.\n");
+}
+
+/// Displays all reminders defined in the config file.
+fn display_reminders(config: &Config) {
+    if config.reminders.is_empty() {
+        return;
+    }
+
+    println!("Don't forget to also do these things!");
+    for (i, remindable) in config.reminders.iter().enumerate() {
+        remindable.display_reminder(i + 1);
     }
 }
