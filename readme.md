@@ -1,20 +1,20 @@
 # Transfer
 
-Transfer is a simple command-line program made with the goal of setting up my macOS dev environment, e.g. after a factory reset/on a new machine.
+Transfer is a simple command-line program made with the goal of setting up my personal macOS dev environment, e.g. after a factory reset/on a new machine.
 
 This program helps me automate:
 
 - installing my CLI and GUI apps programmatically via Homebrew,
 - copying dotfiles and other config files to the new dev env, and
-- running domain-specific setup scripts to, for example, configure some macOS settings via the CLI
+- running scripts to, for example, configure some macOS settings via the CLI
 
-Read the [config](#config) section for more details on the program's behaviour.
+Read the [config](#config) section below for more details on the program's behaviour.
 
 ## Config
 
 ### Homebrew
 
-This program currently assumes a brand new environment, so Homebrew is going to be installed by default. The default Brewfile location that the program will try to read from is `config/Brewfile`. If this file doesn't exist, the program will halt.
+This program currently assumes a brand new empty environment, so it's going to install Homebrew. The default Brewfile location that the program will try to read from is `config/Brewfile`. If this file doesn't exist, the program will halt.
 
 ### Other behaviours
 
@@ -24,7 +24,11 @@ In addition to Homebrew, Transfer supports doing the following operations:
 - downloading remote files,
 - running scripts
 
+These other behaviours can be customised by editing the `config/config.toml` file containing these four sections: `copy`, `download`, `run`, and `reminders`. More details on how to configure each section is available in the file itself.
+
 ## Usage
+
+I made this program for myself, although it's hopefully flexible enough to be useful to others. To adjust its behaviour, refer to the default `config/config.toml` file to suit it to your own needs.
 
 This program has been tested only on macOS, so running it on other platforms may do whatever! It is pretty stable now, although new features and improvements are planned. The program handles only simple configs though, so if you pass funky items into it the program might do unexpected things.
 
@@ -39,6 +43,7 @@ Then do this:
 ```sh
 $ git clone https://github.com/nictar/transfer.git
 $ cd transfer
+$ # optional: update `config/config.toml` or `config/Brewfile` to adjust program behaviour according to your needs
 $ cargo run --release
 ```
 
@@ -62,12 +67,11 @@ This section talks about the learning/reflection aspect of this project (e.g. wh
 
 If you're reading this you're probably wondering "why not Bash since you're wrapping it anyways?" or "why not Python if you wanted a higher-level lang?"
 
-Well, I wrote this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: (a) a useful program I actually use, and (b) better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
+Well, I wrote this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: 1. a useful program I actually use, and 2. better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
 
-Writing `transfer` in Rust first impressions:
+Writing Transfer in Rust first impressions:
 
 - compiler error messages are the real MVPs
 - Rust's ownership doesn't bite me as often as I thought it would (although expected since I'm just... printing things and calling shell commands for the most part)
-- Cargo workspaces is neat
 - high-level features (pattern matching, `map` etc.) have made this journey enjoyable
-- Availability and diversity of crates reminds me of [npm](https://www.npmjs.com), although most of the crates I've encountered in contrast don't really provide detailed docs and examples in English; they provide them in code in [docs.rs](https://docs.rs) instead. Have had to download and run the examples locally way more than I used to do with JS/TS packages, which is an interesting new experience.
+- crate examples tend to be in succinct code excerpts rather than the more comprehensive ones I'm used to from `npm` packages—an interesting experience for sure!
