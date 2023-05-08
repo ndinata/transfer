@@ -1,7 +1,6 @@
 mod cli;
 mod config;
 mod dir;
-mod xcode;
 
 use std::process;
 
@@ -10,9 +9,9 @@ use anyhow::Result;
 fn main() -> Result<()> {
     println!("Hello, world!");
 
-    if !xcode::has_xcode_tools() {
-        xcode::show_xcode_instructions();
-        process::exit(0);
+    if let Err(e) = cli::check_xcode_tools() {
+        eprintln!("XcodeToolsError: {e}");
+        process::exit(1);
     }
 
     const CONFIG_FILE_PATH: &str = "config/config.toml";

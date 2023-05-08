@@ -1,5 +1,6 @@
 use std::fs;
 use std::path::Path;
+use std::process::Command;
 
 use anyhow::{bail, Context, Result};
 
@@ -30,6 +31,24 @@ pub fn run<P: AsRef<Path>>(config_file_path: P, brewfile_path: P) -> Result<()> 
     run_scripts(&config);
 
     display_reminders(&config);
+    Ok(())
+}
+
+/// Checks if Xcode command-line tools have been installed.
+///
+/// # Errors
+/// This function returns an error if `xcode-select -p` doesn't return 0 exit code,
+/// which indicates the tools are not installed yet.
+pub fn check_xcode_tools() -> Result<()> {
+    let output = Command::new("xcode-select").arg("-p").output()?;
+    if !output.status.success() {
+        println!("It seems like you haven't installed Xcode's command-line tools.");
+        println!("You can do so by running this command:");
+        println!("  xcode-select --install");
+        println!("Please try again after you've done this!");
+        bail!("Xcode command-line tools not installed yet");
+    }
+
     Ok(())
 }
 
