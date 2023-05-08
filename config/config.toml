@@ -1,3 +1,15 @@
+# In addition to setting up Homebrew with the Brewfile, Transfer reads this file
+# to determine the behaviour of its next four sections. These four sections need
+# to be defined in the file, although they can be set to empty array to be skipped.
+# The sections are carried out in the other below (copy, download, run, then reminder).
+
+# Files to be copied. This section runs after Homebrew setup has finished.
+# Leave the array blank if you don't have any files to copy.
+# Format: `{ from: string, to_dir: string }`
+# If `from` is a file, it will be copied to `to_dir`; otherwise, if `from` is a dir,
+# every file in it will be copied to `to_dir`.
+# `from` has to be a valid file or dir on disk; a runtime error is printed otherwise.
+# `to_dir` has to end with a '/' so it is treated as a proper dir.
 copy = [
     { from = "config/dotfiles/git/.gitconfig", to_dir = "~/" },
     { from = "config/dotfiles/rg/ripgreprc", to_dir = "~/.config/ripgrep/" },
@@ -8,15 +20,29 @@ copy = [
     { from = "/System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/", to_dir = "~/Library/Fonts/" },
 ]
 
+# Remote files to be downloaded. This section runs after `copy` has finished.
+# Leave the array blank if you don't have any files to download.
+# Format: `{ url: string, to_path: string }`
+# Files are downloaded using `curl`, so any URLs that it supports should be fine.
+# The dir storing the file in `to_path` has to be valid; a runtime error is printed otherwise.
 download = [
     { url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", to_path = "~/.local/share/nvim/site/autoload/plug.vim" },
 ]
 
+# Scripts to run. This section runs after `copy` and `download` have finished.
+# Leave the array blank if you don't have any scripts to run.
+# Format: `{ script_path: string, command: string, title: string }`
+# Transfer expects `command` to be available in $PATH; a runtime error is printed otherwise.
+# `script_path` should also be an existing file on disk; a runtime error is printed otherwise.
 run = [
     { script_path = "config/scripts/macos.sh", command = "bash", title = "Configuring macOS" },
     { script_path = "config/scripts/setup.fish", command = "fish", title = "Installing fish packages" },
 ]
 
+# Things to be reminded of. Transfer will do nothing with these but just print out the instructions and commands.
+# These are printed after everything else is done, at the end of the program.
+# Leave the array blank if you don't have any reminders.
+# Format: `{ instruction: string, command: string }`
 reminders = [
     { instruction = "Set fish as default shell", command = "chsh -s /opt/homebrew/bin/fish" },
     { instruction = "Enable fish vi keybindings", command = "fish_vi_key_bindings" },
