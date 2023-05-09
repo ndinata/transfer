@@ -70,7 +70,7 @@ This section talks about the learning/reflection aspect of this project (e.g. wh
 
 If you're reading this you're probably wondering "why not Bash since you're wrapping it anyways?" or "why not Python if you wanted a higher-level lang?"
 
-Well, I wrote this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: 1. a useful program I actually can use, and 2. better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
+I did write this program as a collection of Bash scripts [at first](https://github.com/nictar/transfer/tree/deprecated/wake)! I then decided to rewrite this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: 1. a useful program I actually can use, and 2. better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
 
 Writing Transfer in Rust first impressions:
 
