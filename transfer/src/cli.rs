@@ -61,7 +61,7 @@ pub fn check_xcode_tools() -> Result<()> {
 /// the Brewfile but it isn't yet included in the list of acceptable shells.
 pub fn check_fish_shell<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
     let brewfile = fs::read_to_string(brewfile_path)?;
-    let fish = brewfile.lines().find(|l| l.contains("brew \"fish\""));
+    let fish = brewfile.lines().find(|l| l.starts_with("brew \"fish\""));
     if fish.is_some() {
         let shells = fs::read_to_string("/etc/shells")?;
         let fish = shells.lines().find(|l| l.contains("fish"));
@@ -73,6 +73,7 @@ pub fn check_fish_shell<P: AsRef<Path>>(brewfile_path: P) -> Result<()> {
                 "This is to prevent errors that might come up during any `fish`-related setup."
             );
             println!("Please try again after you've done this!");
+            println!("Otherwise, to skip this error, try commenting out the line to install `fish` in the Brewfile.");
             bail!("`fish` isn't in list of acceptable shells yet");
         }
     }
