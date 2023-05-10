@@ -11,6 +11,8 @@ This program helps me automate:
 
 I made this for my own personal use, although hopefully it's flexible enough to also be useful to others. Read the [config](#config) section below for details on how to adjust the program's default behaviour to match your needs.
 
+Also, this is my first serious Rust project, so if you have any feedback on the quality of the code or advice on how to make certain parts more idiomatic, please do let me know 🥲🙏
+
 ## Config
 
 The two files that determine the program's behaviour are [`config/Brewfile`](config/Brewfile) and [`config/config.toml`](config/config.toml).
@@ -43,14 +45,15 @@ Then do this:
 $ git clone https://github.com/nictar/transfer.git
 $ cd transfer
 # before running the line below, update `config/config.toml` or `config/Brewfile` to adjust program behaviour according to your needs
-$ cargo run --release
+$ cargo build --release
+$ ./target/release/transfer # or ./target/release/transfer --help to display the help message
 ```
 
 ## Roadmap
 
 Todos:
 
-- [ ] Allow overriding config file location via CLI flag
+- [x] Allow overriding config file location via CLI flag
 - [ ] Improved error logging (to files)
 - [ ] Add dry-run mode
 - [ ] Prettier (T)UI
