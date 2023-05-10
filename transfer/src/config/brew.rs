@@ -3,7 +3,7 @@ use std::process::Command;
 
 use anyhow::{ensure, Result};
 
-/// Downloads the Homebrew installer script and runs it.
+/// Downloads the Homebrew installer script and runs it, if it doesn't exist yet.
 ///
 /// If installation is successful, load Homebrew's `bin` dir into `$PATH` for this
 /// shell session.
@@ -12,6 +12,11 @@ use anyhow::{ensure, Result};
 /// This function returns an error if the download or installation failed, or
 /// if loading the dir failed.
 pub fn install_homebrew() -> Result<()> {
+    let output = Command::new("brew").arg("--version").output()?;
+    if output.status.success() {
+        return Ok(());
+    }
+
     const HOMEBREW_INSTALL_URL: &str =
         "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
 
