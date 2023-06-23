@@ -1,3 +1,5 @@
+> This repo has been archived in favour of [`dotfiles`](https://github.com/ndinata/dotfiles). `dotfiles` being a collection of raw Bash scripts is probably more appropriate for interacting heavily with the shell compared to this repo, which is basically a thin wrapper over Bash anyways. I might've been a bit too eager to build something with Rust after picking it up, although this repo has been a great learning experience so no regrets here! Maybe I'll revive this repo in the future if I manage to find a nice abstraction level where I can combine Rust's expressiveness and Bash's convenience.
+
 # Transfer
 
 Transfer is a simple command-line program made with the goal of setting up my personal macOS dev environment, e.g. after a factory reset/on a new machine.
@@ -10,8 +12,6 @@ This program helps me automate:
 - running scripts to, for example, configure some macOS settings via the CLI
 
 I made this for my own personal use, although hopefully it's flexible enough to also be useful to others. Read the [config](#config) section below for details on how to adjust the program's default behaviour to match your needs.
-
-Also, this is my first serious Rust project, so if you have any feedback on the quality of the code or advice on how to make certain parts more idiomatic, please do let me know 🥲🙏
 
 ## Config
 
@@ -36,7 +36,7 @@ These other behaviours can be customised by editing the [`config/config.toml`](c
 This program has been tested only on macOS, so running it on other platforms may do whatever! To run it, you would need these first:
 
 - Internet connection,
-- stable Rust [toolchain](https://rustup.rs),
+- stable [Rust toolchain](https://rustup.rs),
 - Xcode command-line tools (will be prompted by the program if you don't have it),
 
 Then do this:
@@ -73,7 +73,7 @@ This section talks about the learning/reflection aspect of this project (e.g. wh
 
 If you're reading this you're probably wondering "why not Bash since you're wrapping it anyways?" or "why not Python if you wanted a higher-level lang?"
 
-I did write this program as a collection of Bash scripts [at first](https://github.com/nictar/transfer/tree/deprecated/wake)! I then decided to rewrite this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: 1. a useful program I actually can use, and 2. better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
+I did write this program as a collection of Bash scripts [at first](https://github.com/nictar/transfer/tree/deprecated/wake) (23/06/23 update: we've come full circle as I'm [rewriting it](https://github.com/ndinata/dotfiles) back in Bash 🥲)! I then decided to rewrite this in Rust because I'm currently learning it, so this is a practical project I can practise working with the language in! I get: 1. a useful program I actually can use, and 2. better (hopefully) at writing programs in the language I wanna be proficient in. Win-win!
 
 Writing Transfer in Rust first impressions:
 
